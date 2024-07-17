@@ -14,7 +14,6 @@ if(isset($_SESSION['username'])) {
         $username = $row['username'];
         $password = $row['password'];
         $name = $row['name'];
-        $profile = $row['profile'];
         
     } else {
         // Redirect to login page if user does not exist
@@ -58,7 +57,7 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                 <li><a href="index.php" class="nav__link">Live</a></li>
                 <li><a href="index.php" class="nav__link">Order</a></li>
                 <li><a href="index.php" class="nav__link">Reservation</a></li>
-                <li><a href="about.php" class="nav__link">About Us</a></li>
+                <li><a href="../About/about.php" class="nav__link">About Us</a></li>
                 <li>
                     <a href="welcome.php" class="login" id="loginbutton">Log In</a>
                 </li>
