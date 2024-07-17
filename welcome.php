@@ -27,12 +27,12 @@ $conn->close();
             </div>
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
-                    <li><a href="index.html" class="nav__link">Home</a></li>
-                    <li><a href="menu.html" class="nav__link">Menu</a></li>
-                    <li><a href="live.html" class="nav__link">Live</a></li>
-                    <li><a href="order.html" class="nav__link">Order</a></li>
-                    <li><a href="reservation.html" class="nav__link">Reservation</a></li>
-                    <li><a href="about.html" class="nav__link">About Us</a></li>
+                    <li><a href="index.php" class="nav__link">Home</a></li>
+                    <li><a href="index.php" class="nav__link">Menu</a></li>
+                    <li><a href="index.php" class="nav__link">Live</a></li>
+                    <li><a href="index.php" class="nav__link">Order</a></li>
+                    <li><a href="index.php" class="nav__link">Reservation</a></li>
+                    <li><a href="about.php" class="nav__link">About Us</a></li>
                 </ul>
             </div>
         </nav>
