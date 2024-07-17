@@ -2,17 +2,13 @@
 $server = 'localhost:3306';
 $username = 'root';
 $password = '';
-$database = 'the_gallery_cafe'; //adding the database name to connect
+$database = 'the_gallery_cafe';
 
-if (isset($_POST)){
-    $conn = new mysqli($server, $username , $password , $database);
+// Create connection
+$conn = new mysqli($server, $username, $password, $database);
 
-    if ($conn-> connect_error){
-        die('Connection failed: ' . $conn->connect_error);
-    }else {
-
-    }
-} else {
-    echo "No POST Data Recived.";
+// Check connection
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
 }
 ?>

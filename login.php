@@ -9,35 +9,30 @@ if (isset($_POST['login'])) {
 
     if (empty($username) && empty($password)) {
         $_SESSION['error'] = 'Please fill in both username and password';
-        header('Location: index.php');
+        header('Location: welcome.php');
         exit;
     } elseif (empty($password)) {
         $_SESSION['error'] = 'Please fill in the password';
-        header('Location: index.php');
+        header('Location: welcome.php');
         exit;
     } elseif (empty($username)) {
         $_SESSION['error'] = 'Please fill in the username';
-        header('Location: index.php');
+        header('Location: welcome.php');
         exit;
     } else {
         $sql = "SELECT * FROM `login_tbl` WHERE `username`='$username' AND `password`='$password'";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_array($result);
-            $name = $row['name'];
-            $storedUsername = $row['username'];
-            $storedPassword = $row['password'];
-
-            if ($username == $storedUsername && $password == $storedPassword) {
-                $_SESSION['name'] = $name;
-                $_SESSION['username'] = $username;
-                header('Location: Customer Profile/index.php');
-                exit;
-            }
-        } else {
+          $row = mysqli_fetch_array($result);
+          $_SESSION['name'] = $row['name'];
+          $_SESSION['username'] = $username;
+          header('Location: index.php'); // Redirect to index.php upon successful login
+          exit;
+      }
+       else {
             $_SESSION['error'] = 'Invalid username or password';
-            header('Location: index.php');
+            header('Location: welcome.php');
             exit;
         }
     }
