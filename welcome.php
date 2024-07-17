@@ -18,16 +18,54 @@ $conn->close();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="nav-bar">
-        <ul>
-            <li><a href=""></a></li>
-            <li>Menu</li>
-            <li>Live</li>
-            <li>Order</li>
-            <li>Reservation</li>
-            <li>About</li>
-        </ul>
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__data">
+                <a href="index.html" class="nav__logo">
+                    <i class="ri-planet-line"></i> The Gallery Cafe
+                </a>
+            </div>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Home</a></li>
+                    <li><a href="menu.html" class="nav__link">Menu</a></li>
+                    <li><a href="live.html" class="nav__link">Live</a></li>
+                    <li><a href="order.html" class="nav__link">Order</a></li>
+                    <li><a href="reservation.html" class="nav__link">Reservation</a></li>
+                    <li><a href="about.html" class="nav__link">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="main-banner">
+        <div class="main-banner__content">
+            <h1>Our Newly</h1>
+            <h1>Introduced</h1>
+            <h1>Item</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis cumque aspernatur dolore tempora earum nihil quas expedita, magni, deserunt, molestias doloremque. Illo odio maiores vel vitae laudantium. Pitiis est hic, inventore ab officia numquam perspiciatis?</p>
+            <button class="order">Order Now</button>
+        </div>
+        <img src="Images/steak.png" alt="image">
+    </div>
 
+    <div class="mini-boxes">
+        <div class="box">
+            <h2>Reservation</h2>
+            <button>Book Now</button>
+        </div>
+        <div class="box">
+            <h2>Order Now</h2>
+            <button>Order</button>
+        </div>
+        <div class="box">
+            <h2>Tables</h2>
+            <button>View Tables</button>
+        </div>
+        <div class="box">
+            <h2>Menu</h2>
+            <button>See Menu</button>
+        </div>
     </div>
 </body>
 </html>
