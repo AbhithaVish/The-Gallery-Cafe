@@ -1,4 +1,5 @@
 <?php
+include_once('connection.php');
 
 if(isset($_SESSION['username'])) {
     // Sanitize the username to prevent SQL injection
@@ -17,17 +18,17 @@ if(isset($_SESSION['username'])) {
         
     } else {
         // Redirect to login page if user does not exist
-        header("Location: login.php");
+        header("Location: index.php");
         exit();
     }
 } else {
     // Redirect to login page if user is not logged in
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 
 }
 
-$activePage = basename($_SERVER['PHP_SELF'], ".php");
+$activePage = basename($_SERVER['PHP_SELF'], "index.php");
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +60,7 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                 <li><a href="../index.php" class="nav__link">Reservation</a></li>
                 <li><a href="../About/about.php" class="nav__link">About Us</a></li>
                 <li>
-                    <a href="welcome.php" class="login" id="loginbutton">Log In</a>
+                    <a href="../welcome.php" class="login" id="loginbutton">Log In</a>
                 </li>
             </ul>
         </div>

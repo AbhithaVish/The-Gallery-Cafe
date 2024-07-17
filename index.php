@@ -1,20 +1,7 @@
 <?php
 session_start();
 
-// Include the database connection
-include_once('connection.php');
-
-// Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    header('Location: login.php'); // Redirect to login if not logged in
-    exit;
-}
-
-// Include navbar
-include_once('nav bar/navbar.php');
-
-// Close the database connection
-$conn->close();
+include_once('nav bar\navbar.php');
 ?>
 
 <!DOCTYPE html>
