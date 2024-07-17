@@ -3,18 +3,18 @@
 if(isset($_SESSION['username'])) {
     // Sanitize the username to prevent SQL injection
     $username = mysqli_real_escape_string($conn, $_SESSION['username']);
-    
+
     // Prepare and execute the SQL query to fetch user's name
     $sql = "SELECT * FROM login_tbl WHERE username = '$username'";
     $result = mysqli_query($conn, $sql);
-    
+
     // Check if query executed successfully and user exists
     if($result && mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         $username = $row['username'];
         $password = $row['password'];
         $name = $row['name'];
-        
+
     } else {
         // Redirect to login page if user does not exist
         header("Location: index.php");
@@ -66,6 +66,8 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
     </nav>
 
     </header>
-    
+
 </body>
 </html>
+ 328 changes: 328 additions & 0 deletions328  
+Customer Profile/nav bar - customer/style.css

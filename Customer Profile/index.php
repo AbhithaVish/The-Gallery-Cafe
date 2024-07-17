@@ -20,7 +20,7 @@ $conn->close();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>   
-    
+
     <div class="main-banner">
         <div class="main-banner__content">
             <h1>Our Newly</h1>
@@ -33,8 +33,8 @@ $conn->close();
         <img src="Images/steak.png" alt="image">
     </div>
 
-    <p>lorem 4
-        
+    <p>lorem 24
+
     </p>
 
     <div class="mini-boxes">
