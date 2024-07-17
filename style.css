@@ -15,6 +15,44 @@
     --z-fixed: 100;
 }
 
+button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.login {
+    margin-top: 25px;
+    display: inline-block;
+    background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+    color: white;
+    padding: 0.75em 1.5em;
+    border-radius: 8px;
+    text-align: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+.login:hover {
+    background: linear-gradient(135deg, #000dff 0%, #6b73ff 100%);
+    transform: scale(1.05);
+}
+
+.login:active {
+    transform: scale(0.98);
+}
+
+.login a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+#loginbutton{
+    text-decoration: none;
+}
+
 .mini-boxes {
     display: flex;
     justify-content: space-around;
@@ -83,7 +121,7 @@ a {
     margin-inline: 1.5rem;
 }
 
-/*=============== HEADER ===============*/
+/*Header CSS part*/
 .header {
     margin: 10px 100px 10px 10px;
     position: fixed;
@@ -96,7 +134,7 @@ a {
     border-radius: 20px;
 }
 
-/*=============== NAV ===============*/
+/*Nav Bar CSS part*/
 .nav {
     height: var(--header-height);
 }
@@ -199,7 +237,6 @@ a {
     transform: rotate(90deg);
 }
 
-/*=============== BREAKPOINTS ===============*/
 @media screen and (max-width: 340px) {
     .container {
         margin-inline: 1rem;
@@ -239,7 +276,13 @@ a {
     }
 }
 
-/*=============== MAIN BANNER ===============*/
+@media (max-width: 768px) {
+    .login {
+        padding: 0.5em 1em;
+    }
+}
+
+/*Main CSS part*/
 .main-banner {
     display: flex;
     align-items: center;
@@ -269,7 +312,7 @@ a {
     transform: scale(1.1);
 }
 
-/*=============== ORDER BUTTON ===============*/
+/*order button CSS part*/
 .order {
     background-color: hsl(44, 100%, 50%);
     border-radius: 10px;
