@@ -5,6 +5,8 @@ session_start();
 // Include the database connection
 include_once('connection.php');
 
+include_once('nav bar\navbar.php');
+
 // Close the database connection
 $conn->close();
 ?>
@@ -16,35 +18,8 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.css">
 </head>
-<body>
-    <header class="header">
-        <nav class="nav container">
-        <div class="nav__data">
-            <a href="index.html" class="nav__logo">
-                <i class="ri-planet-line"></i> The Gallery Cafe
-            </a>
-            <div class="nav__toggle">
-                <i class="ri-menu-line"></i>
-            </div>
-        </div>
-        <div class="nav__menu" id="nav-menu">
-            <ul class="nav__list">
-                <li><a href="index.php" class="nav__link">Home</a></li>
-                <li><a href="index.php" class="nav__link">Menu</a></li>
-                <li><a href="index.php" class="nav__link">Live</a></li>
-                <li><a href="index.php" class="nav__link">Order</a></li>
-                <li><a href="index.php" class="nav__link">Reservation</a></li>
-                <li><a href="about.php" class="nav__link">About Us</a></li>
-                <li>
-                    <a href="welcome.php" class="login" id="loginbutton">Log In</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    </header>
+<body>   
     
     <div class="main-banner">
         <div class="main-banner__content">
