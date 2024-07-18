@@ -9,15 +9,15 @@ if (isset($_POST['login'])) {
 
     if (empty($username) && empty($password)) {
         $_SESSION['error'] = 'Please fill in both username and password';
-        header('Location: index.php');
+        header('Location: welcome.php');
         exit;
     } elseif (empty($password)) {
         $_SESSION['error'] = 'Please fill in the password';
-        header('Location: index.php');
+        header('Location: welcome.php');
         exit;
     } elseif (empty($username)) {
         $_SESSION['error'] = 'Please fill in the username';
-        header('Location: index.php');
+        header('Location: welcome.php');
         exit;
     } else {
         $sql = "SELECT * FROM `login_tbl` WHERE `username`='$username' AND `password`='$password'";
@@ -37,7 +37,7 @@ if (isset($_POST['login'])) {
             }
         } else {
             $_SESSION['error'] = 'Invalid username or password';
-            header('Location: index.php');
+            header('Location: welcome.php');
             exit;
         }
     }
