@@ -1,7 +1,9 @@
 <?php
 session_start();
 
-include_once('..\..\connection.php');
+
+include_once('../connection.php');
+include_once('navbar.php');
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
@@ -28,6 +30,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-live.css">
 </head>
 <body>

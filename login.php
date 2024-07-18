@@ -32,7 +32,7 @@ if (isset($_POST['login'])) {
             if ($username == $storedUsername && $password == $storedPassword) {
                 $_SESSION['name'] = $name;
                 $_SESSION['username'] = $username;
-                header('Location: Customer Profile/index.php');
+                header('Location: customer/index.php');
                 exit;
             }
         } else {
