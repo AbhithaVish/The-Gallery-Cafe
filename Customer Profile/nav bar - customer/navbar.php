@@ -59,7 +59,7 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                 <li><a href="../index.php" class="nav__link">Reservation</a></li>
                 <li><a href="../About/about.php" class="nav__link">About Us</a></li>
                 <li>
-                    <a href="welcome.php" class="login" id="loginbutton">Log In</a>
+                    <a href="welcome.php" class="login" id="loginbutton">Log out</a>
                 </li>
             </ul>
         </div>
