@@ -51,13 +51,9 @@ if (isset($_POST['login'])) {
   <title>Login</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- bootstrap for make responsive -->
-  
 </head>
 
 <body>
-
 <?php
     if (isset($_SESSION['error'])) {
         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
