@@ -2,7 +2,7 @@
 session_start();
 
 include_once('..\..\connection.php');
-include_once('..\nav bar - customer/navbar.php');
+include_once('..\nav bar/navbar.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
     $item_id = $_POST['item_id'];
@@ -47,7 +47,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="..\nav bar - customer\style.css">
+    <link rel="stylesheet" href="..\nav bar\style.css">
     <link rel="stylesheet" href="style-menu.css">
 </head>
 <body>

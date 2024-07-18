@@ -2,7 +2,7 @@
 session_start();
 
 include_once('..\..\connection.php');
-include_once('..\nav bar - customer/navbar.php');
+include_once('..\nav bar/navbar.php');
 
 if (!isset($_SESSION['username'])) {
     echo "You need to log in first.";
@@ -19,7 +19,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation</title>
-    <link rel="stylesheet" href="..\nav bar - customer\style.css">
+    <link rel="stylesheet" href="..\nav bar\style.css">
     <link rel="stylesheet" href="style-reservation.css">
 </head>
 <body>

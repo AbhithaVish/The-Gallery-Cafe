@@ -33,8 +33,8 @@ $conn->close();
         <img src="Images/steak.png" alt="image">
     </div>
 
-    <p>lorem 24
-
+    <p>
+        Admin Profile
     </p>
 
     <div class="mini-boxes">
