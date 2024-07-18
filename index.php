@@ -23,6 +23,8 @@ $conn->close();
     
     <div class="main-banner">
         <div class="main-banner__content">
+
+        <p>this is not log in page which is welcome first page</p>
             <h1>Our Newly</h1>
             <h1>Introduced</h1>
             <h1>Item</h1>

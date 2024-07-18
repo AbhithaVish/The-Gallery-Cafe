@@ -4,17 +4,17 @@ session_start();
 include_once('..\..\connection.php');
 include_once('..\nav bar - customer/navbar.php');
 
-// Check if the user is logged in
+
 if (!isset($_SESSION['username'])) {
     echo "You need to log in first.";
     exit;
 }
 
-// Fetch the username from the session
+
 $username = $_SESSION['username'];
 
-// Fetch orders from the order table for the specific user
-$sql = "SELECT order_id, item_id, name, price, order_date, address, contact FROM `order` WHERE username = ?";
+
+$sql = "SELECT  item_id, name, price, order_date, address, contact FROM `order` WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);
 $stmt->execute();
@@ -40,7 +40,6 @@ $conn->close();
             <table>
                 <thead>
                     <tr>
-                        <th>Order ID</th>
                         <th>Item ID</th>
                         <th>Name</th>
                         <th>Price</th>
@@ -52,7 +51,6 @@ $conn->close();
                 <tbody>
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($row['order_id']); ?></td>
                             <td><?php echo htmlspecialchars($row['item_id']); ?></td>
                             <td><?php echo htmlspecialchars($row['name']); ?></td>
                             <td><?php echo htmlspecialchars($row['price']); ?></td>

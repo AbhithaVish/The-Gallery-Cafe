@@ -4,10 +4,6 @@ session_start();
 include_once('..\..\connection.php');
 include_once('..\nav bar - customer/navbar.php');
 
-// menu table from the database
-$sql = "SELECT id, name, description, price, cousintype FROM menu";
-$result = $conn->query($sql);
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
     $item_id = $_POST['item_id'];
 
@@ -37,6 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
     $stmt->close();
     $order_stmt->close();
 }
+
+// Fetch menu items
+$sql = "SELECT id, name, description, price, cousintype FROM menu";
+$result = $conn->query($sql);
 
 $conn->close();
 ?>
