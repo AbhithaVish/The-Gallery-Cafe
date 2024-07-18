@@ -1,18 +1,15 @@
 <?php
-$server = 'localhost:3306';
-$username = 'root';
-$password = '';
-$database = 'the_gallery_cafe'; //adding the database name to connect
+$server = 'localhost:3306'; // MySQL server address and port
+$username = 'root'; // MySQL username
+$password = ''; // MySQL password
+$database = 'the_gallery_cafe'; // Database name
 
-if (isset($_POST)){
-    $conn = new mysqli($server, $username , $password , $database);
+// Create a new MySQLi object for database connection
+$conn = new mysqli($server, $username, $password, $database);
 
-    if ($conn-> connect_error){
-        die('Connection failed: ' . $conn->connect_error);
-    }else {
-
-    }
-} else {
-    echo "No POST Data Recived.";
+// Check connection
+if ($conn->connect_error) {
+    // If connection fails, output error message and terminate script
+    die('Connection failed: ' . $conn->connect_error);
 }
 ?>
