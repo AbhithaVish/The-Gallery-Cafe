@@ -1,21 +1,17 @@
 <?php
-// session_start();
-
 include_once('../connection.php');
 include_once('navbar.php');
 
-// Get the logged-in username from session (assuming it's stored in session after login)
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
-// Initialize the reservations array
+
 $reservations = array();
 
-// Check if the 'reservations' table exists
+
 $tableExistsQuery = "SHOW TABLES LIKE 'reservation'";
 $tableExistsResult = $conn->query($tableExistsQuery);
 
 if ($tableExistsResult->num_rows == 1) {
-    // Modify query to filter reservations based on the logged-in username
     $query = "SELECT * FROM reservation WHERE username = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('s', $username);
@@ -69,7 +65,5 @@ $conn->close();
             <?php endforeach; ?>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

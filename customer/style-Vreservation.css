@@ -15,12 +15,18 @@
 }
 
 body {
+    background-image: url('Images/reservation backround.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    color: white;
+    border: none;
     font-family: Arial, sans-serif;
-    background-color: var(--body-color);
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    margin-top: 160px;
-    color: white;
+    margin-top: 150px;
 }
 
 .container {
@@ -45,7 +51,9 @@ h2 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
 }
-
+.row{
+    width: auto;
+}
 .card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
