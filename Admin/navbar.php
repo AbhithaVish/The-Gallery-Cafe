@@ -64,7 +64,7 @@ include_once('connection.php');
                 <li><a href="reservation.php" class="nav__link">Reservation</a></li>
                 <li><a href="about.php" class="nav__link">About Us</a></li>
                 <li>
-                    <a href="welcome.php" class="login" id="loginbutton">Log In</a>
+                    <a href="login.php" class="login" id="loginbutton">Log In</a>
                 </li>
             </ul>
         </div>

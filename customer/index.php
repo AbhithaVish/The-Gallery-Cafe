@@ -39,7 +39,7 @@ $conn->close();
 
     <div class="mini-boxes">
         <div class="box">
-            <h2>Reservation</h2>
+            <h2>Promotions</h2>
             <button>Book Now</button>
         </div>
         <div class="box">

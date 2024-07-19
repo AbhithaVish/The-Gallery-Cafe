@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 include_once('connection.php');
 include_once('navbar.php');
@@ -31,7 +31,7 @@ $conn->close();
     </div>
 
     <p>
-        this is the admin and staff section
+        this is the admin section
     </p>
 
     <div class="mini-boxes">

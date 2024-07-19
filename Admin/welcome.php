@@ -1,71 +1,60 @@
 <?php
 session_start();
-
-include_once('../connection.php');
-
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if (empty($username) && empty($password)) {
-        $_SESSION['error'] = 'Please fill in both username and password';
-        header('Location: welcome.php');
-        exit;
-    } elseif (empty($password)) {
-        $_SESSION['error'] = 'Please fill in the password';
-        header('Location: welcome.php');
-        exit;
-    } elseif (empty($username)) {
-        $_SESSION['error'] = 'Please fill in the username';
-        header('Location: welcome.php');
-        exit;
-    } else {
-        // Use prepared statements to prevent SQL injection
-        $stmt = $conn->prepare("SELECT * FROM `admin_tbl` WHERE `username` = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $name = $row['name'];
-            $storedUsername = $row['username'];
-            $storedPassword = $row['password']; // Assume passwords are stored hashed
-
-            // Use password_verify to check the hashed password
-            if ($username == $storedUsername && password_verify($password, $storedPassword)) {
-                $_SESSION['name'] = $name;
-                $_SESSION['username'] = $username;
-                header('Location: index.php');
-                exit;
-            } else {
-                $_SESSION['error'] = 'Invalid username or password';
-                header('Location: welcome.php');
-                exit;
-            }
-        } else {
-            $_SESSION['error'] = 'Invalid username or password';
-            header('Location: welcome.php');
-            exit;
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <!-- new commit -->
+<style>
+    .social-icons-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .social-icons-container a {
+        margin-right: 50px;
+    }
+
+    #search-icon {
+      margin-left: 5px;
+      padding: 6px;
+      width: 45px;
+      height: 45px;
+      color: #182431;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid #e4282e;
+      border-radius: 10px;
+      background-color: #fff1f4;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #search-icon:hover {
+      background-color: #ee0c0c;
+      color: white;
+      cursor: pointer;
+    }
+
+</style>
+
   <title>Login</title>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- bootstrap for make responsive -->
+  <!--Upper Icon-->
+  <link rel="shortcut icon" type="dp" href="./pics/graduate.png">
+
+  <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
 
 <body>
-
 <?php
     if (isset($_SESSION['error'])) {
         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
@@ -78,15 +67,15 @@ if (isset($_POST['login'])) {
     }
 ?>
 
-
   <section class="vh-100">
     <div class="container py-5 h-100">
       <div class="row d-flex align-items-center justify-content-center h-100">
-        <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">The Gallery Cafe</h1>
+        <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">Student Management System</h1>
+        <div class="col-md-8 col-lg-7 col-xl-6">
+          <img src="pics/login.png" class="img-fluid" alt="Phone image" height="300px" width="600px">
+        </div>
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <form action="welcome.php" method="post">
-            
-            <!-- <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">Login </p> -->
+          <form action="login.php" method="post">
 
             <!-- Email input -->
             <div class="form-outline mb-4">
@@ -107,6 +96,13 @@ if (isset($_POST['login'])) {
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
               <input type="submit" value="Sign in" name="login" class="btn btn-warning btn-lg text-light my-2 py-3" style="width:100% ; border-radius: 30px; font-weight:600; background-color: #3333ff; border-color: #3333ff; color: #FFFFFF;" />
           
+            </div>
+            <!-- Social Icons -->
+            <div class="social-icons-container">
+              <a href="https://www.instagram.com/icbtsrilanka/" target="_blank"> <img src="icons/instagram.png" alt="" height="32px" width="32px"> </a>
+              <a href="https://www.facebook.com/ICBTsrilanka/" target="_blank"> <img src="icons/facebook.png" alt="" height="32px" width="32px"> </a>
+              <a href="https://www.youtube.com/channel/UC3bDumjXNsq2ixYkUT7wT_g" target="_blank"> <img src="icons/youtube.png" alt="" height="32px" width="32px"> </a>
+              <a href="https://www.linkedin.com/school/icbtcampus/" target="_blank"> <img src="icons/linkedin.png" alt="" height="32px" width="32px"> </a>
             </div>
           </form>
         </div>
