@@ -7,64 +7,34 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if (empty($username) && empty($password)) {
+    if (empty($username) || empty($password)) {
         $_SESSION['error'] = 'Please fill in both username and password';
         header('Location: welcome.php');
         exit;
-    } elseif (empty($password)) {
-        $_SESSION['error'] = 'Please fill in the password';
-        header('Location: welcome.php');
-        exit;
-    } elseif (empty($username)) {
-        $_SESSION['error'] = 'Please fill in the username';
-        header('Location: welcome.php');
-        exit;
-    } else {
-        $sql = "SELECT * FROM `login_tbl` WHERE `username`='$username' AND `password`='$password'";
-        $result = mysqli_query($conn, $sql);
+    }
 
-        if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_array($result);
-            $name = $row['name'];
-            $storedUsername = $row['username'];
-            $storedPassword = $row['password'];
+    $sql = "SELECT * FROM `login_tbl` WHERE `username`=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-            if ($username == $storedUsername && $password == $storedPassword) {
-                $_SESSION['name'] = $name;
-                $_SESSION['username'] = $username;
-                header('Location: customer/index.php');
-                exit;
-            }
-        } else {
-            $_SESSION['error'] = 'Invalid username or password';
-            header('Location: welcome.php');
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if ($password === $row['password']) { // Consider using password_hash and password_verify in production
+            $_SESSION['name'] = $row['name'];
+            $_SESSION['username'] = $row['username'];
+            header('Location: customer/index.php');
             exit;
         }
     }
+
+    $_SESSION['error'] = 'Invalid username or password';
+    header('Location: welcome.php');
+    exit;
 }
 ?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Login</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</head>
-
-<body>
-<?php
-    if (isset($_SESSION['error'])) {
-        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
-            . $_SESSION['error'] .
-            '<button type="button" id="search-icon" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-             </button>
-        </div>';
-        unset($_SESSION['error']);
-    }
-?>
 
 
   <section class="vh-100">

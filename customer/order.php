@@ -3,10 +3,10 @@ session_start();
 
 include_once('../connection.php');
 
-if (!isset($_SESSION['username'])) {
-    echo "You need to log in first.";
-    exit;
-}
+// if (!isset($_SESSION['username'])) {
+//     echo "You need to log in first.";
+//     exit;
+// }
 
 $username = $_SESSION['username'];
 $password = isset($_SESSION['password']) ? $_SESSION['password'] : '';
