@@ -2,6 +2,54 @@
 session_start();
 
 include_once('../connection.php');
+
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if (empty($username) && empty($password)) {
+        $_SESSION['error'] = 'Please fill in both username and password';
+        header('Location: welcome.php');
+        exit;
+    } elseif (empty($password)) {
+        $_SESSION['error'] = 'Please fill in the password';
+        header('Location: welcome.php');
+        exit;
+    } elseif (empty($username)) {
+        $_SESSION['error'] = 'Please fill in the username';
+        header('Location: welcome.php');
+        exit;
+    } else {
+        // Use prepared statements to prevent SQL injection
+        $stmt = $conn->prepare("SELECT * FROM `admin_tbl` WHERE `username` = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $name = $row['name'];
+            $storedUsername = $row['username'];
+            $storedPassword = $row['password']; // Assume passwords are stored hashed
+
+            // Use password_verify to check the hashed password
+            if ($username == $storedUsername && password_verify($password, $storedPassword)) {
+                $_SESSION['name'] = $name;
+                $_SESSION['username'] = $username;
+                header('Location: index.php');
+                exit;
+            } else {
+                $_SESSION['error'] = 'Invalid username or password';
+                header('Location: welcome.php');
+                exit;
+            }
+        } else {
+            $_SESSION['error'] = 'Invalid username or password';
+            header('Location: welcome.php');
+            exit;
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +84,7 @@ include_once('../connection.php');
       <div class="row d-flex align-items-center justify-content-center h-100">
         <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">The Gallery Cafe</h1>
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <form action="login.php" method="post">
+          <form action="welcome.php" method="post">
             
             <!-- <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">Login </p> -->
 

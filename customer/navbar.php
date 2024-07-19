@@ -3,34 +3,34 @@ session_start(); // Ensure sessions are started
 
 include_once('connection.php');
 
-if (isset($_SESSION['username'])) {
-    // Sanitize the username to prevent SQL injection
-    $username = mysqli_real_escape_string($conn, $_SESSION['username']);
+// if (isset($_SESSION['username'])) {
+//     // Sanitize the username to prevent SQL injection
+//     $username = mysqli_real_escape_string($conn, $_SESSION['username']);
     
-    // Prepare and execute the SQL query to fetch user's name
-    $sql = "SELECT * FROM login_tbl WHERE username = '$username'";
-    $result = mysqli_query($conn, $sql);
+//     // Prepare and execute the SQL query to fetch user's name
+//     $sql = "SELECT * FROM login_tbl WHERE username = '$username'";
+//     $result = mysqli_query($conn, $sql);
     
-    // Check if query executed successfully and user exists
-    if ($result && mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
-        $username = $row['username'];
-        $password = $row['password'];
-        $name = $row['name'];
-    } else {
-        // Debug output
-        error_log("User does not exist. Redirecting to login page.");
-        // Redirect to login page if user does not exist
-        header("Location: login.php");
-        exit();
-    }
-} else {
-    // Debug output
-    error_log("User not logged in. Redirecting to login page.");
-    // Redirect to login page if user is not logged in
-    header("Location: login.php");
-    exit();
-}
+//     // Check if query executed successfully and user exists
+//     if ($result && mysqli_num_rows($result) == 1) {
+//         $row = mysqli_fetch_assoc($result);
+//         $username = $row['username'];
+//         $password = $row['password'];
+//         $name = $row['name'];
+//     } else {
+//         // Debug output
+//         error_log("User does not exist. Redirecting to login page.");
+//         // Redirect to login page if user does not exist
+//         header("Location: login.php");
+//         exit();
+//     }
+// } else {
+//     // Debug output
+//     error_log("User not logged in. Redirecting to login page.");
+//     // Redirect to login page if user is not logged in
+//     header("Location: login.php");
+//     exit();
+// }
 
 $activePage = basename($_SERVER['PHP_SELF'], "index.php");
 ?>
