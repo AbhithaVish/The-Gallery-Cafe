@@ -33,7 +33,7 @@ $conn->close();
         <img src="Images/steak.png" alt="image">
     </div>
 
-    <p>lorem 24
+    <p>Customer Index
 
     </p>
 

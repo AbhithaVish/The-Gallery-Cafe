@@ -5,7 +5,7 @@
     --white-color: hsl(44, 100%, 50%);
     --white-color-light: hsl(0, 0%, 100%);
     --white-color-lighten: hsl(220, 20%, 18%);
-    --black-color: #000000;
+    /* --black-color: #000000; */
     --body-color: hsl(0, 0%, 28%);
     --body-font: "Montserrat", sans-serif;
     --normal-font-size: .938rem;
@@ -59,16 +59,20 @@ button {
     justify-content: space-around;
     margin: 20px 0;
     padding: 20px;
+    margin-left:100px ;
+    margin-right:100px;
+
 }
 
 .box {
     background-color: hsl(0, 0%, 60%);
     color: white;
     border-radius: 10px;
-    padding: 20px;
     text-align: center;
     width: 200px;
     transition: background-color 0.3s;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .box:hover {
@@ -129,7 +133,7 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--black-color);
+    /* background-color: var(--black-color); */
     box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
     z-index: var(--z-fixed);
     border-radius: 20px;
@@ -203,14 +207,14 @@ a {
         width: 0;
     }
     .nav__list {
-        background-color: var(--black-color);
+        /* background-color: var(--black-color); */
         padding-top: 1rem;
     }
 }
 
 .nav__link {
     color: var(--white-color);
-    background-color: var(--black-color);
+    /* background-color: var(--black-color); */
     font-weight: var(--font-semi-bold);
     padding: 1.25rem 1.5rem;
     display: flex;
@@ -220,7 +224,7 @@ a {
 }
 
 .nav__link:hover {
-    background-color: var(--black-color-light);
+    /* background-color: var(--black-color-light); */
 }
 
 .show-menu {

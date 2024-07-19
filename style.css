@@ -5,7 +5,7 @@
     --white-color: hsl(44, 100%, 50%);
     --white-color-light: hsl(0, 0%, 100%);
     --white-color-lighten: hsl(220, 20%, 18%);
-    --black-color: #000000;
+    /* --black-color: #000000; */
     --body-color: hsl(0, 0%, 28%);
     --body-font: "Montserrat", sans-serif;
     --normal-font-size: .938rem;
@@ -107,6 +107,19 @@ body {
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     background-color: var(--body-color);
+        background-image: url('Images/home background.jpg');
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-attachment: fixed; 
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: inherit;
+        margin-top: 140px;
+
+    
 }
 
 ul {
