@@ -34,7 +34,7 @@ $conn->close();
         <div class="add-reservations">
         <div class="main-box">
                 <h1>Add Reservations</h1>
-                <button class="button-click"><a href="viewReservations.php">View</a></button>
+                <button class="button-click"><a href="addreservation.php">View</a></button>
             </div>
         </div>
     </div>

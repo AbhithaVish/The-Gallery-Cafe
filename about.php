@@ -1,8 +1,5 @@
 <?php
-// Start the session 
-session_start();
 
-// Include the database connection
 include_once('connection.php');
 
 include_once('navbar.php');

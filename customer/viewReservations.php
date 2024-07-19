@@ -4,15 +4,23 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-$reservations = array(); 
+// Get the logged-in username from session (assuming it's stored in session after login)
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
+// Initialize the reservations array
+$reservations = array();
 
 // Check if the 'reservations' table exists
 $tableExistsQuery = "SHOW TABLES LIKE 'reservation'";
 $tableExistsResult = $conn->query($tableExistsQuery);
 
 if ($tableExistsResult->num_rows == 1) {
-    $query = "SELECT * FROM reservation";
-    $result = $conn->query($query);
+    // Modify query to filter reservations based on the logged-in username
+    $query = "SELECT * FROM reservation WHERE username = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -21,6 +29,7 @@ if ($tableExistsResult->num_rows == 1) {
     } else {
         echo "No reservations found.";
     }
+    $stmt->close();
 } else {
     echo "Table 'reservations' does not exist.";
 }
