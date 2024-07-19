@@ -1,13 +1,13 @@
 <?php
-// Start the session 
 session_start();
 
-// Include the database connection
-include_once('connection.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
+include_once('connection.php');
 include_once('navbar.php');
 
-// Close the database connection
 $conn->close();
 ?>
 
@@ -16,15 +16,13 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Gallery Cafe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>   
-    
     <div class="main-banner">
         <div class="main-banner__content">
-
-        <p>this is not log in page which is welcome first page</p>
+            <p>This is not a login page, it is a welcome first page</p>
             <h1>Our Newly</h1>
             <h1>Introduced</h1>
             <h1>Item</h1>
@@ -52,15 +50,5 @@ $conn->close();
             <button>See Menu</button>
         </div>
     </div>
-
-    <script>
-        const navToggle = document.getElementById('nav-toggle');
-        const navMenu = document.getElementById('nav-menu');
-
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('show-menu');
-            navToggle.classList.toggle('show-icon');
-        });
-    </script>
 </body>
 </html>
