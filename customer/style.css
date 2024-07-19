@@ -275,7 +275,6 @@ a {
         height: 100%;
         display: flex;
         column-gap: 3rem;
-        color: var(--white-color-light);
     }
     .nav__link {
         height: 100%;
