@@ -1,0 +1,33 @@
+<?php
+include_once('../connection.php');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    $cousintype = $_POST['cousintype'];
+
+    // Handling image upload
+    if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name'] != '') {
+        $image = $_FILES['image']['tmp_name'];
+        $imageContent = addslashes(file_get_contents($image));
+        
+        $sql = "INSERT INTO menu (id, name, description, price, cousintype, image) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("issdss", $id, $name, $description, $price, $cousintype, $imageContent);
+        
+        if ($stmt->execute()) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $stmt->close();
+    } else {
+        echo "Please upload an image.";
+    }
+    
+    $conn->close();
+}
+?>

@@ -4,34 +4,49 @@ session_start();
 include_once('../connection.php');
 include_once('navbar.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
-    $item_id = $_POST['item_id'];
+// Check if the user is an admin
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header("Location: login.php");
+    exit();
+}
 
-    // Fetch the username from the session
-    $username = $_SESSION['username'];
+// Handle form submissions
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['add_item'])) {
+        // Add item to the menu
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $cousintype = $_POST['cousintype'];
 
-    // Fetch item details from the menu table
-    $item_sql = "SELECT id, name, price FROM menu WHERE id = ?";
-    $stmt = $conn->prepare($item_sql);
-    $stmt->bind_param("i", $item_id);
-    $stmt->execute();
-    $item_result = $stmt->get_result();
-    $item = $item_result->fetch_assoc();
-    
-    if ($item) {
-        $item_id = $item['id'];
-        $name = $item['name'];
-        $price = $item['price'];
-        
-        // Insert item into the order table
-        $order_sql = "INSERT INTO `order` (item_id, name, price, username, order_date, address, contact) VALUES (?, ?, ?, ?, NOW(), '', '')";
-        $order_stmt = $conn->prepare($order_sql);
-        $order_stmt->bind_param("isds", $item_id, $name, $price, $username);
-        $order_stmt->execute();
+        $add_sql = "INSERT INTO menu (name, description, price, cousintype) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($add_sql);
+        $stmt->bind_param("ssds", $name, $description, $price, $cousintype);
+        $stmt->execute();
+        $stmt->close();
+    } elseif (isset($_POST['edit_item'])) {
+        // Edit item in the menu
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $cousintype = $_POST['cousintype'];
+
+        $edit_sql = "UPDATE menu SET name = ?, description = ?, price = ?, cousintype = ? WHERE id = ?";
+        $stmt = $conn->prepare($edit_sql);
+        $stmt->bind_param("ssdsi", $name, $description, $price, $cousintype, $id);
+        $stmt->execute();
+        $stmt->close();
+    } elseif (isset($_POST['delete_item'])) {
+        // Delete item from the menu
+        $id = $_POST['id'];
+
+        $delete_sql = "DELETE FROM menu WHERE id = ?";
+        $stmt = $conn->prepare($delete_sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
     }
-
-    $stmt->close();
-    $order_stmt->close();
 }
 
 // Fetch menu items
@@ -46,17 +61,26 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
+    <title>Admin Menu Management</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-menu.css">
 </head>
 <body>
     <br><br><br><br><br>
 
-    <div class="cart"></div>
+    <div class="admin-menu-container">
+        <center><h1>Admin Menu Management</h1></center>
 
-    <div class="menu-container">
-        <center><h1>Menu</h1></center>
+        <h2>Add New Item</h2>
+        <form method="post" action="">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="description" placeholder="Description" required>
+            <input type="number" step="0.01" name="price" placeholder="Price" required>
+            <input type="text" name="cousintype" placeholder="Cuisine Type" required>
+            <button type="submit" name="add_item">Add Item</button>
+        </form>
+
+        <h2>Menu Items</h2>
         <?php if ($result->num_rows > 0): ?>
             <table>
                 <thead>
@@ -65,7 +89,7 @@ $conn->close();
                         <th>Description</th>
                         <th>Price</th>
                         <th>Cuisine Type</th>
-                        <th>Order</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,9 +100,17 @@ $conn->close();
                             <td><?php echo htmlspecialchars($row['price']); ?></td>
                             <td><?php echo htmlspecialchars($row['cousintype']); ?></td>
                             <td>
-                                <form method="post" action="">
-                                    <input type="hidden" name="item_id" value="<?php echo $row['id']; ?>">
-                                    <button type="submit" name="add_to_cart">Add to Order</button>
+                                <form method="post" action="" style="display:inline;">
+                                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                    <input type="text" name="name" value="<?php echo htmlspecialchars($row['name']); ?>" required>
+                                    <input type="text" name="description" value="<?php echo htmlspecialchars($row['description']); ?>" required>
+                                    <input type="number" step="0.01" name="price" value="<?php echo htmlspecialchars($row['price']); ?>" required>
+                                    <input type="text" name="cousintype" value="<?php echo htmlspecialchars($row['cousintype']); ?>" required>
+                                    <button type="submit" name="edit_item">Edit</button>
+                                </form>
+                                <form method="post" action="" style="display:inline;">
+                                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                    <button type="submit" name="delete_item">Delete</button>
                                 </form>
                             </td>
                         </tr>
