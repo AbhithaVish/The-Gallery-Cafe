@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 include_once('../connection.php');
 include_once('navbar.php');
@@ -35,7 +35,6 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style-reservation.css">
     <link rel="stylesheet" href="style-Vreservation.css">
 </head>
 <body>

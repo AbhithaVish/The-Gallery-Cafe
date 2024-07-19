@@ -1,25 +1,16 @@
 <?php
-session_start();
-
+// session_start();
 
 include_once('../connection.php');
 include_once('navbar.php');
 
-// Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    echo "You need to log in first.";
-    exit;
-}
+// Fetch tables availability
+$sqlTables = "SELECT * FROM `tables_availability`";
+$resultTables = $conn->query($sqlTables);
 
-// Fetch the username from the session
-$username = $_SESSION['username'];
-
-// Fetch orders from the order table for the specific user
-$sql = "SELECT order_id, item_id, name, price, order_date, address, contact FROM `order` WHERE username = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
+// Fetch parking availability
+$sqlParking = "SELECT * FROM `parking_availability`";
+$resultParking = $conn->query($sqlParking);
 
 $conn->close();
 ?>
@@ -29,12 +20,55 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live</title>
+    <title>Live Data</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-live.css">
 </head>
 <body>
-    <br><br><br><br><br><br>
+    <div class="main-container">
+        <div class="topic">
+        <h1>Live Data</h1>
+        </div>
     
+    <div class="container">
+        <div class="table-container">
+            <h2>Tables Availability</h2>
+            <table>
+                <tr>
+                    <th>Table ID</th>
+                    <th>Status</th>
+                </tr>
+                <?php
+                if ($resultTables->num_rows > 0) {
+                    while($row = $resultTables->fetch_assoc()) {
+                        echo "<tr><td>" . $row["table_id"]. "</td><td>" . $row["status"]. "</td></tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='2'>No data available</td></tr>";
+                }
+                ?>
+            </table>
+        </div>
+        <div class="table-container">
+            <h2>Parking Availability</h2>
+            <table>
+                <tr>
+                    <th>Parking Spot ID</th>
+                    <th>Status</th>
+                </tr>
+                <?php
+                if ($resultParking->num_rows > 0) {
+                    while($row = $resultParking->fetch_assoc()) {
+                        echo "<tr><td>" . $row["parking_spot_id"]. "</td><td>" . $row["status"]. "</td></tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='2'>No data available</td></tr>";
+                }
+                ?>
+            </table>
+        </div>
+    </div>
+
+    </div>
 </body>
 </html>

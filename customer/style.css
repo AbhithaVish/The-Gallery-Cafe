@@ -196,6 +196,7 @@ a {
     opacity: 0;
 }
 
+
 @media screen and (max-width: 1118px) {
     .nav__menu {
         position: absolute;
@@ -274,6 +275,7 @@ a {
         height: 100%;
         display: flex;
         column-gap: 3rem;
+        color: var(--white-color-light);
     }
     .nav__link {
         height: 100%;
