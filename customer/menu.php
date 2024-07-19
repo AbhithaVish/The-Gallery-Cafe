@@ -56,8 +56,8 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style-live.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="style-menu.css">
     <style>
         
         .menu-item {
@@ -82,9 +82,8 @@ $conn->close();
         }
     </style>
 </head>
-<body>
+<body><br><br><br><br><br>
     <div class="container">
-        <h1>Menu</h1>
         <div class="menu">
             <?php if ($result->num_rows > 0): ?>
                 <?php while($row = $result->fetch_assoc()): ?>

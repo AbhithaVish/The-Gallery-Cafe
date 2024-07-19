@@ -19,8 +19,12 @@ $conn->close();
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>   
-
+<body>
+    <div class="container-head">
+        <div class="title">
+            <h1>The Gallery Cafe</h1>
+        </div>
+            
     <div class="main-banner">
         <div class="main-banner__content">
             <h1>Our Newly</h1>
@@ -55,6 +59,8 @@ $conn->close();
             <button>See Menu</button>
         </div>
     </div>
+    </div>
+
 
     <script>
         const navToggle = document.getElementById('nav-toggle');
