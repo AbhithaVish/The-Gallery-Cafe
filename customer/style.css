@@ -241,9 +241,6 @@ a {
     transition: background-color .3s;
 }
 
-.nav__link:hover {
-    /* background-color: var(--black-color-light); */
-}
 
 .show-menu {
     opacity: 1;
