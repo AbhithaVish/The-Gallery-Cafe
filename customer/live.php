@@ -39,7 +39,7 @@ $conn->close();
                     <?php
                     if ($resultTables->num_rows > 0) {
                         while($row = $resultTables->fetch_assoc()) {
-                            $statusClass = $row["status"] === 'Occupied' ? 'occupied' : 'available';
+                            $statusClass = $row["status"] === 'Occupied' ? 'occupied' : 'available'; //if the status is = to one then one class will be executed else two(Ternary Operator)
                             echo "<tr><td>" . $row["table_id"]. "</td><td class='" . $statusClass . "'>" . $row["status"]. "</td></tr>";
                         }
                     } else {
