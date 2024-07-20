@@ -143,20 +143,17 @@ a {
     margin-inline: 1.5rem;
 }
 
-/*Header CSS part*/
 .header {
     margin: 10px 100px 10px 10px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    /* background-color: var(--black-color); */
     box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
     z-index: var(--z-fixed);
     border-radius: 20px;
 }
 
-/*Nav Bar CSS part*/
 .nav {
     height: var(--header-height);
 }
@@ -225,14 +222,12 @@ a {
         width: 0;
     }
     .nav__list {
-        /* background-color: var(--black-color); */
         padding-top: 1rem;
     }
 }
 
 .nav__link {
     color: var(--white-color);
-    /* background-color: var(--black-color); */
     font-weight: var(--font-semi-bold);
     padding: 1.25rem 1.5rem;
     display: flex;
@@ -302,7 +297,6 @@ a {
     }
 }
 
-/*Main CSS part*/
 .main-banner {
     display: flex;
     align-items: center;
