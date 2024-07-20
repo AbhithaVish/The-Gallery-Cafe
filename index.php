@@ -18,8 +18,53 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Gallery Cafe</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            margin-top: 150px
+        }
+        #myVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+        }
+        .main-banner {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+        }
+        .main-banner__content {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .mini-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .box {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>   
+    
+<video autoplay muted loop id="myVideo">
+  <source src="Videos/background video.mp4" type="video/mp4">
+</video>
     <div class="main-banner">
         <div class="main-banner__content">
             <p>This is not a login page, it is a welcome first page</p>
