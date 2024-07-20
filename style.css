@@ -16,6 +16,50 @@
 }
 
 
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+.main-banner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    padding-top: 150px; /* Adjusted to provide top spacing */
+}
+.main-banner__content {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.mini-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 0 20px; /* Added padding to mini-boxes container */
+    box-sizing: border-box; /* Ensures padding is included in total width */
+}
+.box {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1; /* Allows boxes to expand and take equal space */
+    min-width: 150px; /* Minimum width to maintain box integrity */
+}
+
 button {
     border: none;
     cursor: pointer;
