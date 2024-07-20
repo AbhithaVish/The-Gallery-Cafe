@@ -62,6 +62,7 @@ body {
 
 .shape {
     background-color: hsl(0, 0%, 24%);
+    opacity: 0.8;
     color: white;
     border-radius: 10px;
     text-align: center;
@@ -97,6 +98,11 @@ h3 {
 .directions {
     justify-content: center; 
     align-items: center;
+    
+}
+
+.direction-btn{
+    border-radius: 5px;
 }
 
 .direction-btn a {
@@ -123,7 +129,8 @@ h3 {
 }
 
 .shapes {
-    background-color: hsl(0, 0%, 100%);
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0.6;
     color: rgb(0, 0, 0);
     border-radius: 10px;
     text-align: center;
@@ -131,6 +138,7 @@ h3 {
     transition: background-color 0.3s;
     padding-left: 10px;
     padding-right: 10px;
+    font-style: bold;
 }
 
 .shapes:hover {

@@ -2,28 +2,6 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-function getTableData($conn) {
-    $sqlTables = "SELECT * FROM `tables_availability`";
-    return $conn->query($sqlTables);
-}
-
-function getParkingData($conn) {
-    $sqlParking = "SELECT * FROM `parking_availability`";
-    return $conn->query($sqlParking);
-}
-
-function getRecordById($conn, $table, $column, $value) {
-    $sql = "SELECT * FROM `$table` WHERE `$column` = '$value' LIMIT 1";
-    $result = $conn->query($sql);
-    return $result->fetch_assoc();
-}
-
-function recordExists($conn, $table, $column, $value) {
-    $sqlCheck = "SELECT 1 FROM `$table` WHERE `$column` = '$value' LIMIT 1";
-    $result = $conn->query($sqlCheck);
-    return $result->num_rows > 0;
-}
-
 $editingTable = null;
 $editingParking = null;
 
@@ -31,7 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_table'])) {
         $table_id = $_POST['table_id'];
         $status = $_POST['status'];
-        if (!recordExists($conn, 'tables_availability', 'table_id', $table_id)) {
+        $sqlCheck = "SELECT 1 FROM `tables_availability` WHERE `table_id` = '$table_id' LIMIT 1";
+        $result = $conn->query($sqlCheck);
+        if ($result->num_rows == 0) {
             $sqlAddTable = "INSERT INTO `tables_availability` (`table_id`, `status`) VALUES ('$table_id', '$status')";
             $conn->query($sqlAddTable);
         } else {
@@ -49,7 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST['add_parking'])) {
         $parking_spot_id = $_POST['parking_spot_id'];
         $status = $_POST['status'];
-        if (!recordExists($conn, 'parking_availability', 'parking_spot_id', $parking_spot_id)) {
+        $sqlCheck = "SELECT 1 FROM `parking_availability` WHERE `parking_spot_id` = '$parking_spot_id' LIMIT 1";
+        $result = $conn->query($sqlCheck);
+        if ($result->num_rows == 0) {
             $sqlAddParking = "INSERT INTO `parking_availability` (`parking_spot_id`, `status`) VALUES ('$parking_spot_id', '$status')";
             $conn->query($sqlAddParking);
         } else {
@@ -68,15 +50,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['edit_table_id'])) {
         $table_id = $_GET['edit_table_id'];
-        $editingTable = getRecordById($conn, 'tables_availability', 'table_id', $table_id);
+        $sql = "SELECT * FROM `tables_availability` WHERE `table_id` = '$table_id' LIMIT 1";
+        $result = $conn->query($sql);
+        $editingTable = $result->fetch_assoc();
     } elseif (isset($_GET['edit_parking_id'])) {
         $parking_spot_id = $_GET['edit_parking_id'];
-        $editingParking = getRecordById($conn, 'parking_availability', 'parking_spot_id', $parking_spot_id);
+        $sql = "SELECT * FROM `parking_availability` WHERE `parking_spot_id` = '$parking_spot_id' LIMIT 1";
+        $result = $conn->query($sql);
+        $editingParking = $result->fetch_assoc();
     }
 }
 
-$resultTables = getTableData($conn);
-$resultParking = getParkingData($conn);
+$sqlTables = "SELECT * FROM `tables_availability`";
+$resultTables = $conn->query($sqlTables);
+
+$sqlParking = "SELECT * FROM `parking_availability`";
+$resultParking = $conn->query($sqlParking);
+
 $conn->close();
 ?>
 
@@ -124,15 +114,15 @@ $conn->close();
                         <option value="Occupied" <?php echo (isset($editingTable['status']) && $editingTable['status'] === 'Occupied') ? 'selected' : ''; ?>>Occupied</option>
                     </select>
                     <?php if ($editingTable): ?>
-                        <button type="submit" name="edit_table">Edit Table</button>
+                        <button type="submit" name="edit_table" class="btn-class">Edit Table</button>
                     <?php else: ?>
-                        <button type="submit" name="add_table">Add Table</button>
+                        <button type="submit" name="add_table" class="btn-class">Add Table</button>
                     <?php endif; ?>
                 </form>
                 <form method="post">
                     <h3>Delete Table</h3>
                     <input type="text" name="table_id" placeholder="Table ID" required>
-                    <button type="submit" name="delete_table">Delete Table</button>
+                    <button type="submit" name="delete_table" class="btn-delete">Delete Table</button>
                 </form>
             </div>
             <div class="table-container">
@@ -163,15 +153,15 @@ $conn->close();
                         <option value="Occupied" <?php echo (isset($editingParking['status']) && $editingParking['status'] === 'Occupied') ? 'selected' : ''; ?>>Occupied</option>
                     </select>
                     <?php if ($editingParking): ?>
-                        <button type="submit" name="edit_parking">Edit Parking Spot</button>
+                        <button type="submit" name="edit_parking" class="btn-class">Edit Parking Spot</button>
                     <?php else: ?>
-                        <button type="submit" name="add_parking">Add Parking Spot</button>
+                        <button type="submit" name="add_parking" class="btn-class">Add Parking Spot</button>
                     <?php endif; ?>
                 </form>
                 <form method="post">
                     <h3>Delete Parking Spot</h3>
                     <input type="text" name="parking_spot_id" placeholder="Parking Spot ID" required>
-                    <button type="submit" name="delete_parking">Delete Parking Spot</button>
+                    <button type="submit" name="delete_parking" class="btn-delete">Delete Parking Spot</button>
                 </form>
             </div>
         </div>

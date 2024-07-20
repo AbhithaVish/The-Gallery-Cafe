@@ -12,8 +12,8 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-    <link rel="stylesheet" href="../../customer/style-about.css">
-    <link rel="stylesheet" href="../../customer/style.css">
+    <link rel="stylesheet" href="style-about.css">
+    <link rel="stylesheet" href="style.css">
     <style>
       
     </style>

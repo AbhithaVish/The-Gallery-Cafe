@@ -110,6 +110,8 @@ h3 {
 
 /* Flex container for Mission and Vision */
 .mission-vision-container {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #0a0a0a;
     display: flex;
     justify-content: space-around;
     margin: 20px 100px;

@@ -1,4 +1,8 @@
-/* General Styles */
+:root{
+    --btn-color : rgb(17, 0, 255);
+    --btn-delete : red;
+    --text-color : rgb(255, 255, 255);
+}
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -89,6 +93,26 @@ h2 {
     color: #333;
 }
 
+.btn-class{
+    margin-top: 10px;
+    background-color:var(--btn-color) ;
+    color: var(--text-color);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 6px;
+    padding-left: 6px;
+    border-radius: 5px;
+}
+.btn-delete{
+    margin-top: 10px;
+    background-color:var(--btn-delete) ;
+    color: var(--text-color);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 6px;
+    padding-left: 6px;
+    border-radius: 5px;
+}
 /* Responsive layout adjustments */
 @media (max-width: 768px) {
     .container {
