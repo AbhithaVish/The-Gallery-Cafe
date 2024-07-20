@@ -1,14 +1,13 @@
 <?php
-// session_start();
 
 include_once('../connection.php');
 include_once('navbar.php');
 
-// Fetch tables availability
+
 $sqlTables = "SELECT * FROM `tables_availability`";
 $resultTables = $conn->query($sqlTables);
 
-// Fetch parking availability
+
 $sqlParking = "SELECT * FROM `parking_availability`";
 $resultParking = $conn->query($sqlParking);
 
@@ -27,48 +26,48 @@ $conn->close();
 <body>
     <div class="main-container">
         <div class="topic">
-        <h1>Live Data</h1>
+            <h1>Live Data</h1>
         </div>
-    
-    <div class="container">
-        <div class="table-container">
-            <h2>Tables Availability</h2>
-            <table>
-                <tr>
-                    <th>Table ID</th>
-                    <th>Status</th>
-                </tr>
-                <?php
-                if ($resultTables->num_rows > 0) {
-                    while($row = $resultTables->fetch_assoc()) {
-                        echo "<tr><td>" . $row["table_id"]. "</td><td>" . $row["status"]. "</td></tr>";
+        <div class="container">
+            <div class="table-container">
+                <h2>Tables Availability</h2>
+                <table>
+                    <tr>
+                        <th>Table ID</th>
+                        <th>Status</th>
+                    </tr>
+                    <?php
+                    if ($resultTables->num_rows > 0) {
+                        while($row = $resultTables->fetch_assoc()) {
+                            $statusClass = $row["status"] === 'Occupied' ? 'occupied' : 'available';
+                            echo "<tr><td>" . $row["table_id"]. "</td><td class='" . $statusClass . "'>" . $row["status"]. "</td></tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='2'>No data available</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='2'>No data available</td></tr>";
-                }
-                ?>
-            </table>
-        </div>
-        <div class="table-container">
-            <h2>Parking Availability</h2>
-            <table>
-                <tr>
-                    <th>Parking Spot ID</th>
-                    <th>Status</th>
-                </tr>
-                <?php
-                if ($resultParking->num_rows > 0) {
-                    while($row = $resultParking->fetch_assoc()) {
-                        echo "<tr><td>" . $row["parking_spot_id"]. "</td><td>" . $row["status"]. "</td></tr>";
+                    ?>
+                </table>
+            </div>
+            <div class="table-container">
+                <h2>Parking Availability</h2>
+                <table>
+                    <tr>
+                        <th>Parking Spot ID</th>
+                        <th>Status</th>
+                    </tr>
+                    <?php
+                    if ($resultParking->num_rows > 0) {
+                        while($row = $resultParking->fetch_assoc()) {
+                            $statusClass = $row["status"] === 'Occupied' ? 'occupied' : 'available';
+                            echo "<tr><td>" . $row["parking_spot_id"]. "</td><td class='" . $statusClass . "'>" . $row["status"]. "</td></tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='2'>No data available</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='2'>No data available</td></tr>";
-                }
-                ?>
-            </table>
+                    ?>
+                </table>
+            </div>
         </div>
-    </div>
-
     </div>
 </body>
 </html>
