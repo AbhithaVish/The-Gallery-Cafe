@@ -19,6 +19,18 @@ $conn->close();
     <title>The Gallery Cafe</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .round-banner img {
+            margin-top: 400px;
+            width: 100vw; /* 20% of the viewport width */
+            height: auto; /* Maintain aspect ratio */
+            max-width: 350px; /* Optional: set a maximum width */
+        }
+        @media screen and (max-width: 600px) {
+            .round-banner img {
+                width: 40vw; /* 40% of the viewport width for smaller screens */
+                max-width: 150px; /* Optional: set a different maximum width */
+            }
+        }
     </style>
 </head>
 <body>   
@@ -26,18 +38,20 @@ $conn->close();
 <video autoplay muted loop id="myVideo">
   <source src="Videos/background video.mp4" type="video/mp4">
 </video>
-    <div class="main-banner">
-        <div class="main-banner__content">
-            <p>This is not a login page, it is a welcome first page</p>
-            <h1>Our Newly</h1>
-            <h1>Introduced</h1>
-            <h1>Item</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis cumque aspernatur dolore tempora earum nihil quas expedita, magni, deserunt, molestias doloremque. Illo odio maiores vel vitae laudantium. Pitiis est hic, inventore ab officia numquam perspiciatis?</p>
-            <br><button class="order">Order Now</button>
-        </div>
-        <img src="Images/steak.png" alt="image">
-    </div>
 
+    <div class="main-banner">
+        <center>
+        <div class="background">
+        <div class="text-overlay">
+            <img src="Images/logo.png" alt="">
+            <h1>The_Best_Tasting_Experience</h1>
+            <h2>Cousin and Drinks beyond the boundries of task</h2>
+            <p class="tagline">Food is Ready.</p>
+        </div>
+    </div>
+        </center>
+    </div>
+<!-- 
     <div class="mini-boxes">
         <div class="box">
             <h2>Reservation</h2>
@@ -55,6 +69,6 @@ $conn->close();
             <h2>Menu</h2>
             <button>See Menu</button>
         </div>
-    </div>
+    </div> -->
 </body>
 </html>
