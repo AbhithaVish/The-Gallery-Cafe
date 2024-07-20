@@ -13,7 +13,7 @@ if (isset($_POST['login'])) {
         exit;
     }
 
-    $sql = "SELECT * FROM `login_tbl` WHERE `username`=?";
+    $sql = "SELECT * FROM `admin_tbl` WHERE `username`=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -24,7 +24,7 @@ if (isset($_POST['login'])) {
         if ($password === $row['password']) { // Consider using password_hash and password_verify in production
             $_SESSION['name'] = $row['name'];
             $_SESSION['username'] = $row['username'];
-            header('Location: customer/index.php');
+            header('Location: Admin/index.php');
             exit;
         }
     }

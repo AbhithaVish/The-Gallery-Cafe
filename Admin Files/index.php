@@ -22,7 +22,7 @@ $conn->close();
 <body>   
     <div class="main-banner">
         <div class="main-banner__content">
-            <p>This is not a login page, it is a welcome first page</p>
+            <p>This is not a admin login page, it is a admin welcome first page</p>
             <h1>Our Newly</h1>
             <h1>Introduced</h1>
             <h1>Item</h1>

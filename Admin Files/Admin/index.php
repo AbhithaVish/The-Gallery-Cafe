@@ -37,7 +37,7 @@ $conn->close();
         <img src="Images/steak.png" alt="image">
     </div>
 
-    <p>Customer Index
+    <p>Admin index mekt thama admin enna one password gahala
 
     </p>
 
