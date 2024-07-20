@@ -66,11 +66,11 @@ $conn->close();
         <h2 class="text-center">Add Reservation</h2>
         <form method="post" action="">
             <div class="mb-3">
-                <label for="idNo" class="form-label">ID No</label>
+                <label for="idNo" class="form-label">NIC Number</label>
                 <input type="text" class="form-control" id="idNo" name="idNo" required>
             </div>
             <div class="mb-3">
-                <label for="contact" class="form-label">Contact</label>
+                <label for="contact" class="form-label">Contact Number</label>
                 <input type="text" class="form-control" id="contact" name="contact" required>
             </div>
             <div class="mb-3">

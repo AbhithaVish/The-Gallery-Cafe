@@ -24,7 +24,6 @@ $conn->close();
             padding: 0;
             height: 100%;
             overflow: hidden;
-            margin-top: 150px
         }
         #myVideo {
             position: fixed;
@@ -39,6 +38,7 @@ $conn->close();
             z-index: 1;
             text-align: center;
             color: white;
+            padding-top: 150px; /* Adjusted to provide top spacing */
         }
         .main-banner__content {
             position: relative;
@@ -50,6 +50,8 @@ $conn->close();
             justify-content: center;
             gap: 10px;
             margin: 20px 0;
+            padding: 0 20px; /* Added padding to mini-boxes container */
+            box-sizing: border-box; /* Ensures padding is included in total width */
         }
         .box {
             padding: 20px;
@@ -57,6 +59,8 @@ $conn->close();
             color: white;
             border-radius: 10px;
             text-align: center;
+            flex: 1; /* Allows boxes to expand and take equal space */
+            min-width: 150px; /* Minimum width to maintain box integrity */
         }
     </style>
 </head>
