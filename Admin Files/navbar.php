@@ -21,18 +21,18 @@ include_once('connection.php');
 //         // Debug output
 //         error_log("User does not exist. Redirecting to login page.");
 //         // Redirect to login page if user does not exist
-//         header("Location: welcome.php");
+//         header("Location: login.php");
 //         exit();
 //     }
 // } else {
 //     // Debug output
 //     error_log("User not logged in. Redirecting to login page.");
 //     // Redirect to login page if user is not logged in
-//     header("Location: welcome.php");
+//     header("Location: login.php");
 //     exit();
 // }
 
-// $activePage = basename($_SERVER['PHP_SELF'], "index.php");
+$activePage = basename($_SERVER['PHP_SELF'], "index.php");
 ?>
 
 <!DOCTYPE html>
@@ -58,13 +58,13 @@ include_once('connection.php');
         <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
                 <li><a href="index.php" class="nav__link">Home</a></li>
-                <li><a href="menu.php" class="nav__link">Menu</a></li>
-                <li><a href="live.php" class="nav__link">Live</a></li>
-                <li><a href="order.php" class="nav__link">Order</a></li>
-                <li><a href="reservation.php" class="nav__link">Reservation</a></li>
+                <li><a href="welcome.php" class="nav__link">Menu</a></li>
+                <li><a href="welcome.php" class="nav__link">Live</a></li>
+                <li><a href="welcome.php" class="nav__link">Cart</a></li>
+                <li><a href="welcome.php" class="nav__link">Reservation</a></li>
                 <li><a href="about.php" class="nav__link">About Us</a></li>
                 <li>
-                    <a href="login.php" class="login" id="loginbutton">Log In</a>
+                    <a href="welcome.php" class="login" id="loginbutton">Log In</a>
                 </li>
             </ul>
         </div>

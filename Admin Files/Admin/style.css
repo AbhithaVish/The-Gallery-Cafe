@@ -5,7 +5,7 @@
     --white-color: hsl(44, 100%, 50%);
     --white-color-light: hsl(0, 0%, 100%);
     --white-color-lighten: hsl(220, 20%, 18%);
-    --black-color: #000000;
+    /* --black-color: #000000; */
     --body-color: hsl(0, 0%, 28%);
     --body-font: "Montserrat", sans-serif;
     --normal-font-size: .938rem;
@@ -15,6 +15,11 @@
     --z-fixed: 100;
 }
 
+
+@font-face {
+    font-family: titlefont;
+    src: url('Fonts/title.ttf');
+}
 button {
     border: none;
     cursor: pointer;
@@ -54,21 +59,37 @@ button {
     text-decoration: none;
 }
 
+.direction-btn{
+    text-align: center;
+        background-color: #04AA6D; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+}
+
 .mini-boxes {
     display: flex;
     justify-content: space-around;
     margin: 20px 0;
     padding: 20px;
+    margin-left:100px ;
+    margin-right:100px;
+
 }
 
 .box {
     background-color: hsl(0, 0%, 60%);
     color: white;
     border-radius: 10px;
-    padding: 20px;
     text-align: center;
     width: 200px;
     transition: background-color 0.3s;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .box:hover {
@@ -129,7 +150,7 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--black-color);
+    /* background-color: var(--black-color); */
     box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
     z-index: var(--z-fixed);
     border-radius: 20px;
@@ -187,6 +208,7 @@ a {
     opacity: 0;
 }
 
+
 @media screen and (max-width: 1118px) {
     .nav__menu {
         position: absolute;
@@ -203,14 +225,14 @@ a {
         width: 0;
     }
     .nav__list {
-        background-color: var(--black-color);
+        /* background-color: var(--black-color); */
         padding-top: 1rem;
     }
 }
 
 .nav__link {
     color: var(--white-color);
-    background-color: var(--black-color);
+    /* background-color: var(--black-color); */
     font-weight: var(--font-semi-bold);
     padding: 1.25rem 1.5rem;
     display: flex;
@@ -219,9 +241,6 @@ a {
     transition: background-color .3s;
 }
 
-.nav__link:hover {
-    background-color: var(--black-color-light);
-}
 
 .show-menu {
     opacity: 1;
@@ -325,4 +344,11 @@ a {
 .order:hover {
     background-color: hsl(44, 100%, 40%);
     color: rgb(255, 255, 255);
+}
+
+.title{
+    text-align: center;
+    font-size: 50px;
+    font-family: titlefont;
+    -webkit-text-stroke: 1px rgb(216, 120, 11);
 }

@@ -1,10 +1,13 @@
 <?php
 // session_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include_once('connection.php');
 include_once('navbar.php');
 
-// Close the database connection
 $conn->close();
 ?>
 
@@ -13,26 +16,21 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Gallery Cafe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>   
-
     <div class="main-banner">
         <div class="main-banner__content">
+            <p>This is not a login page, it is a welcome first page</p>
             <h1>Our Newly</h1>
             <h1>Introduced</h1>
             <h1>Item</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis cumque aspernatur dolore tempora earum nihil quas expedita, magni, deserunt, molestias doloremque. Illo odio maiores vel vitae laudantium. Pitiis est hic, inventore ab officia numquam perspiciatis?</p>
-            <br>
-            <button class="order">Order Now</button>
+            <br><button class="order">Order Now</button>
         </div>
         <img src="Images/steak.png" alt="image">
     </div>
-
-    <p>
-        this is the admin section
-    </p>
 
     <div class="mini-boxes">
         <div class="box">
@@ -52,15 +50,5 @@ $conn->close();
             <button>See Menu</button>
         </div>
     </div>
-
-    <script>
-        const navToggle = document.getElementById('nav-toggle');
-        const navMenu = document.getElementById('nav-menu');
-
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('show-menu');
-            navToggle.classList.toggle('show-icon');
-        });
-    </script>
 </body>
 </html>

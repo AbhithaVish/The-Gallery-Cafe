@@ -5,7 +5,7 @@
     --white-color: hsl(44, 100%, 50%);
     --white-color-light: hsl(0, 0%, 100%);
     --white-color-lighten: hsl(220, 20%, 18%);
-    --black-color: #000000;
+    /* --black-color: #000000; */
     --body-color: hsl(0, 0%, 28%);
     --body-font: "Montserrat", sans-serif;
     --normal-font-size: .938rem;
@@ -15,35 +15,40 @@
     --z-fixed: 100;
 }
 
-@font-face {
-    font-family: titlefont;
-    src: url('Fonts/title.ttf');
-}
-
-
-body {
-    background-image: url('Images/background image.jpg');
+body{
+    background-image: url('Images/reservation backround.jpg');
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
     background-attachment: fixed; 
     color: white;
     border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: inherit;
-    margin-top: 140px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    margin-top: 150px;
 }
 
-
-h3 {
-    margin: 50px; 
-    text-align: justify;
+.container {
+    display: flex;
+    justify-content: space-around;
 }
 
-.topic{
+.main-box {
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    background-color: hsl(0, 0%, 60%);
+    color: white;
+    border-radius: 10px;
     text-align: center;
-    font-size: 50px;
-    font-family: titlefont;
-    -webkit-text-stroke: 1px rgb(216, 120, 11);
+    transition: background-color 0.3s;
+}
+
+.button-click{
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    background-color: var(--white-color);
 }
