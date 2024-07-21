@@ -35,10 +35,11 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Creation</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-new.css">
 </head>
 <body>
 <div class="container">
-    <h2 class="text-topic">Add Reservation</h2>
+    <h2 class="text-topic">Create New Account</h2>
     <form method="post" action="">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label><br>
@@ -56,7 +57,10 @@ $conn->close();
             <label for="password" class="form-label">Password</label><br>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
-        <button type="submit" class="btn-add">Add</button>
+        <button type="submit" class="btn-add">Create</button><br> <br>
+        <button class="btn-add" style="color:azure;">
+            <a href="welcome.php">Log In</a>
+        </button>
     </form>
 </div>
 </body>
