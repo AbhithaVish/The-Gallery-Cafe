@@ -1,0 +1,203 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+:root {
+    --header-height: 3.5rem;
+    --white-color: hsl(44, 100%, 50%);
+    --white-color-light: hsl(0, 0%, 100%);
+    --white-color-lighten: hsl(220, 20%, 18%);
+    --body-color: hsl(0, 0%, 28%);
+    --body-font: "Montserrat", sans-serif;
+    --normal-font-size: .938rem;
+    --font-regular: 400;
+    --font-semi-bold: 600;
+    --z-tooltip: 10;
+    --z-fixed: 100;
+}
+
+@font-face {
+    font-family: titlefont;
+    src: url('Fonts/title.ttf');
+}
+
+body {
+    background-image: url('Images/background image.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    margin-top: 140px;
+}
+
+.image-section {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 5px;
+}
+
+.images {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.images::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.big-boxes {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    padding: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.shape {
+    background-color: hsl(0, 0%, 24%);
+    opacity: 0.8;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: auto;
+    transition: background-color 0.3s;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.shape:hover {
+    background-color: hsl(44, 100%, 40%);
+}
+
+.title-image {
+    text-align: center;
+    font-size: 50px;
+    font-family: title;
+    -webkit-text-stroke: 1px rgb(0, 110, 255);
+}
+
+h3 {
+    margin: 50px; 
+    text-align: justify;
+}
+
+.topic {
+    text-align: center;
+    font-size: 50px;
+    font-family: titlefont;
+    -webkit-text-stroke: 1px rgb(216, 120, 11);
+}
+
+.directions {
+    justify-content: center; 
+    align-items: center;
+    
+}
+
+.direction-btn{
+    border-radius: 5px;
+}
+
+.direction-btn a {
+    color: white;
+    text-decoration: none;
+}
+
+.direction-btn:hover {
+    color: #000;
+}
+
+/* Flex container for Mission and Vision */
+.mission-vision-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 100px;
+}
+
+.big-box {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 5px;
+}
+
+.shapes {
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0.6;
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    text-align: center;
+    width: auto;
+    transition: background-color 0.3s;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-style: bold;
+}
+
+.shapes:hover {
+    background-color: hsl(44, 100%, 40%);
+}
+
+.shapes {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.shapes::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.contact-boxes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 1500px;
+}
+
+.contact-d {
+    background-color: hsl(0, 0%, 15%);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 15000px;
+    transition: background-color 0.3s;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 15000px;
+    font-size: 1.2rem;
+}
+
+.contact-d:hover {
+    background-color: hsl(44, 100%, 40%);
+}
+
+.contact-d a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-d a:hover {
+    color: #000;
+}
+
+.contact-d i {
+    margin-right: 10px;
+}
+
+.contact-d h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
