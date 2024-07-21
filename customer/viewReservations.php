@@ -39,11 +39,11 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="style-Vreservation.css">
     <style>
         html{
-            overflow-y: scroll;
+            overflow-x: scroll;
         }
     </style>
 </head>
@@ -56,7 +56,7 @@ $conn->close();
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">Reservation ID: <?php echo htmlspecialchars($reservation['id']); ?></h5>
-                            <p class="card-text"><strong>Username:</strong> <?php echo htmlspecialchars($reservation['username']); ?></p>
+                            <p class="card-text"><strong>Name:</strong> <?php echo htmlspecialchars($reservation['username']); ?></p>
                             <p class="card-text"><strong>ID No:</strong> <?php echo htmlspecialchars($reservation['idNo']); ?></p>
                             <p class="card-text"><strong>Contact:</strong> <?php echo htmlspecialchars($reservation['contact']); ?></p>
                             <p class="card-text"><strong>Tables:</strong> <?php echo htmlspecialchars($reservation['tables']); ?></p>

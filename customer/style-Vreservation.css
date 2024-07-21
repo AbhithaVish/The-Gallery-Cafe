@@ -33,11 +33,15 @@ body {
     overflow: scroll;
 }
 
+.text-center{
+    color: var(--white-color-light);
+}
+
 .container {
     margin-top: 20px;
 }
 
-.text-center{
+.text-topic{
     color: white;
 }
 h2 {
@@ -46,17 +50,20 @@ h2 {
     color: #333;
 }
 
-/* Card Styles */
+
+
 .card {
+    margin-left: 10px;
     background-color: var(--white-color-light);
-    margin: 20px 0;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
 }
 .row{
     width: auto;
+    float: left;
+    display: flex;
+
 }
 .card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -65,10 +72,11 @@ h2 {
 .card-body {
     padding: 20px;
     width: auto;
+    height: auto;
+
 }
 
 .card-title {
-    margin: 0 0 10px 0;
     font-size: 1.25em;
     color: #007BFF;
 }
@@ -77,3 +85,23 @@ h2 {
     margin: 0 0 10px 0;
     color: #666;
 }
+
+.btn-add{
+        text-align: center;
+        background-color: #009de6; /* Green */
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        margin-top: 10px;
+}
+
+.btn-add:hover{
+    background-color: var(--white-color-light);
+    color: #333;
+}
+

@@ -60,40 +60,46 @@ $conn->close();
     <title>Reservations</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-Vreservation.css">
+    <style>
+        html{
+    overflow-y: scroll;
+}
+
+    </style>
 </head>
 <body>
     <div class="container">
-        <h2 class="text-center">Add Reservation</h2>
-        <form method="post" action="">
+        <h2 class="text-topic">Add Reservation</h2>
+        <form method="post" action="" >
             <div class="mb-3">
-                <label for="idNo" class="form-label">NIC Number</label>
+                <label for="idNo" class="form-label">NIC Number</label><br>
                 <input type="text" class="form-control" id="idNo" name="idNo" required>
-            </div>
+            </div>  
             <div class="mb-3">
-                <label for="contact" class="form-label">Contact Number</label>
+                <label for="contact" class="form-label">Contact Number</label><br>
                 <input type="text" class="form-control" id="contact" name="contact" required>
             </div>
             <div class="mb-3">
-                <label for="tables" class="form-label">Tables</label>
+                <label for="tables" class="form-label">Tables</label><br>
                 <input type="text" class="form-control" id="tables" name="tables" required>
             </div>
             <div class="mb-3">
-                <label for="date" class="form-label">Date</label>
+                <label for="date" class="form-label">Date</label><br>
                 <input type="date" class="form-control" id="date" name="date" required>
             </div>
             <div class="mb-3">
-                <label for="time" class="form-label">Time</label>
+                <label for="time" class="form-label">Time</label><br>
                 <input type="time" class="form-control" id="time" name="time" required>
             </div>
             <div class="mb-3">
-                <label for="noOfPeople" class="form-label">No Of People</label>
+                <label for="noOfPeople" class="form-label">No Of People</label><br>
                 <input type="number" class="form-control" id="noOfPeople" name="noOfPeople" required>
             </div>
             <div class="mb-3">
-                <label for="status" class="form-label">Status</label>
+                <label for="status" class="form-label">Status</label><br>
                 <input type="text" class="form-control" id="status" name="status" required>
             </div>
-            <button type="submit" class="btn btn-primary">Add Reservation</button>
+            <button type="submit" class="btn-add">Add</button>
         </form>
         
     </div>
