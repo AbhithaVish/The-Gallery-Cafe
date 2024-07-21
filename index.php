@@ -45,7 +45,7 @@ $conn->close();
         <div class="text-overlay">
             <img src="Images/logo.png" alt="">
             <h1>The_Best_Tasting_Experience</h1>
-            <h2>Cousin and Drinks beyond the boundries of task</h2>
+            <h2>Cuisine and Drinks beyond the boundries of taste</h2>
             <p class="tagline">Food is Ready.</p>
         </div>
     </div>

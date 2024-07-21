@@ -1,13 +1,13 @@
 <?php
-// Start the session 
 // session_start();
 
-// Include the database connection
-include_once('../connection.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
+include_once('../connection.php');
 include_once('navbar.php');
 
-// Close the database connection
 $conn->close();
 ?>
 
@@ -16,34 +16,45 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Gallery Cafe</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .round-banner img {
+            margin-top: 400px;
+            width: 100vw; /* 20% of the viewport width */
+            height: auto; /* Maintain aspect ratio */
+            max-width: 350px; /* Optional: set a maximum width */
+        }
+        @media screen and (max-width: 600px) {
+            .round-banner img {
+                width: 40vw; /* 40% of the viewport width for smaller screens */
+                max-width: 150px; /* Optional: set a different maximum width */
+            }
+        }
+    </style>
 </head>
-<body>
-    <div class="container-head">
-        <div class="title">
-            <h1>The Gallery Cafe</h1>
-        </div>
-            
+<body>   
+    
+<video autoplay muted loop id="myVideo">
+  <source src="Videos/background video.mp4" type="video/mp4">
+</video>
+
     <div class="main-banner">
-        <div class="main-banner__content">
-            <h1>Our Newly</h1>
-            <h1>Introduced</h1>
-            <h1>Item</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nobis cumque aspernatur dolore tempora earum nihil quas expedita, magni, deserunt, molestias doloremque. Illo odio maiores vel vitae laudantium. Pitiis est hic, inventore ab officia numquam perspiciatis?</p>
-            <br>
-            <button class="order">Order Now</button>
+        <center>
+        <div class="background">
+        <div class="text-overlay">
+            <img src="Images/logo.png" alt="">
+            <h1>The_Best_Tasting_Experience</h1>
+            <h2>Cuisine and Drinks beyond the boundries of taste</h2>
+            <p class="tagline">Food is Ready.</p>
         </div>
-        <img src="Images/steak.png" alt="image">
     </div>
-
-    <p>Admin index mekt thama admin enna one password gahala
-
-    </p>
-
+        </center>
+    </div>
+<!-- 
     <div class="mini-boxes">
         <div class="box">
-            <h2>Promotions</h2>
+            <h2>Reservation</h2>
             <button>Book Now</button>
         </div>
         <div class="box">
@@ -58,18 +69,6 @@ $conn->close();
             <h2>Menu</h2>
             <button>See Menu</button>
         </div>
-    </div>
-    </div>
-
-
-    <script>
-        const navToggle = document.getElementById('nav-toggle');
-        const navMenu = document.getElementById('nav-menu');
-
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('show-menu');
-            navToggle.classList.toggle('show-icon');
-        });
-    </script>
+    </div> -->
 </body>
 </html>
