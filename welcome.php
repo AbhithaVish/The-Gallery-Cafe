@@ -54,6 +54,12 @@ include_once('connection.php');
           
             </div>
           </form>
+          <div class="sign-up">
+            <h6>Don't have an account? <a href="account.php">Sign up Here.</a> </h6>
+            
+          </div>
+
+        
         </div>
       </div>
       
