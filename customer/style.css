@@ -5,6 +5,7 @@
     --white-color: hsl(44, 100%, 50%);
     --white-color-light: hsl(0, 0%, 100%);
     --white-color-lighten: hsl(220, 20%, 18%);
+    /* --black-color: #000000; */
     --body-color: hsl(0, 0%, 28%);
     --body-font: "Montserrat", sans-serif;
     --normal-font-size: .938rem;
@@ -15,94 +16,14 @@
 }
 
 
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    color: white;
-    overflow: hidden;
-}
-#myVideo {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
+@font-face {
+    font-family: titlefont;
+    src: url('Fonts/title.ttf');
 }
 
-
-.round-banner{
-    scale: 150%     ;
-}
-
-.background {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-}
-.text-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-.text-overlay h1 {
-    font-size: 4rem;
-    margin: 0;
-    font-weight: bold;
-}
-.text-overlay h2 {
-    font-size: 2rem;
-    margin: 0;
-    font-weight: normal;
-}
-.text-overlay h3 {
-    font-size: 1.5rem;
-    margin: 0;
-    font-weight: normal;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-}
-.text-overlay .tagline {
-    font-size: 1rem;
-    margin-top: 10px;
-    font-weight: normal;
-    letter-spacing: 0.2rem;
-}
-.main-banner {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    color: white;
-    padding-top: 150px; 
-    /* margin-top: 180px; */
-}
-.main-banner__content {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.mini-boxes {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
-    padding: 0 20px; /* Added padding to mini-boxes container */
-    box-sizing: border-box; /* Ensures padding is included in total width */
-}
-.box {
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border-radius: 10px;
-    text-align: center;
-    flex: 1; /* Allows boxes to expand and take equal space */
-    min-width: 150px; /* Minimum width to maintain box integrity */
-}
-
+html{
+    overflow: auto;
+  }
 button {
     border: none;
     cursor: pointer;
@@ -127,6 +48,7 @@ button {
     transform: scale(1.05);
 }
 
+
 .login:active {
     transform: scale(0.98);
 }
@@ -141,22 +63,37 @@ button {
     text-decoration: none;
 }
 
+.direction-btn{
+    text-align: center;
+        background-color: #04AA6D; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+}
+
 .mini-boxes {
     display: flex;
     justify-content: space-around;
     margin: 20px 0;
     padding: 20px;
-    width: auto;
+    margin-left:100px ;
+    margin-right:100px;
+
 }
 
 .box {
     background-color: hsl(0, 0%, 60%);
     color: white;
     border-radius: 10px;
-    padding: 20px;
     text-align: center;
-    width: auto;
+    width: 200px;
     transition: background-color 0.3s;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .box:hover {
@@ -195,18 +132,6 @@ body {
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     background-color: var(--body-color);
-        background-image: url('Images/home background.jpg');
-        background-size: cover; 
-        background-position: center; 
-        background-repeat: no-repeat; 
-        background-attachment: fixed; 
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: inherit;
-
-    
 }
 
 ul {
@@ -222,20 +147,17 @@ a {
     margin-inline: 1.5rem;
 }
 
-/*Header CSS part*/
 .header {
     margin: 10px 100px 10px 10px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--black-color);
     box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
     z-index: var(--z-fixed);
     border-radius: 20px;
 }
 
-/*Nav Bar CSS part*/
 .nav {
     height: var(--header-height);
 }
@@ -287,6 +209,7 @@ a {
     opacity: 0;
 }
 
+
 @media screen and (max-width: 1118px) {
     .nav__menu {
         position: absolute;
@@ -294,7 +217,6 @@ a {
         top: 2.5rem;
         width: 100%;
         height: calc(100vh - 3.5rem);
-        overflow: auto;
         pointer-events: none;
         opacity: 0;
         transition: top .4s, opacity .3s;
@@ -303,14 +225,12 @@ a {
         width: 0;
     }
     .nav__list {
-        background-color: var(--black-color);
         padding-top: 1rem;
     }
 }
 
 .nav__link {
     color: var(--white-color);
-    background-color: var(--black-color);
     font-weight: var(--font-semi-bold);
     padding: 1.25rem 1.5rem;
     display: flex;
@@ -319,9 +239,6 @@ a {
     transition: background-color .3s;
 }
 
-.nav__link:hover {
-    background-color: var(--black-color-light);
-}
 
 .show-menu {
     opacity: 1;
@@ -383,7 +300,6 @@ a {
     }
 }
 
-/*Main CSS part*/
 .main-banner {
     display: flex;
     align-items: center;
@@ -425,4 +341,11 @@ a {
 .order:hover {
     background-color: hsl(44, 100%, 40%);
     color: rgb(255, 255, 255);
+}
+
+.title{
+    text-align: center;
+    font-size: 50px;
+    font-family: titlefont;
+    -webkit-text-stroke: 1px rgb(216, 120, 11);
 }

@@ -1,11 +1,9 @@
 <?php
-
 include_once('../connection.php');
-
 include_once('navbar.php');
-
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,17 +13,12 @@ $conn->close();
     <link rel="stylesheet" href="style-about.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
-
-    <style>
-      
-    </style>
 </head>
 <body>
     <div class="main-container">
         <div class="topic">
             <h1>The Gallery Cafe</h1>
         </div>
-
         <div class="history">
             <div class="big-boxes">
                 <div class="shape">
@@ -33,7 +26,6 @@ $conn->close();
                 </div>
             </div>
         </div>
-
         <div class="gallery">
             <div class="title-image">
                 <p>The Image Gallery</p>
@@ -41,45 +33,39 @@ $conn->close();
             <div class="image-section">
                 <div class="images">
                     <a href="Images/image 1.jpg">
-                        <img src="Images/image 1.jpg" alt="Restuarant Image" style="width: auto; height: 290px;">
+                        <img src="Images/image 1.jpg" alt="Restaurant Image" style="width: auto; height: 290px;">
                     </a>
                 </div>
                 <div class="images">
                     <a href="Images/image 2.jpg">
-                        <img src="Images/image 2.jpg" alt="Restuarant Image" style="width: auto; height: 290px;">
+                        <img src="Images/image 2.jpg" alt="Restaurant Image" style="width: auto; height: 290px;">
                     </a>
                 </div>
                 <div class="images">
                     <a href="Images/image 3.png">
-                        <img src="Images/image 3.png" alt="Restuarant Image" style="width: auto; height: 290px;">                   
+                        <img src="Images/image 3.png" alt="Restaurant Image" style="width: auto; height: 290px;">                   
                     </a>
                 </div>
             </div>
         </div>
-
-<div class="mission-vision-container">
-    <div class="mission">
-        <div class="big-box">
-            <div class="shapes">
-                <br>
-                <h1>Our Mission</h1>
-                <h3>To be Sri Lanka’s best quick service restaurant by providing outstanding food, unique experiences and being the preferred dining and drinking place of the customers</h3>
+        <div class="mission-vision-container">
+            <div class="mission">
+                <div class="big-box">
+                    <div class="shapes">
+                        <h1>Our Mission</h1>
+                        <h3>To be Sri Lanka’s best quick service restaurant by providing outstanding food, unique experiences and being the preferred dining and drinking place of the customers</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="vision">
+                <div class="big-box">
+                    <div class="shapes">
+                        <h1>Our Vision</h1>
+                        <h3>To be recognized as one of the ten best dining experiences in our city and to become a better place for customers with delicious food</h3>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="vision">
-        <div class="big-box">
-            <div class="shapes">
-                <br>
-                <h1>Our Vision</h1>
-                <h3>To be recognized as one of the ten best dining experiences in our city and to become a better place for customers with delicious food</h3>
-            </div>
-        </div>
-    </div>
-</div>
-
-        
         <div class="directions">
             <center>
                 <button class="direction-btn">
@@ -87,14 +73,14 @@ $conn->close();
                 </button>
             </center>
         </div>
-
-        <div class="Contact">
+        <div class="contact">
             <div class="contact-boxes">
                 <div class="contact-d">
                     <h1>Contact us</h1>
                     <i class="fa-solid fa-phone"></i> <a href="tel:+94 114 777 888">114 777 888</a><br>
                     <i class="fa-solid fa-location-dot"></i> Location : De Krester Road, Colombo 4.<br>
                     <i class="fa-solid fa-envelope"></i> <a href="mailto:thegallerycafe@gmail.com">E-mail : thegallerycafe@gmail.com </a><br>
+                </div>
             </div>
         </div>
     </div>

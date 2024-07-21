@@ -19,6 +19,15 @@
     src: url('Fonts/title.ttf');
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    overflow-x: hidden;
+}
+
 body {
     background-image: url('Images/background image.jpg');
     background-size: cover; 
@@ -26,66 +35,31 @@ body {
     background-repeat: no-repeat; 
     background-attachment: fixed; 
     color: white;
+    padding-top: 140px; 
+}
+
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
     border: none;
     cursor: pointer;
     font-family: inherit;
     font-size: inherit;
-    margin-top: 140px;
 }
 
-.image-section {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    padding: 5px;
-}
-
-.images {
-    margin-left: 3px;
-    margin-right: 3px;
-}
-
-.images::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.big-boxes {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-    padding: 20px;
-    margin-left: 100px;
-    margin-right: 100px;
-}
-
-.shape {
-    background-color: hsl(0, 0%, 24%);
-    opacity: 0.8;
-    color: white;
-    border-radius: 10px;
-    text-align: center;
-    width: auto;
-    transition: background-color 0.3s;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.shape:hover {
-    background-color: hsl(44, 100%, 40%);
-}
-
-.title-image {
-    text-align: center;
-    font-size: 50px;
-    font-family: title;
-    -webkit-text-stroke: 1px rgb(0, 110, 255);
-}
-
-h3 {
-    margin: 50px; 
-    text-align: justify;
+.main-container {
+    padding: 0 20px;
 }
 
 .topic {
@@ -95,14 +69,83 @@ h3 {
     -webkit-text-stroke: 1px rgb(216, 120, 11);
 }
 
-.directions {
-    justify-content: center; 
-    align-items: center;
-    
+.history .big-boxes {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 20px;
 }
 
-.direction-btn{
-    border-radius: 5px;
+.shape {
+    background-color: hsl(0, 0%, 24%);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    transition: background-color 0.3s;
+    padding: 20px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.shape:hover {
+    background-color: hsl(44, 100%, 40%);
+}
+
+.gallery .title-image {
+    text-align: center;
+    font-size: 30px;
+    font-family: titlefont;
+    -webkit-text-stroke: 1px rgb(0, 110, 255);
+    margin-bottom: 20px;
+}
+
+.image-section {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px;
+}
+
+.images img {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.images img:hover {
+    transform: scale(1.05);
+}
+
+.mission-vision-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.mission, .vision {
+    flex: 1 1 45%;
+    margin: 10px;
+}
+
+.shapes {
+    background-color: hsl(0, 0%, 100%);
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    text-align: center;
+    transition: background-color 0.3s;
+    padding: 20px;
+}
+
+.shapes:hover {
+    background-color: hsl(44, 100%, 40%);
+}
+
+.directions {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
 }
 
 .direction-btn a {
@@ -110,59 +153,19 @@ h3 {
     text-decoration: none;
 }
 
-.direction-btn:hover {
+.direction-btn:hover a {
     color: #000;
 }
 
-/* Flex container for Mission and Vision */
-.mission-vision-container {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 100px;
+.contact {
+    padding: 20px 0;
 }
-
-.big-box {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    padding: 5px;
-}
-
-.shapes {
-    background-color: rgba(255, 255, 255, 0.7);
-    opacity: 0.6;
-    color: rgb(0, 0, 0);
-    border-radius: 10px;
-    text-align: center;
-    width: auto;
-    transition: background-color 0.3s;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-style: bold;
-}
-
-.shapes:hover {
-    background-color: hsl(44, 100%, 40%);
-}
-
-.shapes {
-    margin-left: 3px;
-    margin-right: 3px;
-}
-
-.shapes::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
 
 .contact-boxes {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 20px;
-    width: 1500px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .contact-d {
@@ -170,13 +173,11 @@ h3 {
     color: white;
     border-radius: 10px;
     text-align: center;
-    width: 15000px;
-    transition: background-color 0.3s;
     padding: 20px;
-    margin: 10px;
+    transition: background-color 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 15000px;
-    font-size: 1.2rem;
+    max-width: 400px;
+    flex: 1 1 100%;
 }
 
 .contact-d:hover {
@@ -200,4 +201,8 @@ h3 {
 .contact-d h1 {
     margin-bottom: 20px;
     font-size: 2rem;
+}
+
+h3 {
+    text-align: justify;
 }
