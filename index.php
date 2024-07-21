@@ -1,5 +1,4 @@
 <?php
-// session_start();
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -19,18 +18,6 @@ $conn->close();
     <title>The Gallery Cafe</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .round-banner img {
-            margin-top: 400px;
-            width: 100vw; /* 20% of the viewport width */
-            height: auto; /* Maintain aspect ratio */
-            max-width: 350px; /* Optional: set a maximum width */
-        }
-        @media screen and (max-width: 600px) {
-            .round-banner img {
-                width: 40vw; /* 40% of the viewport width for smaller screens */
-                max-width: 150px; /* Optional: set a different maximum width */
-            }
-        }
     </style>
 </head>
 <body>   
