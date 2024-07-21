@@ -22,7 +22,7 @@
 }
 
 html{
-    overflow: auto;
+    /* overflow-x: scroll; */
   }
 button {
     border: none;

@@ -41,6 +41,11 @@ $conn->close();
     <title>Reservations</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-Vreservation.css">
+    <style>
+        html{
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
