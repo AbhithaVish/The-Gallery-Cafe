@@ -20,12 +20,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $stmt->error;
     }
-
-    // Close the statement and connection
     $stmt->close();
-    $conn->close();
 }
+
+// Fetch menu items
+$sqlMenu = "SELECT * FROM menu";
+$resultMenu = $conn->query($sqlMenu);
+
+// Close the connection
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,5 +58,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit">Add Item</button>
         </form>
     </div>
+    <div class="view-table">
+    <table>
+        <tr>
+            <th>Item ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        <?php
+        if ($resultMenu->num_rows > 0) {
+            while($row = $resultMenu->fetch_assoc()) {
+                echo "<tr><td>" . htmlspecialchars($row["item_id"]) . "</td><td>" . htmlspecialchars($row["name"]) . "</td><td>" . htmlspecialchars($row["description"]) . "</td><td>" . htmlspecialchars($row["price"]) . "</td></tr>";
+            }
+        } else {
+            echo "<tr><td colspan='4'>No items available</td></tr>";
+        }
+        ?>
+    </table>
+</div>
+
 </body>
 </html>
