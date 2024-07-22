@@ -21,14 +21,14 @@ $conn->close();
     <style>
         .round-banner img {
             margin-top: 400px;
-            width: 100vw; /* 20% of the viewport width */
-            height: auto; /* Maintain aspect ratio */
-            max-width: 350px; /* Optional: set a maximum width */
+            width: 100vw; 
+            height: auto; 
+            max-width: 350px; 
         }
         @media screen and (max-width: 600px) {
             .round-banner img {
-                width: 40vw; /* 40% of the viewport width for smaller screens */
-                max-width: 150px; /* Optional: set a different maximum width */
+                width: 40vw; 
+                max-width: 150px; 
             }
         }
     </style>

@@ -47,14 +47,14 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
 
 <header class="header">
     <nav class="nav container">
-        <div class="nav__data">
+        <!-- <div class="nav__data">
             <a href="index.php" class="nav__logo">
                 <i class="ri-planet-line"></i> The Gallery Cafe
             </a>
             <div class="nav__toggle">
                 <i class="ri-menu-line"></i>
             </div>
-        </div>
+        </div> -->
         <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
                 <li><a href="index.php" class="nav__link">Home</a></li>
