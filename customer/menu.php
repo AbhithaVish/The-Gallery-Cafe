@@ -70,16 +70,6 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   
-
-
-<div class="heading">
-    <h3>our menu</h3>
-    <p><a href="home.php">home</a> <span> / menu</span></p>
-</div>
-
-<!-- menu section starts  -->
-
 <section class="products">
 
     <h1 class="title">latest dishes</h1>
