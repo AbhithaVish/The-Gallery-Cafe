@@ -1,4 +1,4 @@
-/* General Styles */
+
 body {
     background-image: url('Images/menu backround.png');
     background-size: cover; 
@@ -21,11 +21,13 @@ h1 {
 }
 
 .form-container {
-    width: 50%;
-    background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    width: 90%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.9); 
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    box-sizing: border-box;
 }
 
 .form-container label {
@@ -64,4 +66,19 @@ h1 {
 
 .form-container button:hover {
     background-color: #45a049;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .form-container {
+        width: 95%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        width: 100%;
+        padding: 10px;
+    }
 }
