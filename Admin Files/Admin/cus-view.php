@@ -60,7 +60,7 @@ $conn->close();
 <body>
     <div class="main-container">
         <div class="topic">
-            <h1>Manage Users</h1>
+            <h1>Manage Customer Profiles</h1>
         </div>
         <div class="container">
             <div class="table-container">

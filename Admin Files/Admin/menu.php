@@ -58,7 +58,7 @@ $conn->close();
             <button type="submit">Add Item</button>
         </form>
     </div>
-    <div class="view-table">
+<div class="view-table">
     <table>
         <tr>
             <th>Item ID</th>
@@ -77,6 +77,5 @@ $conn->close();
         ?>
     </table>
 </div>
-
 </body>
 </html>

@@ -59,14 +59,14 @@ $conn->close();
 <body>
     <div class="main-container">
         <div class="topic">
-            <h1>Manage Users</h1>
+            <h1>Manage Staff Profiles</h1>
         </div>
         <div class="container">
             <div class="table-container">
                 <h2>Users</h2>
                 
                 <table>
-                    <tr>
+                    <tr><th>ID</th>
                         <th>Name</th>
                         <th>Username</th>
                         <th>Email</th>
@@ -99,7 +99,7 @@ $conn->close();
                 </form>
                 <form method="post">
                     <h3>Delete User</h3>
-                    <input type="text" name="id" placeholder="ID" required>
+                    <input type="text" name="id" placeholder="Enter id" required>
                     <button type="submit" name="delete_user" class="btn-delete">Delete User</button>
                 </form>
             </div>
