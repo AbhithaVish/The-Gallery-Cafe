@@ -1,7 +1,7 @@
 <?php
-// session_start();
 include_once('../connection.php');
-include_once('navbar.php');
+
+session_start();
 
 // Check if user is logged in
 if (!isset($_SESSION['username'])) {
@@ -63,34 +63,74 @@ $result = $conn->query($sql);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
-    <link rel="stylesheet" href="style-menu.css">
+    <title>menu</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <?php if (isset($message)): ?>
-            <p><?php echo htmlspecialchars($message); ?></p>
-        <?php endif; ?>
+   
+<!-- header section starts  -->
+<?php include 'components/user_header.php'; ?>
+<!-- header section ends -->
 
-        <div class="menu">
-            <?php if ($result && $result->num_rows > 0): ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                <div class="menu-item">
-                    <h2><?php echo htmlspecialchars($row['name']); ?></h2>
-                    <p><?php echo htmlspecialchars($row['description']); ?></p>
-                    <p>Rs.<?php echo htmlspecialchars($row['price']); ?></p>
-                    <form method="post">
-                        <input type="hidden" name="item_id" value="<?php echo htmlspecialchars($row['item_id']); ?>">
-                        <button type="submit" class="add-to-cart">Add to Cart</button>
-                    </form>
-                </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>No menu items available.</p>
-            <?php endif; ?>
-        </div>
+<div class="heading">
+    <h3>our menu</h3>
+    <p><a href="home.php">home</a> <span> / menu</span></p>
+</div>
+
+<!-- menu section starts  -->
+
+<section class="products">
+
+    <h1 class="title">latest dishes</h1>
+
+    <div class="box-container">
+
+        <?php
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+        ?>
+        <form action="" method="post" class="box">
+            <input type="hidden" name="item_id" value="<?= htmlspecialchars($row['item_id']); ?>">
+            <input type="hidden" name="name" value="<?= htmlspecialchars($row['name']); ?>">
+            <input type="hidden" name="price" value="<?= htmlspecialchars($row['price']); ?>">
+            <input type="hidden" name="image" value="<?= htmlspecialchars($row['image']); ?>">
+            <a href="quick_view.php?pid=<?= htmlspecialchars($row['item_id']); ?>" class="fas fa-eye"></a>
+            <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
+            <img src="uploaded_img/<?= htmlspecialchars($row['image']); ?>" alt="">
+            <a href="category.php?category=<?= htmlspecialchars($row['cousintype']); ?>" class="cat"><?= htmlspecialchars($row['cousintype']); ?></a>
+            <div class="name"><?= htmlspecialchars($row['name']); ?></div>
+            <div class="flex">
+                <div class="price"><span>Rs.</span><?= htmlspecialchars($row['price']); ?></div>
+                <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2">
+            </div>
+        </form>
+        <?php
+            }
+        } else {
+            echo '<p class="empty">no products added yet!</p>';
+        }
+        ?>
+
     </div>
+
+</section>
+
+<!-- menu section ends -->
+
+<!-- footer section starts  -->
+<?php include 'components/footer.php'; ?>
+<!-- footer section ends -->
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
 </body>
 </html>
 
