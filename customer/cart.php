@@ -23,6 +23,7 @@ $conn->close();
 </head>
 <body>
     <div class="container">
+        <p>this is the cart page</p>
     </div>
 </body>
 </html>
