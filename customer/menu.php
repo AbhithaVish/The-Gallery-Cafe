@@ -31,12 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
     if ($item) {
         $name = $item['name'];
         $price = $item['price'];
-        $order_date = date('Y-m-d');
+        $added_date = date('Y-m-d H:i:s');
 
-        // Add to orders table
-        $order_sql = "INSERT INTO orders (item_id, name, price, username, order_date, address, contact) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        if ($stmt = $conn->prepare($order_sql)) {
-            $stmt->bind_param("issssss", $item_id, $name, $price, $username, $order_date, $address, $contact);
+        // Add to cart table
+        $cart_sql = "INSERT INTO cart (item_id, name, price, username, added_date) VALUES (?, ?, ?, ?, ?)";
+        if ($stmt = $conn->prepare($cart_sql)) {
+            $stmt->bind_param("issss", $item_id, $name, $price, $username, $added_date);
             if ($stmt->execute()) {
                 $message = "Item added to cart.";
             } else {
