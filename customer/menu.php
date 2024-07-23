@@ -92,7 +92,7 @@ $result = $conn->query($sql);
             <div class="name"><?= htmlspecialchars($row['name']); ?></div>
             <div class="flex">
                 <div class="price"><span>Rs.</span><?= htmlspecialchars($row['price']); ?></div>
-                <input type="number" name="qty" class="qty" min="1" max="99" value="1" maxlength="2">
+                <input type="number" name="qty" class="qty" >
             </div>
         </form>
         <?php
