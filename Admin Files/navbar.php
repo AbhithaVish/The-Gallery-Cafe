@@ -60,7 +60,7 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
                 <li><a href="index.php" class="nav__link">Home</a></li>
                 <li><a href="welcome.php" class="nav__link">Menu</a></li>
                 <li><a href="welcome.php" class="nav__link">Live</a></li>
-                <li><a href="welcome.php" class="nav__link">Cart</a></li>
+                <li><a href="welcome.php" class="nav__link">Orders</a></li>
                 <li><a href="welcome.php" class="nav__link">Reservation</a></li>
                 <li><a href="about.php" class="nav__link">About Us</a></li>
                 <li><a href="about.php" class="nav__link">Profile</a></li>
