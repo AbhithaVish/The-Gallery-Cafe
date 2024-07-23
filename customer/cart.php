@@ -66,7 +66,9 @@ $conn->close();
         </div>
 
         <center>
-            <button>Order Now</button>
+        <button class="btn-add" style="color:azure;">
+            <a href="pay.php">Order Now</a>
+        </button>
         </center>
     </div>
 </body>
