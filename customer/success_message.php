@@ -12,7 +12,12 @@
             <h1>Payment Successful</h1>
         </div>
         <div class="container">
-            <p>Your payment was successful and your cart has been cleared. Thank you for your purchase!</p>
+            <?php if (isset($_GET['reference'])): ?>
+                <p>Your payment was successful and your cart has been cleared. Thank you for your purchase!</p>
+                <p>Your payment reference number is: <strong><?php echo htmlspecialchars($_GET['reference']); ?></strong></p>
+            <?php else: ?>
+                <p>Your payment was successful and your cart has been cleared. Thank you for your purchase!</p>
+            <?php endif; ?>
             <a href="menu.php" class="btn btn-primary">Back to Menu</a>
         </div>
     </div>
