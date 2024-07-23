@@ -35,7 +35,7 @@ while ($row = $resultCart->fetch_assoc()) {
 if (count($line_items) > 0) {
     $checkout_session = \Stripe\Checkout\Session::create([
         "mode" => "payment",
-        "success_url" => "http://localhost:3000/customer/success.php",
+        "success_url" => "http://localhost:3000/customer/success.php", // Update this URL
         "cancel_url" => "http://localhost:3000/customer/cancel.php",
         "line_items" => $line_items
     ]);
