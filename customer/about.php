@@ -10,8 +10,8 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-    <link rel="stylesheet" href="style-about.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style-about.css">
+    <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
 </head>
 <body>
@@ -33,17 +33,17 @@ $conn->close();
             <div class="image-section">
                 <div class="images">
                     <a href="Images/image 1.jpg">
-                        <img src="Images/image 1.jpg" alt="Restaurant Image" style="width: auto; height: 290px;">
+                        <img src="style/Images/image 1.jpg" alt="Restaurant Image" style="width: auto; height: 290px;">
                     </a>
                 </div>
                 <div class="images">
                     <a href="Images/image 2.jpg">
-                        <img src="Images/image 2.jpg" alt="Restaurant Image" style="width: auto; height: 290px;">
+                        <img src="style/Images/image 2.jpg" alt="Restaurant Image" style="width: auto; height: 290px;">
                     </a>
                 </div>
                 <div class="images">
                     <a href="Images/image 3.png">
-                        <img src="Images/image 3.png" alt="Restaurant Image" style="width: auto; height: 290px;">                   
+                        <img src="style/Images/image 3.png" alt="Restaurant Image" style="width: auto; height: 290px;">                   
                     </a>
                 </div>
             </div>

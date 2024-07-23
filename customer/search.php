@@ -9,7 +9,7 @@ include_once('../connection.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
-    <link rel="stylesheet" href="style-search.css">
+    <link rel="stylesheet" href="style/style-search.css">
 </head>
 <body>
     <form method="post">
