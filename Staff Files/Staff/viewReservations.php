@@ -4,25 +4,6 @@ include_once('navbar.php');
 
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
-// Handle deletion
-if (isset($_POST['delete'])) {
-    $id = $_POST['reservation_id'];
-    echo "Attempting to delete reservation ID: $id";
-
-    $deleteQuery = "DELETE FROM reservation WHERE id = ?";
-    $stmt = $conn->prepare($deleteQuery);
-    $stmt->bind_param('i', $id);
-
-    if ($stmt->execute()) {
-        echo "Reservation deleted successfully.";
-    } else {
-        echo "Error deleting reservation: " . $stmt->error;
-    }
-    $stmt->close();
-    header("Location: " . $_SERVER['PHP_SELF']); // Refresh the page
-    exit();
-}
-
 // Handle status update
 if (isset($_POST['update_status'])) {
     $id = $_POST['reservation_id'];
@@ -128,10 +109,6 @@ $conn->close();
                                     <button type="submit" name="update_status" class="btn btn-danger">Canceled</button>
                                 </form>
                             </div>
-                            <form action="" method="POST" style="margin-top: 10px;">
-                                <input type="hidden" name="reservation_id" value="<?php echo htmlspecialchars($reservation['id']); ?>">
-                                <button type="submit" name="delete" class="btn btn-danger">Delete</button>
-                            </form>
                         </div>
                     </div>
                 </div>
