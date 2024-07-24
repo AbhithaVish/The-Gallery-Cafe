@@ -2,8 +2,46 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
+// Handle deletion
+if (isset($_POST['delete'])) {
+    $id = $_POST['reservation_id'];
+    echo "Attempting to delete reservation ID: $id";
+
+    $deleteQuery = "DELETE FROM reservation WHERE id = ?";
+    $stmt = $conn->prepare($deleteQuery);
+    $stmt->bind_param('i', $id);
+
+    if ($stmt->execute()) {
+        echo "Reservation deleted successfully.";
+    } else {
+        echo "Error deleting reservation: " . $stmt->error;
+    }
+    $stmt->close();
+    header("Location: " . $_SERVER['PHP_SELF']); // Refresh the page
+    exit();
+}
+
+// Handle status update
+if (isset($_POST['update_status'])) {
+    $id = $_POST['reservation_id'];
+    $status = $_POST['new_status'];
+    echo "Attempting to update reservation ID: $id with status: $status";
+
+    $updateQuery = "UPDATE reservation SET status = ? WHERE id = ?";
+    $stmt = $conn->prepare($updateQuery);
+    $stmt->bind_param('si', $status, $id);
+
+    if ($stmt->execute()) {
+        echo "Reservation updated successfully.";
+    } else {
+        echo "Error updating reservation: " . $stmt->error;
+    }
+    $stmt->close();
+    header("Location: " . $_SERVER['PHP_SELF']); // Refresh the page
+    exit();
+}
 
 // Fetch reservations
 $reservations = array();
@@ -29,48 +67,8 @@ if ($tableExistsResult->num_rows == 1) {
     echo "Table 'reservation' does not exist.";
 }
 
-// Handle deletion
-if (isset($_POST['delete'])) {
-    $id = $_POST['reservation_id'];
-    echo "Attempting to delete reservation ID: $id";
-
-    $deleteQuery = "DELETE FROM reservation WHERE id = ?";
-    $stmt = $conn->prepare($deleteQuery);
-    $stmt->bind_param('i', $id);
-
-    if ($stmt->execute()) {
-        echo "Reservation deleted successfully.";
-    } else {
-        echo "Error deleting reservation: " . $stmt->error;
-    }
-    $stmt->close();
-    header("Location: " . $_SERVER['PHP_SELF']); // Refresh the page
-    exit();
-}
-
-// Handle editing
-if (isset($_POST['update'])) {
-    $id = $_POST['reservation_id'];
-    $status = $_POST['status'];
-    echo "Attempting to update reservation ID: $id with status: $status";
-
-    $updateQuery = "UPDATE reservation SET status = ? WHERE id = ?";
-    $stmt = $conn->prepare($updateQuery);
-    $stmt->bind_param('si', $status, $id);
-
-    if ($stmt->execute()) {
-        echo "Reservation updated successfully.";
-    } else {
-        echo "Error updating reservation: " . $stmt->error;
-    }
-    $stmt->close();
-    header("Location: " . $_SERVER['PHP_SELF']); // Refresh the page
-    exit();
-}
-
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,13 +79,24 @@ $conn->close();
     <link rel="stylesheet" href="style/style-Vreservation.css">
     <style>
         body {
-            overflow-y: scroll;
+            margin-top: 50px;
+            overflow-y: auto;
+        }
+        .container {
+            max-height: 80vh; /* Adjust based on your layout */
+            
+            padding: 20px;
+        }
+        .status-buttons form {
+            display: inline-block;
+        }
+        .card {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2 class="text-center">Reservations</h2>
         <div class="row">
             <?php foreach ($reservations as $reservation): ?>
                 <div class="col-md-4">
@@ -101,14 +110,26 @@ $conn->close();
                             <p class="card-text"><strong>Date:</strong> <?php echo htmlspecialchars($reservation['date']); ?></p>
                             <p class="card-text"><strong>Time:</strong> <?php echo htmlspecialchars($reservation['time']); ?></p>
                             <p class="card-text"><strong>No Of People:</strong> <?php echo htmlspecialchars($reservation['noOfPeople']); ?></p>
-                            <form action="" method="POST">
+                            <p class="card-text"><strong>Status:</strong> <?php echo htmlspecialchars($reservation['status']); ?></p>
+                            <div class="status-buttons">
+                                <form action="" method="POST">
+                                    <input type="hidden" name="reservation_id" value="<?php echo htmlspecialchars($reservation['id']); ?>">
+                                    <input type="hidden" name="new_status" value="pending">
+                                    <button type="submit" name="update_status" class="btn btn-warning">Pending</button>
+                                </form>
+                                <form action="" method="POST">
+                                    <input type="hidden" name="reservation_id" value="<?php echo htmlspecialchars($reservation['id']); ?>">
+                                    <input type="hidden" name="new_status" value="approved">
+                                    <button type="submit" name="update_status" class="btn btn-success">Approved</button>
+                                </form>
+                                <form action="" method="POST">
+                                    <input type="hidden" name="reservation_id" value="<?php echo htmlspecialchars($reservation['id']); ?>">
+                                    <input type="hidden" name="new_status" value="canceled">
+                                    <button type="submit" name="update_status" class="btn btn-danger">Canceled</button>
+                                </form>
+                            </div>
+                            <form action="" method="POST" style="margin-top: 10px;">
                                 <input type="hidden" name="reservation_id" value="<?php echo htmlspecialchars($reservation['id']); ?>">
-                                <select name="status" class="form-control mb-2">
-                                    <option value="pending" <?php if ($reservation['status'] === 'pending') echo 'selected'; ?>>Pending</option>
-                                    <option value="approved" <?php if ($reservation['status'] === 'approved') echo 'selected'; ?>>Approved</option>
-                                    <option value="canceled" <?php if ($reservation['status'] === 'canceled') echo 'selected'; ?>>Canceled</option>
-                                </select>
-                                <button type="submit" name="update" class="btn btn-primary">Update</button>
                                 <button type="submit" name="delete" class="btn btn-danger">Delete</button>
                             </form>
                         </div>

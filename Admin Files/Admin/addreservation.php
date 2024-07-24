@@ -18,11 +18,10 @@ if ($tableExistsResult->num_rows == 1) {
         $date = $_POST['date'];
         $time = $_POST['time'];
         $noOfPeople = $_POST['noOfPeople'];
-        $status = $_POST['status'];
         
-        $insertQuery = "INSERT INTO reservation (username, idNo, contact, tables, date, time, noOfPeople, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $insertQuery = "INSERT INTO reservation (username, idNo, contact, tables, date, time, noOfPeople) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param('ssssssis', $username, $idNo, $contact, $tables, $date, $time, $noOfPeople, $status);
+        $stmt->bind_param('ssssssi', $username, $idNo, $contact, $tables, $date, $time, $noOfPeople);
         
         if ($stmt->execute()) {
             echo "Reservation added successfully.";
@@ -51,7 +50,6 @@ if ($tableExistsResult->num_rows == 1) {
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,43 +57,38 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations</title>
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/style-Vreservation.css">
 </head>
 <body>
     <div class="container">
-        <h2 class="text-center">Add Reservation</h2>
+        <h2>Add Reservation</h2>
         <form method="post" action="">
-            <div class="mb-3">
-                <label for="idNo" class="form-label">ID No</label>
-                <input type="text" class="form-control" id="idNo" name="idNo" required>
+            <div class="form-group">
+                <label for="idNo">ID Number</label>
+                <input type="text" class="form-control" id="idNo" name="idNo" required placeholder="Enter your ID number">
             </div>
-            <div class="mb-3">
-                <label for="contact" class="form-label">Contact</label>
-                <input type="text" class="form-control" id="contact" name="contact" required>
+            <div class="form-group">
+                <label for="contact">Contact Number</label>
+                <input type="text" class="form-control" id="contact" name="contact" required placeholder="Enter your contact number">
             </div>
-            <div class="mb-3">
-                <label for="tables" class="form-label">Tables</label>
-                <input type="text" class="form-control" id="tables" name="tables" required>
+            <div class="form-group">
+                <label for="tables">Number of Tables</label>
+                <input type="number" class="form-control" id="tables" name="tables" required placeholder="Enter number of tables">
             </div>
-            <div class="mb-3">
-                <label for="date" class="form-label">Date</label>
+            <div class="form-group">
+                <label for="date">Reservation Date</label>
                 <input type="date" class="form-control" id="date" name="date" required>
             </div>
-            <div class="mb-3">
-                <label for="time" class="form-label">Time</label>
+            <div class="form-group">
+                <label for="time">Reservation Time</label>
                 <input type="time" class="form-control" id="time" name="time" required>
             </div>
-            <div class="mb-3">
-                <label for="noOfPeople" class="form-label">No Of People</label>
-                <input type="number" class="form-control" id="noOfPeople" name="noOfPeople" required>
+            <div class="form-group">
+                <label for="noOfPeople">Number of People</label>
+                <input type="number" class="form-control" id="noOfPeople" name="noOfPeople" required placeholder="Enter number of people">
             </div>
-            <div class="mb-3">
-                <label for="status" class="form-label">Status</label>
-                <input type="text" class="form-control" id="status" name="status" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Add Reservation</button>
+            <button type="submit">Add Reservation</button>
         </form>
-        
     </div>
 </body>
 </html>
+
