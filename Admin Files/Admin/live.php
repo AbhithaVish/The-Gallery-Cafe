@@ -114,7 +114,7 @@ $conn->close();
                         <option value="Occupied" <?php echo (isset($editingTable['status']) && $editingTable['status'] === 'Occupied') ? 'selected' : ''; ?>>Occupied</option>
                     </select>
                     <?php if ($editingTable): ?>
-                        <button type="submit" name="edit_table" class="btn-class">Edit Table</button>
+                        <button type="submit" name="edit_table" class="btn-class">Save</button>
                     <?php else: ?>
                         <button type="submit" name="add_table" class="btn-class">Add Table</button>
                     <?php endif; ?>
@@ -153,7 +153,7 @@ $conn->close();
                         <option value="Occupied" <?php echo (isset($editingParking['status']) && $editingParking['status'] === 'Occupied') ? 'selected' : ''; ?>>Occupied</option>
                     </select>
                     <?php if ($editingParking): ?>
-                        <button type="submit" name="edit_parking" class="btn-class">Edit Parking Spot</button>
+                        <button type="submit" name="edit_parking" class="btn-class">Save</button>
                     <?php else: ?>
                         <button type="submit" name="add_parking" class="btn-class">Add Parking Spot</button>
                     <?php endif; ?>

@@ -1,6 +1,6 @@
 <?php
 include_once('../connection.php');
-include_once('../navbar.php');
+include_once('navbar.php');
 
 $username = $_SESSION['username'];
 
@@ -35,6 +35,11 @@ $conn->close();
     <title>Orders</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/style-orders.css">
+    <style>
+        html{
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 <body>
     <div class="main-container">
