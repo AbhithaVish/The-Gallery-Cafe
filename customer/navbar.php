@@ -36,6 +36,12 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </a>
                 </li>
+                
+                <li>
+                <a href="view_profile.php" class="nav__link">
+                <i class="fa-solid fa-user"></i>
+                </a>
+                </li>   
                 <li>
                     <a href="../index.php" class="login" id="loginbutton">Log Out</a>
                 </li>

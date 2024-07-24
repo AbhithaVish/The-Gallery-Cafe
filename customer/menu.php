@@ -53,9 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
     }
 }
 
-// Fetch menu items
-$sql = "SELECT * FROM menu";
-$result = $conn->query($sql);
+// Fetch distinct categories
+$category_sql = "SELECT DISTINCT category FROM menu";
+$category_result = $conn->query($category_sql);
 ?>
 
 <!DOCTYPE html>
@@ -64,48 +64,37 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>menu</title>
+    <title>Menu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="style/style-menu.css">
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-<section class="products">
+<section class="categories">
 
-    <h1 class="title">latest dishes</h1>
+    <h1 class="title">Categories</h1>
 
     <div class="box-container">
 
         <?php
-        if ($result && $result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        if ($category_result && $category_result->num_rows > 0) {
+            while ($row = $category_result->fetch_assoc()) {
+                $category = htmlspecialchars($row['category']);
         ?>
-        <form action="" method="post" class="box">
-            <input type="hidden" name="item_id" value="<?= htmlspecialchars($row['item_id']); ?>">
-            <input type="hidden" name="name" value="<?= htmlspecialchars($row['name']); ?>">
-            <input type="hidden" name="price" value="<?= htmlspecialchars($row['price']); ?>">
-            <input type="hidden" name="image" value="<?= htmlspecialchars($row['image']); ?>">
-            <a href="quick_view.php?pid=<?= htmlspecialchars($row['item_id']); ?>" class="fas fa-eye"></a>
-            <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
-            <img src="uploaded_img/<?= htmlspecialchars($row['image']); ?>" alt="">
-            <a href="category.php?category=<?= htmlspecialchars($row['cousintype']); ?>" class="cat"><?= htmlspecialchars($row['cousintype']); ?></a>
-            <div class="name"><?= htmlspecialchars($row['name']); ?></div>
-            <div class="flex">
-                <div class="price"><span>Rs.</span><?= htmlspecialchars($row['price']); ?></div>
-                <input type="number" name="qty" class="qty" >
-            </div>
+        <form action="category.php" method="get" class="box">
+            <input type="hidden" name="category" value="<?= $category; ?>">
+            <button type="submit" class="btn"><?= $category; ?></button>
         </form>
         <?php
             }
         } else {
-            echo '<p class="empty">no products added yet!</p>';
+            echo '<p class="empty">No categories available!</p>';
         }
         ?>
 
     </div>
 
 </section>
-
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
