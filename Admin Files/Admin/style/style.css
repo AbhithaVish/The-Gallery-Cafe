@@ -317,7 +317,7 @@ a {
 }
 
 .main-banner img {
-    margin-top: 100px;
+    /* margin-top: 100px; */
     max-width: 30%;
     height: auto;
     transition: transform 0.3s ease;

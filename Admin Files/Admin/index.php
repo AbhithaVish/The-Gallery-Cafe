@@ -8,6 +8,31 @@ error_reporting(E_ALL);
 include_once('../connection.php');
 include_once('navbar.php');
 
+// Function to get the count of rows in a table
+function getCount($tableName) {
+    global $conn;
+
+    // Prepare and execute the query
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM $tableName");
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Fetch the result and return the count
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $totalCount = $row['count'];
+        return $totalCount;
+    } else {
+        return 0; // Return 0 if query fails or no rows found
+    }
+}
+
+// Get the counts from respective tables
+$loginCount = getCount('login_tbl');
+$orderCount = getCount('orders');
+$reservationCount = getCount('reservation');
+
+
 $conn->close();
 ?>
 
@@ -18,6 +43,8 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Gallery Cafe</title>
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style-home.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .round-banner img {
             margin-top: 400px;
@@ -39,36 +66,51 @@ $conn->close();
   <source src="Videos/background video.mp4" type="video/mp4">
 </video>
 
-    <div class="main-banner">
-        <center>
-        <div class="background">
-        <div class="text-overlay">
-            <img src="Images/logo.png" alt="">
-            <h1>The_Best_Tasting_Experience</h1>
-            <h2>Cuisine and Drinks beyond the boundries of taste</h2>
-            <p class="tagline">Food is Ready.</p>
+    
+
+    <div class="container1">
+    <div class="counter-wrapper">
+        <div class="counter-box colored">
+            <i class="fa fa-thumbs-o-up"></i>
+            <span class="counter"><?= $loginCount ?></span>
+            <p>Customers</p>
+        </div>
+
+        <div class="counter-box colored">
+            <i class="fa fa-thumbs-o-up"></i>
+            <span class="counter"><?= $orderCount ?></span>
+            <p>Orders</p>
+        </div>
+
+        <div class="counter-box colored">
+            <i class="fa fa-thumbs-o-up"></i>
+            <span class="counter"><?= $reservationCount ?></span>
+            <p>Reservations</p>
         </div>
     </div>
-        </center>
-    </div>
-<!-- 
-    <div class="mini-boxes">
-        <div class="box">
-            <h2>Reservation</h2>
-            <button>Book Now</button>
-        </div>
-        <div class="box">
-            <h2>Order Now</h2>
-            <button>Order</button>
-        </div>
-        <div class="box">
-            <h2>Tables</h2>
-            <button>View Tables</button>
-        </div>
-        <div class="box">
-            <h2>Menu</h2>
-            <button>See Menu</button>
-        </div>
-    </div> -->
+</div>
+
+
+
+<script>
+$(document).ready(function() {
+    $('.counter').each(function() {
+        var $this = $(this);
+        var countTo = parseInt($this.text(), 10);
+        
+        $({ countNum: 0 }).animate({ countNum: countTo }, {
+            duration: 4000,
+            easing: 'swing',
+            step: function() {
+                $this.text(Math.ceil(this.countNum));
+            },
+            complete: function() {
+                $this.text(countTo);
+            }
+        });
+    });
+});
+</script>
+
 </body>
 </html>
