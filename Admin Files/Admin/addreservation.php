@@ -57,9 +57,10 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations</title>
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style-addreservation.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container-add">
         <h2>Add Reservation</h2>
         <form method="post" action="">
             <div class="form-group">
