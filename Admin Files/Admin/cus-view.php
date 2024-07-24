@@ -54,8 +54,8 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style-live.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style-live.css">
 </head>
 <body>
     <div class="main-container">
