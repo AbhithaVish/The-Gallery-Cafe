@@ -32,13 +32,14 @@ $conn->close();
     <div class="profile-container">
         <h1>User Profile</h1>
         <?php if ($user): ?>
+            <center>
             <p><strong>ID:</strong> <?php echo htmlspecialchars($user['id']); ?></p>
             <p><strong>Name:</strong> <?php echo htmlspecialchars($user['name']); ?></p>
             <p><strong>Username:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
             <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
             <p><strong>Password:</strong> <?php echo htmlspecialchars($user['password']); ?></p>
             <button type="submit">
-                <a href="profile.php">Update Profile</a>
+                <a href="profile.php">Edit Profile</a>
             </button>
         <?php else: ?>
             <p>User not found.</p>

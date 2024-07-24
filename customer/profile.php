@@ -31,7 +31,9 @@ $stmt->close();
 </head>
 <body>
     <div class="profile-container">
-        <h1>User Profile</h1>
+        <center>
+             <h1>Edit Personal Details</h1>
+        </center>
         <?php if ($user): ?>
             <form action="update_profile.php" method="post">
                 <p><strong>ID:</strong> <?php echo htmlspecialchars($user['id']); ?></p>
@@ -39,7 +41,15 @@ $stmt->close();
                 <p><strong>Username:</strong> <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" readonly></p>
                 <p><strong>Email:</strong> <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>"></p>
                 <p><strong>Password:</strong> <input type="password" name="password" value="<?php echo htmlspecialchars($user['password']); ?>"></p>
-                <button type="submit">Update Profile</button>
+                <p>Note : username can not be edited!</p>
+                <div class="button-container">
+                    <button type="submit" class="update-btn">Update Profile</button>
+                    <button type="cancel" class="cancel-btn">
+                        <a href="view_profile.php">Cancel</a>
+                    </button>
+
+                </div>
+                
             </form>
         <?php else: ?>
             <p>User not found.</p>
