@@ -77,7 +77,7 @@ $conn->close();
                     <?php
                     if ($resultUsers->num_rows > 0) {
                         while($row = $resultUsers->fetch_assoc()) {
-                            echo "<tr><td>" . $row["id"]. "</td><td>" . $row["name"]. "</td><td>" . $row["username"]. "</td><td>" . $row["email"]. "</td><td>" . $row["profile"]. "</td>";
+                            echo "<tr><td>" . $row["name"]. "</td><td>" . $row["username"]. "</td><td>" . $row["email"]. "</td><td>" . $row["profile"]. "</td>";
                             echo "<td><a href='?edit_user_id=" . $row["id"] . "'>Edit</a></td></tr>";
                         }
                     } else {
@@ -91,7 +91,6 @@ $conn->close();
                     <input type="text" name="username" placeholder="Username" value="<?php echo $editingUser['username'] ?? ''; ?>" required>
                     <input type="email" name="email" placeholder="Email" value="<?php echo $editingUser['email'] ?? ''; ?>" required>
                     <input type="password" name="password" placeholder="Password" required>
-                    <input type="text" name="profile" placeholder="Profile" value="<?php echo $editingUser['profile'] ?? ''; ?>" required>
                     <?php if ($editingUser): ?>
                         <button type="submit" name="edit_user" class="btn-class">Edit User</button>
                     <?php else: ?>
