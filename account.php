@@ -58,9 +58,13 @@ $conn->close();
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <button type="submit" class="btn-add">Create</button><br> <br>
-        <button class="btn-add" style="color:azure;">
-            <a href="welcome.php">Log In</a>
-        </button>
+        <center>
+            <button type="" class="btn-add">
+            <a href="welcome.php" class="btn-add" style="color:azure;">Log In</a>
+            </button>
+        </center>
+                
+        
     </form>
 </div>
 </body>
