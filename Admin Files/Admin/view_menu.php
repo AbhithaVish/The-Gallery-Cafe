@@ -92,7 +92,7 @@ $conn->close();
                     <input type="text" name="description" placeholder="Description" value="<?php echo $editingItem['description'] ?? ''; ?>" required>
                     <input type="number" step="0.01" name="price" placeholder="Price" value="<?php echo $editingItem['price'] ?? ''; ?>" required>
                     <input type="text" name="cousintype" placeholder="Cuisine Type" value="<?php echo $editingItem['cousintype'] ?? ''; ?>" required>
-                    <input type="text" name="image" placeholder="Image URL" value="<?php echo $editingItem['image'] ?? ''; ?>" required>
+                    <input type="text" name="image" placeholder="Image URL" value="<?php echo $editingItem['image'] ?? ''; ?>">
                     <input type="text" name="category" placeholder="Category" value="<?php echo $editingItem['category'] ?? ''; ?>" required>
                     <?php if ($editingItem): ?>
                         <button type="submit" name="edit_item" class="btn-class">Edit Item</button>

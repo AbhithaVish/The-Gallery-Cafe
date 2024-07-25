@@ -10,14 +10,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST['category'];
     $cousintype = $_POST['cousintype'];
 
+    // Debugging: Print received values
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+
     $query = "INSERT INTO menu (item_id, name, description, price, category, cousintype) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "ssssds", $item_id, $name, $description, $category, $price, $cousintype);
+    mysqli_stmt_bind_param($stmt, "sssdds", $item_id, $name, $description, $price, $category, $cousintype);
 
     if (mysqli_stmt_execute($stmt)) {
         echo "Item added successfully!";
     } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+        echo "Error: " . mysqli_error($conn);
+        echo "<br>Query: " . $query;
     }
 
     mysqli_stmt_close($stmt);
@@ -60,19 +66,17 @@ $conn->close();
                 <label for="description">Description:</label>
                 <textarea name="description" required></textarea>
 
+                <label for="price">Price:</label>
+                <input type="number" name="price" step="0.01" required>
+
                 <label for="category">Category:</label>
                 <input type="text" name="category" required>
 
                 <label for="cousintype">Cousin Type:</label>
                 <input type="text" name="cousintype" required>
 
-                <label for="price">Price:</label>
-                <input type="number" name="price" step="0.01" required>
-
-                <button type="submit">Add User</button>
+                <button type="submit">Add Item</button>
             </form>
-        </div>
-        
         </div>
     </div>
 </body>
