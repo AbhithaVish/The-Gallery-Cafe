@@ -24,7 +24,7 @@ $conn->close();
         <div class="view-reservations">
             <div class="main-box">
                 <h1>Add Menu Items</h1>
-                <button  class="button-click"><a href="add_menu.php">View</a></button>
+                <button  class="button-click"><a href="add_menu.php">Add</a></button>
             </div>
         </div>
 
