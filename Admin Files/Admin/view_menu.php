@@ -2,48 +2,44 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-$editingUser = null;
+$editingItem = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['add_user'])) {
+    if (isset($_POST['add_item'])) {
         $name = $_POST['name'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $profile = $_POST['profile'];
-        $sqlCheck = "SELECT 1 FROM `staff_tbl` WHERE `username` = '$username' LIMIT 1";
-        $result = $conn->query($sqlCheck);
-        if ($result->num_rows == 0) {
-            $sqlAddUser = "INSERT INTO `staff_tbl` ( `name`, `username`, `email`, `password`, `profile`) VALUES ( '$name', '$username', '$email', '$password', '$profile')";
-            $conn->query($sqlAddUser);
-        } else {
-            echo "Error: Username already exists.";
-        }
-    } elseif (isset($_POST['edit_user'])) {
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $cousintype = $_POST['cousintype'];
+        $image = $_POST['image'];
+        $category = $_POST['category'];
+        $sqlAddItem = "INSERT INTO `menu` (`name`, `description`, `price`, `cousintype`, `image`, `category`) VALUES ('$name', '$description', '$price', '$cousintype', '$image', '$category')";
+        $conn->query($sqlAddItem);
+    } elseif (isset($_POST['edit_item'])) {
         $id = $_POST['id'];
         $name = $_POST['name'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $profile = $_POST['profile'];
-        $sqlEditUser = "UPDATE `staff_tbl` SET `name` = '$name', `username` = '$username', `email` = '$email', `password` = '$password', `profile` = '$profile' WHERE `id` = '$id'";
-        $conn->query($sqlEditUser);
-    } elseif (isset($_POST['delete_user'])) {
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+        $cousintype = $_POST['cousintype'];
+        $image = $_POST['image'];
+        $category = $_POST['category'];
+        $sqlEditItem = "UPDATE `menu` SET `name` = '$name', `description` = '$description', `price` = '$price', `cousintype` = '$cousintype', `image` = '$image', `category` = '$category' WHERE `item_id` = '$id'";
+        $conn->query($sqlEditItem);
+    } elseif (isset($_POST['delete_item'])) {
         $id = $_POST['id'];
-        $sqlDeleteUser = "DELETE FROM `staff_tbl` WHERE `id` = '$id'";
-        $conn->query($sqlDeleteUser);
+        $sqlDeleteItem = "DELETE FROM `menu` WHERE `item_id` = '$id'";
+        $conn->query($sqlDeleteItem);
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['edit_user_id'])) {
-        $id = $_GET['edit_user_id'];
-        $sql = "SELECT * FROM `staff_tbl` WHERE `id` = '$id' LIMIT 1";
+    if (isset($_GET['edit_item_id'])) {
+        $id = $_GET['edit_item_id'];
+        $sql = "SELECT * FROM `menu` WHERE `item_id` = '$id' LIMIT 1";
         $result = $conn->query($sql);
-        $editingUser = $result->fetch_assoc();
+        $editingItem = $result->fetch_assoc();
     }
 }
 
-$sqlUsers = "SELECT * FROM `staff_tbl`";
-$resultUsers = $conn->query($sqlUsers);
+$sqlItems = "SELECT * FROM `menu`";
+$resultItems = $conn->query($sqlItems);
 
 $conn->close();
 ?>
@@ -53,66 +49,64 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users</title>
-    <link rel="stylesheet" href="style/style-menu.css">
-    <link rel="stylesheet" href="style/style-profile.css">
+    <title>Manage Menu Items</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style-live.css">
 </head>
 <body>
-<div class="container">
-    <div class="main-box">
-        <h1>Manage Staff Profiles</h1>
-        <div class="view-table">
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Profile</th>
-                    <th>Actions</th>
-                </tr>
-                <?php
-                if ($resultUsers->num_rows > 0) {
-                    while($row = $resultUsers->fetch_assoc()) {
-                        echo "<tr><td>" . htmlspecialchars($row["id"]) . "</td>
-                                  <td>" . htmlspecialchars($row["name"]) . "</td>
-                                  <td>" . htmlspecialchars($row["username"]) . "</td>
-                                  <td>" . htmlspecialchars($row["email"]) . "</td>
-                                  <td>" . htmlspecialchars($row["profile"]) . "</td>
-                                  <td>
-                                      <a href='?edit_user_id=" . htmlspecialchars($row["id"]) . "'>Edit</a>
-                                      <form method='post' action='' style='display:inline-block;'>
-                                          <input type='hidden' name='id' value='" . htmlspecialchars($row["id"]) . "'>
-                                          <button type='submit' name='delete_user' onclick='return confirm(\"Are you sure you want to delete this user?\");'>Delete</button>
-                                      </form>
-                                  </td>
-                              </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='6'>No data available</td></tr>";
-                }
-                ?>
-            </table>
+    <div class="main-container">
+        <div class="topic">
+            <h1>Manage Menu Items</h1>
         </div>
-        <div class="form-container">
-            <form method="post">
-                <h3><?php echo $editingUser ? 'Edit User' : 'Add User'; ?></h3>
-                <?php if ($editingUser): ?>
-                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($editingUser['id']); ?>">
-                <?php endif; ?>
-                <input type="text" name="name" placeholder="Name" value="<?php echo htmlspecialchars($editingUser['name'] ?? ''); ?>" required>
-                <input type="text" name="username" placeholder="Username" value="<?php echo htmlspecialchars($editingUser['username'] ?? ''); ?>" required>
-                <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($editingUser['email'] ?? ''); ?>" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <input type="text" name="profile" placeholder="Profile" value="<?php echo htmlspecialchars($editingUser['profile'] ?? ''); ?>" required>
-                <?php if ($editingUser): ?>
-                    <button type="submit" name="edit_user" class="btn-class">Edit User</button>
-                <?php else: ?>
-                    <button type="submit" name="add_user" class="btn-class">Add User</button>
-                <?php endif; ?>
-            </form>
+        <div class="container">
+            <div class="table-container">
+                <h2>Menu Items</h2>
+                
+                <table>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Cuisine Type</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                    <?php
+                    if ($resultItems->num_rows > 0) {
+                        while($row = $resultItems->fetch_assoc()) {
+                            echo "<tr><td>" . $row["item_id"]. "</td><td>" . $row["name"]. "</td><td>" . $row["description"]. "</td><td>" . $row["price"]. "</td><td>" . $row["cousintype"]. "</td><td>" . $row["category"]. "</td>";
+                            echo "<td><a href='?edit_item_id=" . $row["item_id"] . "'>Edit</a></td></tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='7'>No data available</td></tr>";
+                    }
+                    ?>
+                </table>
+                <form method="post">
+                    <h3><?php echo $editingItem ? 'Edit Item' : 'Add Item'; ?></h3>
+                    <?php if ($editingItem): ?>
+                        <input type="hidden" name="id" value="<?php echo $editingItem['item_id']; ?>">
+                    <?php endif; ?>
+                    <input type="text" name="name" placeholder="Name" value="<?php echo $editingItem['name'] ?? ''; ?>" required>
+                    <input type="text" name="description" placeholder="Description" value="<?php echo $editingItem['description'] ?? ''; ?>" required>
+                    <input type="number" step="0.01" name="price" placeholder="Price" value="<?php echo $editingItem['price'] ?? ''; ?>" required>
+                    <input type="text" name="cousintype" placeholder="Cuisine Type" value="<?php echo $editingItem['cousintype'] ?? ''; ?>" required>
+                    <input type="text" name="image" placeholder="Image URL" value="<?php echo $editingItem['image'] ?? ''; ?>" required>
+                    <input type="text" name="category" placeholder="Category" value="<?php echo $editingItem['category'] ?? ''; ?>" required>
+                    <?php if ($editingItem): ?>
+                        <button type="submit" name="edit_item" class="btn-class">Edit Item</button>
+                    <?php else: ?>
+                        <button type="submit" name="add_item" class="btn-class">Add Item</button>
+                    <?php endif; ?>
+                </form>
+                <form method="post">
+                    <h3>Delete Item</h3>
+                    <input type="text" name="id" placeholder="Item ID" required>
+                    <button type="submit" name="delete_item" class="btn-delete">Delete Item</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>

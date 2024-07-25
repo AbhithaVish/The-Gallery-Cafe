@@ -71,13 +71,12 @@ $conn->close();
                         <th>Name</th>
                         <th>Username</th>
                         <th>Email</th>
-                        <th>Profile</th>
                         <th>Action</th>
                     </tr>
                     <?php
                     if ($resultUsers->num_rows > 0) {
                         while($row = $resultUsers->fetch_assoc()) {
-                            echo "<tr><td>" . $row["name"]. "</td><td>" . $row["username"]. "</td><td>" . $row["email"]. "</td><td>" . $row["profile"]. "</td>";
+                            echo "<tr><td>" . $row["name"]. "</td><td>" . $row["username"]. "</td><td>" . $row["email"]. "</td>";
                             echo "<td><a href='?edit_user_id=" . $row["id"] . "'>Edit</a></td></tr>";
                         }
                     } else {
