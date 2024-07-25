@@ -1,35 +1,38 @@
 <?php
-include ('../connection.php');
 include_once('navbar.php');
+// Establish a MySQL Database Connection
+$connection = mysqli_connect("localhost", "root", "", "the_gallery_cafe");
+// Connection validation check
+if (!$connection) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data
+    // Retrieve the user input from the form
     $item_id = $_POST['item_id'];
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
-    $category = $_POST['category']; // New field
+    $category = $_POST['category'];
 
-    // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO menu (item_id, name, description, price, category) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssd", $item_id, $name, $description, $price, $category); // Update the bind_param function
+    // Insert user data into the database
+    $query = "INSERT INTO menu (item_id, name, description, price, category) VALUES (?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($stmt, "ssssd", $item_id, $name, $description, $category, $price);
 
-    // Execute the statement
-    if ($stmt->execute()) {
-        echo "New menu item added successfully.";
+    if (mysqli_stmt_execute($stmt)) {
+        echo "User added successfully!";
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Error: " . $query . "<br>" . mysqli_error($connection);
     }
-    $stmt->close();
+
+    // Close the prepared statement
+    mysqli_stmt_close($stmt);
 }
 
-// Fetch menu items
-$sqlMenu = "SELECT * FROM menu";
-$resultMenu = $conn->query($sqlMenu);
-
-// Close the connection
-$conn->close();
+// Close the database connection
+mysqli_close($connection);
 ?>
 
 <!DOCTYPE html>
@@ -37,50 +40,30 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Menu Item</title>
+    <title>Add Menu</title>
+    <link rel="stylesheet" href="style/styles.css">
     <link rel="stylesheet" href="style/style-menu.css">
+
 </head>
 <body>
-    <div class="form-container">
-        <h1>Add Menu Item</h1>
-        <form action="add_menu_item.php" method="post">
-            <label for="item_id">Item ID:</label>
-            <input type="text" id="item_id" name="item_id"><br>
+    <h1>Add Menu</h1>
+    <form action="" method="POST">
+        <label for="item_id">Item ID:</label>
+        <input type="text" name="item_id" required><br>
 
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required><br>
+        <label for="name">Name:</label>
+        <input type="text" name="name" required><br>
 
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea><br>
+        <label for="description">Description:</label>
+        <input type="text" name="description" required><br>
 
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price" step="0.01" required><br>
+        <label for="category">Category:</label>
+        <input type="text" name="category" required><br>
 
-            <label for="category">Category:</label>
-            <input type="text" id="category" name="category" required><br>
+        <label for="price">Price:</label>
+        <input type="number" name="price" step="0.01" required><br>
 
-            <button type="submit">Add Item</button>
-        </form>
-    </div>
-<div class="view-table">
-    <table>
-        <tr>
-            <th>Item ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Category</th> <!-- New column -->
-        </tr>
-        <?php
-        if ($resultMenu->num_rows > 0) {
-            while($row = $resultMenu->fetch_assoc()) {
-                echo "<tr><td>" . htmlspecialchars($row["item_id"]) . "</td><td>" . htmlspecialchars($row["name"]) . "</td><td>" . htmlspecialchars($row["description"]) . "</td><td>" . htmlspecialchars($row["price"]) . "</td><td>" . htmlspecialchars($row["category"]) . "</td></tr>";
-            }
-        } else {
-            echo "<tr><td colspan='5'>No items available</td></tr>";
-        }
-        ?>
-    </table>
-</div>
+        <input type="submit" value="Add User">
+    </form>
 </body>
 </html>
