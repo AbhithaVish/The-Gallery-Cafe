@@ -3,6 +3,7 @@ include_once('../connection.php');
 include_once('navbar.php');
 
 $editingUser = null;
+$id = null; // Initialize $id to prevent undefined variable notice
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_user'])) {
@@ -11,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $profile = $_POST['profile'];
+        $profile = $_POST['profile'] ?? ''; // Use null coalescing operator
         $sqlCheck = "SELECT 1 FROM `login_tbl` WHERE `username` = '$username' LIMIT 1";
         $result = $conn->query($sqlCheck);
         if ($result->num_rows == 0) {
@@ -21,12 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Error: Username already exists.";
         }
     } elseif (isset($_POST['edit_user'])) {
+        $id = $_POST['id'] ?? $id; // Ensure $id is set
         $name = $_POST['name'];
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $profile = $_POST['profile'];
-        $sqlEditUser = "UPDATE `login_tbl` SET `name` = '$name', `email` = '$email', `password` = '$password', `profile` = '$profile' WHERE `id` = '$id'";
+        $profile = $_POST['profile'] ?? ''; // Use null coalescing operator
+        $sqlEditUser = "UPDATE `login_tbl` SET `name` = '$name', `username` = '$username', `email` = '$email', `password` = '$password', `profile` = '$profile' WHERE `id` = '$id'";
         $conn->query($sqlEditUser);
     } elseif (isset($_POST['delete_user'])) {
         $id = $_POST['id'];
@@ -80,16 +82,18 @@ $conn->close();
                             echo "<td><a href='?edit_user_id=" . $row["id"] . "'>Edit</a></td></tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='6'>No data available</td></tr>";
+                        echo "<tr><td colspan='4'>No data available</td></tr>";
                     }
                     ?>
                 </table>
                 <form method="post">
                     <h3><?php echo $editingUser ? 'Edit User' : 'Add User'; ?></h3>
+                    <input type="hidden" name="id" value="<?php echo $editingUser['id'] ?? ''; ?>">
                     <input type="text" name="name" placeholder="Name" value="<?php echo $editingUser['name'] ?? ''; ?>" required>
                     <input type="text" name="username" placeholder="Username" value="<?php echo $editingUser['username'] ?? ''; ?>" required>
                     <input type="email" name="email" placeholder="Email" value="<?php echo $editingUser['email'] ?? ''; ?>" required>
                     <input type="password" name="password" placeholder="Password" required>
+                    <input type="text" name="profile" placeholder="Profile" value="<?php echo $editingUser['profile'] ?? ''; ?>">
                     <?php if ($editingUser): ?>
                         <button type="submit" name="edit_user" class="btn-class">Edit User</button>
                     <?php else: ?>
