@@ -2,33 +2,6 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve the user input from the form
-    $item_id = $_POST['item_id'];
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $category = $_POST['category'];
-    $cousintype = $_POST['cousintype'];
-
-    // Insert user data into the database
-    $query = "INSERT INTO menu (item_id, name, description, price, category, cousintype) VALUES (?, ?, ?, ?, ?,?)";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "ssssds", $item_id, $name, $description, $category, $price, $cousintype);
-
-    if (mysqli_stmt_execute($stmt)) {
-        echo "User added successfully!";
-    } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($connection);
-    }
-
-    // Close the prepared statement
-    mysqli_stmt_close($stmt);
-}
-
-// Close the database connection
 $conn->close();
 ?>
 
@@ -39,31 +12,28 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Menu</title>
     <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="style/style-menu.css">
-
+    <link rel="stylesheet" href="style/style-reservation.css">
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 <body>
-    <h1>Add Menu</h1>
-    <form action="" method="POST">
-        <label for="item_id">Item ID:</label>
-        <input type="text" name="item_id" required><br>
+    <div class="container">
+        <div class="view-reservations">
+            <div class="main-box">
+                <h1>Add Menu Items</h1>
+                <button  class="button-click"><a href="add_menu.php">View</a></button>
+            </div>
+        </div>
 
-        <label for="name">Name:</label>
-        <input type="text" name="name" required><br>
-
-        <label for="description">Description:</label>
-        <input type="text" name="description" required><br>
-
-        <label for="category">Category:</label>
-        <input type="text" name="category" required><br>
-        
-        <label for="cousintype">cousintype:</label>
-        <input type="text" name="cousintype" required><br>
-
-        <label for="price">Price:</label>
-        <input type="number" name="price" step="0.01" required><br>
-
-        <input type="submit" value="Add User">
-    </form>
+        <div class="add-reservations">
+        <div class="main-box">
+                <h1>View All Menu</h1>
+                <button class="button-click"><a href="view_menu.php">View</a></button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

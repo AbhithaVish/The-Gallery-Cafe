@@ -11,6 +11,7 @@ $conn->close();
     <title>Profile View</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/style-profile.css">
+    </style>
 </head>
 <body>
     <div class="container">
