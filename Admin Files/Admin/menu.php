@@ -1,11 +1,7 @@
 <?php
+include_once('../connection.php');
 include_once('navbar.php');
-// Establish a MySQL Database Connection
-$connection = mysqli_connect("localhost", "root", "", "the_gallery_cafe");
-// Connection validation check
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -15,11 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST['description'];
     $price = $_POST['price'];
     $category = $_POST['category'];
+    $cousintype = $_POST['cousintype'];
 
     // Insert user data into the database
-    $query = "INSERT INTO menu (item_id, name, description, price, category) VALUES (?, ?, ?, ?, ?)";
-    $stmt = mysqli_prepare($connection, $query);
-    mysqli_stmt_bind_param($stmt, "ssssd", $item_id, $name, $description, $category, $price);
+    $query = "INSERT INTO menu (item_id, name, description, price, category, cousintype) VALUES (?, ?, ?, ?, ?,?)";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "ssssds", $item_id, $name, $description, $category, $price, $cousintype);
 
     if (mysqli_stmt_execute($stmt)) {
         echo "User added successfully!";
@@ -32,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Close the database connection
-mysqli_close($connection);
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +56,9 @@ mysqli_close($connection);
 
         <label for="category">Category:</label>
         <input type="text" name="category" required><br>
+        
+        <label for="cousintype">cousintype:</label>
+        <input type="text" name="cousintype" required><br>
 
         <label for="price">Price:</label>
         <input type="number" name="price" step="0.01" required><br>
