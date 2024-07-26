@@ -37,7 +37,6 @@ $conn->close();
             <p><strong>Name:</strong> <?php echo htmlspecialchars($user['name']); ?></p>
             <p><strong>Username:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
             <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
-            <p><strong>Password:</strong> <?php echo htmlspecialchars($user['password']); ?></p>
             <button type="submit">
                 <a href="profile.php">Edit Profile</a>
             </button>
