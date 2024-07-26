@@ -18,7 +18,7 @@ if ($tableExistsResult->num_rows == 1) {
         $date = $_POST['date'];
         $time = $_POST['time'];
         $noOfPeople = $_POST['noOfPeople'];
-        $status = $_POST['status'];
+        $status = 'pending';
         
         $insertQuery = "INSERT INTO reservation (username, idNo, contact, tables, date, time, noOfPeople, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertQuery);
@@ -93,10 +93,6 @@ $conn->close();
             <div class="reservation-mb-3">
                 <label for="noOfPeople" class="reservation-form-label">No Of People</label><br>
                 <input type="number" class="reservation-form-control" id="noOfPeople" name="noOfPeople" required>
-            </div>
-            <div class="reservation-mb-3">
-                <label for="status" class="reservation-form-label">Status</label><br>
-                <input type="text" class="reservation-form-control" id="status" name="status" required>
             </div>
             <button type="submit" class="reservation-btn-add">Add</button>
         </form>
