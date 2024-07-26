@@ -9,20 +9,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
+    $category = $_POST['category'];
 
     // Validate form data
-    if (empty($item_id) || empty($name) || empty($description) || empty($price)) {
+    if (empty($item_id) || empty($name) || empty($description) || empty($price) || empty($category)) {
         echo "All fields are required.";
         exit;
     }
 
     // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO menu (item_id, name, description, price) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO menu (item_id, name, description, price, category) VALUES (?, ?, ?, ?, ?)");
+    
     if ($stmt === false) {
         die('Prepare failed: ' . htmlspecialchars($conn->error));
     }
 
-    $bind = $stmt->bind_param("isss", $item_id, $name, $description, $price);
+    $bind = $stmt->bind_param("issds", $item_id, $name, $description, $price, $category);
     if ($bind === false) {
         die('Bind param failed: ' . htmlspecialchars($stmt->error));
     }

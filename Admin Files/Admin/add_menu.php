@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $query = "INSERT INTO menu (item_id, name, description, price, category, cousintype) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "sssdds", $item_id, $name, $description, $price, $category, $cousintype);
+    mysqli_stmt_bind_param($stmt, "sssdss", $item_id, $name, $description, $price, $category, $cousintype);
 
     if (mysqli_stmt_execute($stmt)) {
         echo "Item added successfully!";
