@@ -10,11 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST['category'];
     $cousintype = $_POST['cousintype'];
 
-    // Debugging: Print received values (commented out)
-    // echo "<pre>";
-    // print_r($_POST);
-    // echo "</pre>";
-
     $query = "INSERT INTO menu (item_id, name, description, price, category, cousintype) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "sssdss", $item_id, $name, $description, $price, $category, $cousintype);
