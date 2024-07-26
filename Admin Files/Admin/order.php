@@ -51,7 +51,7 @@ $conn->close();
             <?php if (!empty($orders)): ?>
                 <?php foreach ($orders as $reference_number => $order): ?>
                     <div class="order-group">
-                        <h2>Reference Number: <?php echo htmlspecialchars($reference_number); ?></h2>
+                        <h2>Reference Number: <?php echo htmlspecialchars($reference_number); ?></h2>A
                         <p>Payment Date: <?php echo htmlspecialchars($order['payment_date']); ?></p>
                         <table>
                             <thead>
