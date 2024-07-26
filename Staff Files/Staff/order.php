@@ -40,6 +40,19 @@ $conn->close();
             overflow-y: scroll;
         }
     </style>
+    <script>
+        function updateStatus(orderId, status) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "update_status.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    alert("Status updated successfully!");
+                }
+            };
+            xhr.send("order_id=" + orderId + "&status=" + status);
+        }
+    </script>
 </head>
 <body>
     <div class="main-container">
@@ -61,6 +74,7 @@ $conn->close();
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>Reference number</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,6 +86,13 @@ $conn->close();
                                         <td><?php echo htmlspecialchars($item['name']); ?></td>
                                         <td><?php echo htmlspecialchars($item['price']); ?></td>
                                         <td><?php echo htmlspecialchars($item['reference_number']); ?></td>
+                                        <td>
+                                            <select onchange="updateStatus(<?php echo htmlspecialchars($item['order_id']); ?>, this.value)">
+                                                <option value="ready to pick up" <?php echo ($item['status'] == 'ready to pick up') ? 'selected' : ''; ?>>Ready to Pick Up</option>
+                                                <option value="picked" <?php echo ($item['status'] == 'picked') ? 'selected' : ''; ?>>Picked</option>
+                                                <option value="cancel" <?php echo ($item['status'] == 'cancel') ? 'selected' : ''; ?>>Cancel</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
