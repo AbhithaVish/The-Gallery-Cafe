@@ -59,49 +59,47 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations</title>
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/style-Vreservation.css">
+    <link rel="stylesheet" href="style/style-addreservations.css">
     <style>
         html{
-    overflow-y: scroll;
-}
-
+            overflow-y: scroll;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="text-topic">Add Reservation</h2>
-        <form method="post" action="" >
-            <div class="mb-3">
-                <label for="idNo" class="form-label">NIC Number</label><br>
-                <input type="text" class="form-control" id="idNo" name="idNo" required>
+    <div class="reservation-container">
+        <h2 class="reservation-text-topic">Add Reservation</h2>
+        <form method="post" action="">
+            <div class="reservation-mb-3">
+                <label for="idNo" class="reservation-form-label">NIC Number</label><br>
+                <input type="text" class="reservation-form-control" id="idNo" name="idNo" required>
             </div>  
-            <div class="mb-3">
-                <label for="contact" class="form-label">Contact Number</label><br>
-                <input type="text" class="form-control" id="contact" name="contact" required>
+            <div class="reservation-mb-3">
+                <label for="contact" class="reservation-form-label">Contact Number</label><br>
+                <input type="text" class="reservation-form-control" id="contact" name="contact" required>
             </div>
-            <div class="mb-3">
-                <label for="tables" class="form-label">Tables</label><br>
-                <input type="text" class="form-control" id="tables" name="tables" required>
+            <div class="reservation-mb-3">
+                <label for="tables" class="reservation-form-label">Tables</label><br>
+                <input type="text" class="reservation-form-control" id="tables" name="tables" required>
             </div>
-            <div class="mb-3">
-                <label for="date" class="form-label">Date</label><br>
-                <input type="date" class="form-control" id="date" name="date" required>
+            <div class="reservation-mb-3">
+                <label for="date" class="reservation-form-label">Date</label><br>
+                <input type="date" class="reservation-form-control" id="date" name="date" required>
             </div>
-            <div class="mb-3">
-                <label for="time" class="form-label">Time</label><br>
-                <input type="time" class="form-control" id="time" name="time" required>
+            <div class="reservation-mb-3">
+                <label for="time" class="reservation-form-label">Time</label><br>
+                <input type="time" class="reservation-form-control" id="time" name="time" required>
             </div>
-            <div class="mb-3">
-                <label for="noOfPeople" class="form-label">No Of People</label><br>
-                <input type="number" class="form-control" id="noOfPeople" name="noOfPeople" required>
+            <div class="reservation-mb-3">
+                <label for="noOfPeople" class="reservation-form-label">No Of People</label><br>
+                <input type="number" class="reservation-form-control" id="noOfPeople" name="noOfPeople" required>
             </div>
-            <div class="mb-3">
-                <label for="status" class="form-label">Status</label><br>
-                <input type="text" class="form-control" id="status" name="status" required>
+            <div class="reservation-mb-3">
+                <label for="status" class="reservation-form-label">Status</label><br>
+                <input type="text" class="reservation-form-control" id="status" name="status" required>
             </div>
-            <button type="submit" class="btn-add">Add</button>
+            <button type="submit" class="reservation-btn-add">Add</button>
         </form>
-        
     </div>
 </body>
 </html>
