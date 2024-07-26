@@ -6,13 +6,16 @@ $editingItem = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_item'])) {
+        $item_id = $_POST['item_id'];
         $name = $_POST['name'];
         $description = $_POST['description'];
         $price = $_POST['price'];
         $cousintype = $_POST['cousintype'];
         $image = $_POST['image'];
         $category = $_POST['category'];
-        $sqlAddItem = "INSERT INTO `menu` (`name`, `description`, `price`, `cousintype`, `image`, `category`) VALUES ('$name', '$description', '$price', '$cousintype', '$image', '$category')";
+
+
+        $sqlAddItem = "INSERT INTO `menu` (`item_id`,`name`, `description`, `price`, `cousintype`, `image`, `category`) VALUES ('$item_id','$name', '$description', '$price', '$cousintype', '$image', '$category')";
         $conn->query($sqlAddItem);
     } elseif (isset($_POST['edit_item'])) {
         $id = $_POST['id'];
@@ -22,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cousintype = $_POST['cousintype'];
         $image = $_POST['image'];
         $category = $_POST['category'];
-        $sqlEditItem = "UPDATE `menu` SET `name` = '$name', `description` = '$description', `price` = '$price', `cousintype` = '$cousintype', `image` = '$image', `category` = '$category' WHERE `item_id` = '$id'";
+        $sqlEditItem = "UPDATE `menu` SET `item_id` = '$item_id', `name` = '$name', `description` = '$description', `price` = '$price', `cousintype` = '$cousintype', `image` = '$image', `category` = '$category' WHERE `item_id` = '$id'";
         $conn->query($sqlEditItem);
     } elseif (isset($_POST['delete_item'])) {
         $id = $_POST['id'];
@@ -88,6 +91,7 @@ $conn->close();
                     <?php if ($editingItem): ?>
                         <input type="hidden" name="id" value="<?php echo $editingItem['item_id']; ?>">
                     <?php endif; ?>
+                    <input type="text" name="item_id" placeholder="item_id" value="<?php echo $editingItem['item_id'] ?? ''; ?>" required>
                     <input type="text" name="name" placeholder="Name" value="<?php echo $editingItem['name'] ?? ''; ?>" required>
                     <input type="text" name="description" placeholder="Description" value="<?php echo $editingItem['description'] ?? ''; ?>" required>
                     <input type="number" step="0.01" name="price" placeholder="Price" value="<?php echo $editingItem['price'] ?? ''; ?>" required>
