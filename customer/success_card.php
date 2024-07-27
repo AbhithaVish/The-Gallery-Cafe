@@ -54,6 +54,5 @@ if (isset($_SESSION['form_data'])) {
     </script>
 </head>
 <body>
-    <!-- Include any additional HTML or PHP content here -->
 </body>
 </html>
