@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = $_POST['name'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $password = $_POST['password']; // No encryption
         $profile = $_POST['profile'] ?? ''; // Use null coalescing operator
         $sqlCheck = "SELECT 1 FROM `login_tbl` WHERE `username` = '$username' LIMIT 1";
         $result = $conn->query($sqlCheck);
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = $_POST['name'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $password = $_POST['password']; // No encryption
         $profile = $_POST['profile'] ?? ''; // Use null coalescing operator
         $sqlEditUser = "UPDATE `login_tbl` SET `name` = '$name', `username` = '$username', `email` = '$email', `password` = '$password', `profile` = '$profile' WHERE `id` = '$id'";
         $conn->query($sqlEditUser);
