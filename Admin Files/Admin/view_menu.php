@@ -55,6 +55,14 @@ $conn->close();
     <title>Manage Menu Items</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/style-live.css">
+    <style>
+        body{
+            overflow-y: auto;
+        }
+        .main-container{
+            margin-top: 150px;
+        }
+    </style>
 </head>
 <body>
     <div class="main-container">
