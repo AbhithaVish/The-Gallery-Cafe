@@ -34,12 +34,38 @@ while ($row = $resultCart->fetch_assoc()) {
     ];
 }
 
+$discounted_total_price = $total_price;
+$card_valid = false;
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $entered_card_no = $_POST['card_no'];
+    if (!empty($entered_card_no)) {
+        $query = $conn->prepare("SELECT * FROM loyalty_card WHERE card_no = ?");
+        $query->bind_param("s", $entered_card_no);
+        $query->execute();
+        $result = $query->get_result();
+        if ($result->num_rows > 0) {
+            $card_valid = true;
+            $discounted_total_price = $total_price * 0.85; // Apply 15% discount
+        }
+    }
+}
+
 if (count($line_items) > 0) {
     $checkout_session = \Stripe\Checkout\Session::create([
         "mode" => "payment",
         "success_url" => "http://localhost:3000/customer/success.php", // Update this URL
         "cancel_url" => "http://localhost:3000/customer/cancel.php",
-        "line_items" => $line_items
+        "line_items" => [[
+            "quantity" => 1,
+            "price_data" => [
+                "currency" => "lkr",
+                "unit_amount" => $discounted_total_price * 100, // Apply the discounted total price
+                "product_data" => [
+                    "name" => "Total Cart Items"
+                ]
+            ]
+        ]]
     ]);
 
     $checkout_url = $checkout_session->url;
@@ -98,6 +124,18 @@ $conn->close();
                 <span><?php echo number_format($total_price, 2); ?> LKR</span>
                 </h2>
             </div>
+            <?php if ($card_valid): ?>
+                <div class="discount-container">
+                    <h2>Discounted Total:
+                    <span><?php echo number_format($discounted_total_price, 2); ?> LKR</span>
+                    </h2>
+                </div>
+            <?php endif; ?>
+            <form method="POST" action="">
+                <label for="card_no">Enter Card Number for Discount:</label>
+                <input type="text" id="card_no" name="card_no"><br>
+                <button type="submit">Apply Discount</button>
+            </form>
             <br>
             <div class="pay-button">
                 <center>
@@ -107,7 +145,6 @@ $conn->close();
                     <?php endif; ?>
                 </button>
                 </center>
-                
             </div>
         </div>
     </div>
