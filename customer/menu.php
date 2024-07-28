@@ -75,7 +75,7 @@ $category_result = $conn->query($category_sql);
     <h1 class="title">Categories</h1>
 
     <div class="box-container">
-
+        <center>
         <?php
         if ($category_result && $category_result->num_rows > 0) {
             while ($row = $category_result->fetch_assoc()) {
@@ -91,6 +91,8 @@ $category_result = $conn->query($category_sql);
             echo '<p class="empty">No categories available!</p>';
         }
         ?>
+        </center>
+
 
     </div>
 
