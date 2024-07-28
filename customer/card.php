@@ -32,6 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($query->execute()) {
         $message = "Registration successful! Your card number is " . htmlspecialchars($card_no);
+        // Redirect to register.php after successful registration
+        header('Location: register.php');
+        exit();
     } else {
         $message = "Error: " . $query->error;
     }
