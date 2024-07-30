@@ -41,7 +41,7 @@ if ($tableExistsResult->num_rows == 1) {
             $reservations[] = $row;
         }
     } else {
-        echo "No reservations found.";
+        // echo "No reservations found.";
     }
     $stmt->close();
 } else {
