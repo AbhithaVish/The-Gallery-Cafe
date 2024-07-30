@@ -3,8 +3,8 @@ session_start();
 include_once('connection.php');
 
 if (isset($_POST['login'])) {
-
-    $username = $_POST['username'];
+    // Sanitize user inputs
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = $_POST['password'];
 
     if (empty($username) || empty($password)) {
@@ -13,7 +13,7 @@ if (isset($_POST['login'])) {
         exit;
     }
 
-    $sql = "SELECT * FROM `staff_tbl` WHERE `username`=?";
+    $sql = "SELECT * FROM `staff_tbl` WHERE `username` = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -21,7 +21,7 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        if ($password === $row['password']) { // Consider using password_hash and password_verify in production
+        if (password_verify($password, $row['password'])) { // Verify the password
             $_SESSION['name'] = $row['name'];
             $_SESSION['username'] = $row['username'];
             header('Location: Staff/index.php');

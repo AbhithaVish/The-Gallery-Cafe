@@ -6,37 +6,54 @@ $editingUser = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_user'])) {
-        $name = $_POST['name'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $profile = $_POST['profile'];
-        $sqlCheck = "SELECT 1 FROM `staff_tbl` WHERE `username` = '$username' LIMIT 1";
-        $result = $conn->query($sqlCheck);
+        $profile = filter_input(INPUT_POST, 'profile', FILTER_SANITIZE_STRING);
+
+        $sqlCheck = "SELECT 1 FROM `staff_tbl` WHERE `username` = ? LIMIT 1";
+        $stmtCheck = $conn->prepare($sqlCheck);
+        $stmtCheck->bind_param("s", $username);
+        $stmtCheck->execute();
+        $result = $stmtCheck->get_result();
+
         if ($result->num_rows == 0) {
-            $sqlAddUser = "INSERT INTO `staff_tbl` ( `name`, `username`, `email`, `password`, `profile`) VALUES ( '$name', '$username', '$email', '$password', '$profile')";
-            $conn->query($sqlAddUser);
+            $sqlAddUser = "INSERT INTO `staff_tbl` (`name`, `username`, `email`, `password`, `profile`) VALUES (?, ?, ?, ?, ?)";
+            $stmtAddUser = $conn->prepare($sqlAddUser);
+            $stmtAddUser->bind_param("sssss", $name, $username, $email, $password, $profile);
+            $stmtAddUser->execute();
         } else {
             echo "Error: Username already exists.";
         }
     } elseif (isset($_POST['edit_user'])) {
-        $name = $_POST['name'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $profile = $_POST['profile'];
-        $sqlEditUser = "UPDATE `staff_tbl` SET `name` = '$name', `email` = '$email', `password` = '$password', `profile` = '$profile' WHERE `id` = '$id'";
-        $conn->query($sqlEditUser);
+        $profile = filter_input(INPUT_POST, 'profile', FILTER_SANITIZE_STRING);
+        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+        $sqlEditUser = "UPDATE `staff_tbl` SET `name` = ?, `username` = ?, `email` = ?, `password` = ?, `profile` = ? WHERE `id` = ?";
+        $stmtEditUser = $conn->prepare($sqlEditUser);
+        $stmtEditUser->bind_param("sssssi", $name, $username, $email, $password, $profile, $id);
+        $stmtEditUser->execute();
     } elseif (isset($_POST['delete_user'])) {
-        $id = $_POST['id'];
-        $sqlDeleteUser = "DELETE FROM `staff_tbl` WHERE `id` = '$id'";
-        $conn->query($sqlDeleteUser);
+        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+        $sqlDeleteUser = "DELETE FROM `staff_tbl` WHERE `id` = ?";
+        $stmtDeleteUser = $conn->prepare($sqlDeleteUser);
+        $stmtDeleteUser->bind_param("i", $id);
+        $stmtDeleteUser->execute();
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['edit_user_id'])) {
-        $id = $_GET['edit_user_id'];
-        $sql = "SELECT * FROM `staff_tbl` WHERE `id` = '$id' LIMIT 1";
-        $result = $conn->query($sql);
+        $id = filter_input(INPUT_GET, 'edit_user_id', FILTER_SANITIZE_NUMBER_INT);
+        $sql = "SELECT * FROM `staff_tbl` WHERE `id` = ? LIMIT 1";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
         $editingUser = $result->fetch_assoc();
     }
 }
@@ -64,9 +81,9 @@ $conn->close();
         <div class="container">
             <div class="table-container">
                 <h2>Users</h2>
-                
                 <table>
-                    <tr><th>ID</th>
+                    <tr>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Username</th>
                         <th>Email</th>
@@ -92,6 +109,7 @@ $conn->close();
                     <input type="password" name="password" placeholder="Password" required>
                     <input type="text" name="profile" placeholder="Profile" value="<?php echo $editingUser['profile'] ?? ''; ?>" required>
                     <?php if ($editingUser): ?>
+                        <input type="hidden" name="id" value="<?php echo $editingUser['id']; ?>">
                         <button type="submit" name="edit_user" class="btn-class">Edit User</button>
                     <?php else: ?>
                         <button type="submit" name="add_user" class="btn-class">Add User</button>
