@@ -6,19 +6,20 @@ $tableExistsQuery = "SHOW TABLES LIKE 'login_tbl'";
 $tableExistsResult = $conn->query($tableExistsQuery);
 
 if ($tableExistsResult->num_rows == 1) {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {//initializing the post method
-        $name = $_POST['name'];//creating and initizializing variables
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Sanitizing and filtering inputs
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hashing the password
         $profile = 'customer';
-        $email = $_POST['email'];
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
-        $insertQuery = "INSERT INTO login_tbl (name, username, password, profile, email) VALUES (?, ?, ?, ?, ?)";//data inserting into the database
+        $insertQuery = "INSERT INTO login_tbl (name, username, password, profile, email) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertQuery);
         $stmt->bind_param('sssss', $name, $username, $password, $profile, $email);
         
         if ($stmt->execute()) {
-            echo "New Account added successfully.";//if user creating sucess, this massage will print on the top of the page
+            echo "New Account added successfully.";
         } else {
             echo "Error: " . $stmt->error;
         }
@@ -50,8 +51,8 @@ $conn->close();
             <input type="text" class="form-control" id="username" name="username" required>
         </div>
         <div class="mb-3">
-            <label for="username" class="form-label">Email</label><br>
-            <input type="text" class="form-control" id="email" name="email" required>
+            <label for="email" class="form-label">Email</label><br>
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label><br>
@@ -59,7 +60,6 @@ $conn->close();
         </div>
         <button type="submit" class="btn-add">Create</button><br> <br>
         <a href="welcome.php" class="btn-add2">Log In</a>
-        <!-- <button type="submit" class="btn-add"></button><br> <br> -->
     </form>
 </div>
 </body>

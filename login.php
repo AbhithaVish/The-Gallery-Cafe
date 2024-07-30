@@ -4,7 +4,7 @@ include_once('connection.php');
 
 if (isset($_POST['login'])) {
 
-    $username = $_POST['username'];
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = $_POST['password'];
 
     if (empty($username) || empty($password)) {
@@ -21,7 +21,7 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        if ($password === $row['password']) { 
+        if (password_verify($password, $row['password'])) { // Verifying the password
             $_SESSION['name'] = $row['name'];
             $_SESSION['username'] = $row['username'];
             header('Location: customer/index.php');
@@ -34,4 +34,3 @@ if (isset($_POST['login'])) {
     exit;
 }
 ?>
-
