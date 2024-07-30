@@ -1,7 +1,7 @@
 <?php
 include_once('../connection.php');
 include_once('navbar.php');
-require __DIR__ . "/vendor/autoload.php";
+require __DIR__ . "/vendor/autoload.php";//file path for the stipe payment page
 
 
 // Stripe API key
@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone_no = $_POST['phone_no'];
     $address = $_POST['address'];
 
-    // Store the form data in the session for later use
     $_SESSION['form_data'] = [
         'username' => $username,
         'name' => $name,
@@ -25,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 
     try {
-        // Create a Stripe Checkout Session
+        // stripe Checkout Session
         $checkout_session = \Stripe\Checkout\Session::create([
             "payment_method_types" => ["card"],
             "line_items" => [[
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     "product_data" => [
                         "name" => "Loyalty Program Registration"
                     ],
-                    "unit_amount" => 100000, // Rs. 100 in LKR cents
+                    "unit_amount" => 100000, 
                 ],
                 "quantity" => 1
             ]],
@@ -55,10 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone_no = $_SESSION['form_data']['phone_no'];
     $address = $_SESSION['form_data']['address'];
 
-    // Generate a unique card number
+    // generate a unique card number
     $isUnique = false;
     do {
-        $card_no = uniqid('CARD-', true); // Example card number generation
+        $card_no = uniqid('CARD-', true); // example card number generation
         $query = $conn->prepare("SELECT * FROM loyalty_card WHERE card_no = ?");
         $query->bind_param("s", $card_no);
         $query->execute();
@@ -68,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } while (!$isUnique);
 
-    // Set the expiry date to one year from today
+    // expiry date set to one year from the payment date
     $expiry_date = date('Y-m-d', strtotime('+1 year'));
 
     $query = $conn->prepare("INSERT INTO loyalty_card (username, name, nic, phone_no, address, card_no, points, expiry_date) VALUES (?, ?, ?, ?, ?, ?, 0, ?)");
@@ -80,10 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = "Error: " . $query->error;
     }
 
-    // Clear session form data
+    // clear session form data
     unset($_SESSION['form_data']);
 
-    // Retrieve the inserted user data
+    // retrieve the inserted user data
     $query = $conn->prepare("SELECT * FROM loyalty_card WHERE username = ?");
     $query->bind_param("s", $username);
     $query->execute();

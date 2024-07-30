@@ -1,9 +1,11 @@
 <?php
-include_once('connection.php');
+include_once('connection.php');//include the connection file and navigation bar
 include_once('navbar.php');
 
-$conn->close();
+$conn->close();//closing the connection
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

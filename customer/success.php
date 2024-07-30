@@ -5,10 +5,9 @@ session_start();
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
 if (!empty($username)) {
-    // Generate a unique reference number for the payment
-    $reference_number = uniqid('ref_', true);
+    $reference_number = uniqid('ref_', true);//creating unique reference number
 
-    // Retrieve items from the cart for the user
+    // retrieve items from the cart for the user
     $sqlCart = "SELECT * FROM `cart` WHERE username=?";
     $stmtCart = $conn->prepare($sqlCart);
     $stmtCart->bind_param('s', $username);
@@ -16,7 +15,7 @@ if (!empty($username)) {
     $resultCart = $stmtCart->get_result();
 
     if ($resultCart->num_rows > 0) {
-        // Insert items into the orders table
+        // insert items into the orders table
         $sqlInsertOrder = "INSERT INTO `orders` (username, item_id, name, price, added_date, reference_number) VALUES (?, ?, ?, ?, ?, ?)";
         $stmtInsertOrder = $conn->prepare($sqlInsertOrder);
 
@@ -27,7 +26,7 @@ if (!empty($username)) {
 
         $stmtInsertOrder->close();
 
-        // Delete items from the cart for the user
+        //delete items from the cart for the user
         $sqlDeleteCart = "DELETE FROM `cart` WHERE username=?";
         $stmtDeleteCart = $conn->prepare($sqlDeleteCart);
         $stmtDeleteCart->bind_param('s', $username);
@@ -48,7 +47,6 @@ if (!empty($username)) {
 
 $conn->close();
 
-// Redirect to a success page or display a success message
-header('Location: success_message.php?reference=' . $reference_number); // Redirect to a success message page with the reference number
+header('Location: success_message.php?reference=' . $reference_number); 
 exit();
 ?>

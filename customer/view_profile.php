@@ -2,7 +2,7 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['username'])) {//getting  the username from the session to display data properly
     header('Location: ../welcome.php');
     exit;
 }

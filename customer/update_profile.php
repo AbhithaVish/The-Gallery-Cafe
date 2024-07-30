@@ -1,7 +1,6 @@
 <?php
 include_once('../connection.php');
 
-// Check if user is logged in
 session_start();
 if (!isset($_SESSION['username'])) {
     header('Location: ../welcome.php');

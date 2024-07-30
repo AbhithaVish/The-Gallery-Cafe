@@ -3,9 +3,7 @@ include_once('../connection.php');
 include_once('navbar.php');
 
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
-
-
-$reservations = array();
+$reservations = array();//used to save data into a row and save it in the database table
 
 
 $tableExistsQuery = "SHOW TABLES LIKE 'reservation'";
@@ -39,9 +37,9 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="style/style-Vreservation.css">
     <style>
+        /* style for display scroll bar in the page */
         html{
             overflow-x: scroll;
         }

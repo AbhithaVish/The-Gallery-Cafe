@@ -6,19 +6,19 @@ $tableExistsQuery = "SHOW TABLES LIKE 'login_tbl'";
 $tableExistsResult = $conn->query($tableExistsQuery);
 
 if ($tableExistsResult->num_rows == 1) {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $name = $_POST['name'];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {//initializing the post method
+        $name = $_POST['name'];//creating and initizializing variables
         $username = $_POST['username'];
         $password = $_POST['password'];
         $profile = 'customer';
         $email = $_POST['email'];
 
-        $insertQuery = "INSERT INTO login_tbl (name, username, password, profile, email) VALUES (?, ?, ?, ?, ?)";
+        $insertQuery = "INSERT INTO login_tbl (name, username, password, profile, email) VALUES (?, ?, ?, ?, ?)";//data inserting into the database
         $stmt = $conn->prepare($insertQuery);
         $stmt->bind_param('sssss', $name, $username, $password, $profile, $email);
         
         if ($stmt->execute()) {
-            echo "New Account added successfully.";
+            echo "New Account added successfully.";//if user creating sucess, this massage will print on the top of the page
         } else {
             echo "Error: " . $stmt->error;
         }
