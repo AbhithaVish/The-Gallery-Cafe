@@ -14,23 +14,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image = $_POST['image'];
         $category = $_POST['category'];
 
-
-        $sqlAddItem = "INSERT INTO `menu` (`item_id`,`name`, `description`, `price`, `cousintype`, `image`, `category`) VALUES ('$item_id','$name', '$description', '$price', '$cousintype', '$image', '$category')";
-        $conn->query($sqlAddItem);
+        $sqlAddItem = "INSERT INTO `menu` (`item_id`, `name`, `description`, `price`, `cousintype`, `image`, `category`) VALUES ('$item_id', '$name', '$description', '$price', '$cousintype', '$image', '$category')";
+        if ($conn->query($sqlAddItem) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sqlAddItem . "<br>" . $conn->error;
+        }
     } elseif (isset($_POST['edit_item'])) {
         $id = $_POST['id'];
+        $item_id = $_POST['item_id'];
         $name = $_POST['name'];
         $description = $_POST['description'];
         $price = $_POST['price'];
         $cousintype = $_POST['cousintype'];
         $image = $_POST['image'];
         $category = $_POST['category'];
+
         $sqlEditItem = "UPDATE `menu` SET `item_id` = '$item_id', `name` = '$name', `description` = '$description', `price` = '$price', `cousintype` = '$cousintype', `image` = '$image', `category` = '$category' WHERE `item_id` = '$id'";
-        $conn->query($sqlEditItem);
+        if ($conn->query($sqlEditItem) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error: " . $sqlEditItem . "<br>" . $conn->error;
+        }
     } elseif (isset($_POST['delete_item'])) {
         $id = $_POST['id'];
         $sqlDeleteItem = "DELETE FROM `menu` WHERE `item_id` = '$id'";
-        $conn->query($sqlDeleteItem);
+        if ($conn->query($sqlDeleteItem) === TRUE) {
+            echo "Record deleted successfully";
+        } else {
+            echo "Error: " . $sqlDeleteItem . "<br>" . $conn->error;
+        }
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['edit_item_id'])) {
@@ -64,7 +77,6 @@ $conn->close();
         <div class="container">
             <div class="table-container">
                 <h2>Menu Items</h2>
-                
                 <table>
                     <tr>
                         <th>Item ID</th>
@@ -91,7 +103,7 @@ $conn->close();
                     <?php if ($editingItem): ?>
                         <input type="hidden" name="id" value="<?php echo $editingItem['item_id']; ?>">
                     <?php endif; ?>
-                    <input type="text" name="item_id" placeholder="item_id" value="<?php echo $editingItem['item_id'] ?? ''; ?>" required>
+                    <input type="text" name="item_id" placeholder="Item ID" value="<?php echo $editingItem['item_id'] ?? ''; ?>" required>
                     <input type="text" name="name" placeholder="Name" value="<?php echo $editingItem['name'] ?? ''; ?>" required>
                     <input type="text" name="description" placeholder="Description" value="<?php echo $editingItem['description'] ?? ''; ?>" required>
                     <input type="number" step="0.01" name="price" placeholder="Price" value="<?php echo $editingItem['price'] ?? ''; ?>" required>
