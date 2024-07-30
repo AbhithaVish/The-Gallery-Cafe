@@ -68,3 +68,7 @@ th {
     .apply-discount-btn:hover {
         background-color: #45a049;
     }
+
+    .discount-container h2{
+        color: #000000;
+    }

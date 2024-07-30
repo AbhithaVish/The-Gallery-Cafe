@@ -123,12 +123,13 @@ $conn->close();
                 <h2>Total:
                 <span><?php echo number_format($total_price, 2); ?> LKR</span>
                 </h2>
-            </div>
+            
             <?php if ($card_valid): ?>
                 <div class="discount-container">
                     <h2>Discounted Total:
                     <span><?php echo number_format($discounted_total_price, 2); ?> LKR</span>
                     </h2>
+                </div>
                 </div>
             <?php endif; ?>
             <form method="POST" action="">
