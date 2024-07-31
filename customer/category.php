@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
             <input type="hidden" name="price" value="<?= htmlspecialchars($row['price']); ?>">
             <input type="hidden" name="image" value="<?= htmlspecialchars($row['image']); ?>">
             <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
-            <img src="uploaded_img/<?= htmlspecialchars($row['image']); ?>" alt="">
+            <img src="../Admin Files/Admin/uploads/<?= htmlspecialchars($row['image']); ?>" alt="<?= htmlspecialchars($row['name']); ?>">
             <div class="name"><?= htmlspecialchars($row['name']); ?></div>
             <div class="flex">
                 <div class="price"><span>Rs.</span><?= htmlspecialchars($row['price']); ?></div>
