@@ -3,7 +3,6 @@ session_start();
 include_once('connection.php');
 
 if (isset($_POST['login'])) {
-    // Sanitize user inputs
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = $_POST['password'];
 

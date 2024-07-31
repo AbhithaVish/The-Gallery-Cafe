@@ -1,5 +1,5 @@
 <?php
-// session_start();
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -23,7 +23,7 @@ function getCount($tableName) {
         $totalCount = $row['count'];
         return $totalCount;
     } else {
-        return 0; // Return 0 if query fails or no rows found
+        return 0; 
     }
 }
 

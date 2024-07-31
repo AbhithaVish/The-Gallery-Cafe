@@ -39,7 +39,7 @@ if (isset($_POST['update_status'])) {
         echo "Error updating reservation: " . $stmt->error;
     }
     $stmt->close();
-    header("Location: " . $_SERVER['PHP_SELF']); // Refresh the page
+    header("Location: " . $_SERVER['PHP_SELF']); 
     exit();
 }
 
@@ -83,7 +83,7 @@ $conn->close();
             overflow-y: auto;
         }
         .container {
-            max-height: 80vh; /* Adjust based on your layout */
+            max-height: 80vh; 
             
             padding: 20px;
         }

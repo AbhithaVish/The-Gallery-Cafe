@@ -16,11 +16,6 @@ $conn->close();
     <title>Loyalty Cards</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/style-promotions.css">
-    <!-- <style>
-        html {
-            overflow-y: scroll;
-        }
-    </style> -->
 </head>
 <body>
     <div class="main-container">

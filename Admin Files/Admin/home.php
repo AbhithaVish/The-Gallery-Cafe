@@ -17,7 +17,7 @@ function getCount($tableName) {
         $totalCount = $row['count'];
         return $totalCount;
     } else {
-        return 0; // Return 0 if query fails or no rows found
+        return 0; 
     }
 }
 

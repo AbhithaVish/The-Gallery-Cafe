@@ -38,7 +38,6 @@ include_once('connection.php');
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
           <form action="login.php" method="post">
             
-            <!-- <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">Login </p> -->
 
             <!-- Email input -->
             <div class="form-outline mb-4">
@@ -74,7 +73,7 @@ include_once('connection.php');
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
 
-  <!-- Include Bootstrap JS and dependencies (optional) -->
+  <!-- Include Bootstrap JS and dependencies -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
