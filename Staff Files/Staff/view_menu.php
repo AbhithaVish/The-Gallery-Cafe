@@ -11,14 +11,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $description = $_POST['description'];
         $price = $_POST['price'];
         $cousintype = $_POST['cousintype'];
-        $image = $_POST['image'];
         $category = $_POST['category'];
 
-        $sqlAddItem = "INSERT INTO `menu` (`item_id`, `name`, `description`, `price`, `cousintype`, `image`, `category`) VALUES ('$item_id', '$name', '$description', '$price', '$cousintype', '$image', '$category')";
-        if ($conn->query($sqlAddItem) === TRUE) {
-            echo "New record created successfully";
+        // Handle file upload
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $imageTmpPath = $_FILES['image']['tmp_name'];
+            $imageName = basename($_FILES['image']['name']);
+            $imageUploadPath = 'uploads/' . $imageName; // Corrected the path
+
+            if (move_uploaded_file($imageTmpPath, $imageUploadPath)) {
+                $imagePathForDB = '../../Admin Files/Admin/uploads/' . $imageName; // Path to be stored in the database
+                $sqlAddItem = "INSERT INTO `menu` (`item_id`, `name`, `description`, `price`, `cousintype`, `image`, `category`) VALUES ('$item_id', '$name', '$description', '$price', '$cousintype', '$imagePathForDB', '$category')";
+                $conn->query($sqlAddItem);
+            } else {
+                echo "Failed to upload image.";
+            }
         } else {
-            echo "Error: " . $sqlAddItem . "<br>" . $conn->error;
+            $sqlAddItem = "INSERT INTO `menu` (`item_id`, `name`, `description`, `price`, `cousintype`, `category`) VALUES ('$item_id', '$name', '$description', '$price', '$cousintype', '$category')";
+            $conn->query($sqlAddItem);
         }
     } elseif (isset($_POST['edit_item'])) {
         $id = $_POST['id'];
@@ -27,23 +37,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $description = $_POST['description'];
         $price = $_POST['price'];
         $cousintype = $_POST['cousintype'];
-        $image = $_POST['image'];
         $category = $_POST['category'];
 
-        $sqlEditItem = "UPDATE `menu` SET `item_id` = '$item_id', `name` = '$name', `description` = '$description', `price` = '$price', `cousintype` = '$cousintype', `image` = '$image', `category` = '$category' WHERE `item_id` = '$id'";
-        if ($conn->query($sqlEditItem) === TRUE) {
-            echo "Record updated successfully";
+        // Handle file upload
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $imageTmpPath = $_FILES['image']['tmp_name'];
+            $imageName = basename($_FILES['image']['name']);
+            $imageUploadPath = 'uploads/' . $imageName; // Corrected the path
+
+            if (move_uploaded_file($imageTmpPath, $imageUploadPath)) {
+                $imagePathForDB = 'Admin Files/Admin/uploads/' . $imageName; // Path to be stored in the database
+                $sqlEditItem = "UPDATE `menu` SET `item_id` = '$item_id', `name` = '$name', `description` = '$description', `price` = '$price', `cousintype` = '$cousintype', `image` = '$imagePathForDB', `category` = '$category' WHERE `item_id` = '$id'";
+                $conn->query($sqlEditItem);
+            } else {
+                echo "Failed to upload image.";
+            }
         } else {
-            echo "Error: " . $sqlEditItem . "<br>" . $conn->error;
+            $sqlEditItem = "UPDATE `menu` SET `item_id` = '$item_id', `name` = '$name', `description` = '$description', `price` = '$price', `cousintype` = '$cousintype', `category` = '$category' WHERE `item_id` = '$id'";
+            $conn->query($sqlEditItem);
         }
     } elseif (isset($_POST['delete_item'])) {
         $id = $_POST['id'];
         $sqlDeleteItem = "DELETE FROM `menu` WHERE `item_id` = '$id'";
-        if ($conn->query($sqlDeleteItem) === TRUE) {
-            echo "Record deleted successfully";
-        } else {
-            echo "Error: " . $sqlDeleteItem . "<br>" . $conn->error;
-        }
+        $conn->query($sqlDeleteItem);
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['edit_item_id'])) {
@@ -68,6 +84,11 @@ $conn->close();
     <title>Manage Menu Items</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/style-live.css">
+    <style>
+        body {
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="main-container">
@@ -77,6 +98,7 @@ $conn->close();
         <div class="container">
             <div class="table-container">
                 <h2>Menu Items</h2>
+                
                 <table>
                     <tr>
                         <th>Item ID</th>
@@ -85,20 +107,21 @@ $conn->close();
                         <th>Price</th>
                         <th>Cuisine Type</th>
                         <th>Category</th>
+                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                     <?php
                     if ($resultItems->num_rows > 0) {
-                        while($row = $resultItems->fetch_assoc()) {
-                            echo "<tr><td>" . $row["item_id"]. "</td><td>" . $row["name"]. "</td><td>" . $row["description"]. "</td><td>" . $row["price"]. "</td><td>" . $row["cousintype"]. "</td><td>" . $row["category"]. "</td>";
+                        while ($row = $resultItems->fetch_assoc()) {
+                            echo "<tr><td>" . $row["item_id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["description"] . "</td><td>" . $row["price"] . "</td><td>" . $row["cousintype"] . "</td><td>" . $row["category"] . "</td><td><img src='" . htmlspecialchars($row['image']) . "' alt='Item Image' width='100'></td>";
                             echo "<td><a href='?edit_item_id=" . $row["item_id"] . "'>Edit</a></td></tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='7'>No data available</td></tr>";
+                        echo "<tr><td colspan='8'>No data available</td></tr>";
                     }
                     ?>
                 </table>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <h3><?php echo $editingItem ? 'Edit Item' : 'Add Item'; ?></h3>
                     <?php if ($editingItem): ?>
                         <input type="hidden" name="id" value="<?php echo $editingItem['item_id']; ?>">
@@ -108,7 +131,7 @@ $conn->close();
                     <input type="text" name="description" placeholder="Description" value="<?php echo $editingItem['description'] ?? ''; ?>" required>
                     <input type="number" step="0.01" name="price" placeholder="Price" value="<?php echo $editingItem['price'] ?? ''; ?>" required>
                     <input type="text" name="cousintype" placeholder="Cuisine Type" value="<?php echo $editingItem['cousintype'] ?? ''; ?>" required>
-                    <input type="text" name="image" placeholder="Image URL" value="<?php echo $editingItem['image'] ?? ''; ?>">
+                    <input type="file" name="image" placeholder="Image">
                     <input type="text" name="category" placeholder="Category" value="<?php echo $editingItem['category'] ?? ''; ?>" required>
                     <?php if ($editingItem): ?>
                         <button type="submit" name="edit_item" class="btn-class">Edit Item</button>
