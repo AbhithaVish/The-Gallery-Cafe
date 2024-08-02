@@ -23,7 +23,7 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
     <nav class="nav container">
         <div class="nav__data">
             <a href="index.php" class="nav__logo">
-                <i class="ri-planet-line"></i> The Gallery Cafe
+                <i class="ri-planet-line"></i> 
             </a>
             <div class="nav__toggle" id="nav-toggle">
                 <i class="ri-menu-line"></i>
@@ -37,10 +37,13 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
                 <li><a href="register.php" class="nav__link">loyalty card</a></li>
                 <li><a href="Orders.php" class="nav__link">Orders</a></li>
                 <li><a href="reservation.php" class="nav__link">Reservation</a></li>
+                <li><a href="cart.php" class="nav__link">Cart</a></li>
+                <li><a href="search.php" class="nav__link">Search</a></li>
+                <li><a href="view_profile.php" class="nav__link">Profile</a></li>
                 <li><a href="about.php" class="nav__link">About Us</a></li>
 
                 <li>
-                    <a href="welcome.php" class="login" id="loginbutton">Log In</a>
+                <a href="../index.php" class="login" id="loginbutton">Log Out</a>
                 </li>
             </ul>
         </div>
