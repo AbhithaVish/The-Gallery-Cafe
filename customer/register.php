@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     "product_data" => [
                         "name" => "Loyalty Program Registration"
                     ],
-                    "unit_amount" => 100000, // Rs. 100 in LKR cents
+                    "unit_amount" => 100000, 
                 ],
                 "quantity" => 1
             ]],

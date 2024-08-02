@@ -2,19 +2,17 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-// Handle form submission for registration
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve form data
     $username = $_POST['username'];
     $name = $_POST['name'];
     $nic = $_POST['nic'];
     $phone_no = $_POST['phone_no'];
     $address = $_POST['address'];
 
-    // Generate a unique card number
+  
     $isUnique = false;
     do {
-        $card_no = uniqid('CARD-', true); // Example card number generation
+        $card_no = uniqid('CARD-', true); 
         $query = $conn->prepare("SELECT * FROM loyalty_card WHERE card_no = ?");
         $query->bind_param("s", $card_no);
         $query->execute();
@@ -24,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } while (!$isUnique);
 
-    // Set the expiry date to one year from today
     $expiry_date = date('Y-m-d', strtotime('+1 year'));
 
     $query = $conn->prepare("INSERT INTO loyalty_card (username, name, nic, phone_no, address, card_no, points, expiry_date) VALUES (?, ?, ?, ?, ?, ?, 0, ?)");
@@ -32,14 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($query->execute()) {
         $message = "Registration successful! Your card number is " . htmlspecialchars($card_no);
-        // Redirect to register.php after successful registration
         header('Location: register.php');
         exit();
     } else {
         $message = "Error: " . $query->error;
     }
 } else {
-    // Retrieve user data if already registered
     $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
     $query = $conn->prepare("SELECT * FROM loyalty_card WHERE username = ?");
     $query->bind_param("s", $username);
@@ -61,6 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         body {
             margin-top: 150px;
         }
+        .topic{
+            color: aliceblue;
+        }
     </style>
     <script>
         window.onload = function() {
@@ -72,7 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <?php if (isset($user_data)): ?>
-        <h2>Welcome back, <?php echo htmlspecialchars($user_data['name']); ?>!</h2>
+        <div class="topic">
+            <h2>Welcome back, <?php echo htmlspecialchars($user_data['name']); ?>!</h2>
+        </div>
         <table border="1">
             <tr>
                 <th>Card Number</th>
@@ -90,7 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </tr>
         </table>
     <?php else: ?>
-        <h2>Register for the Loyalty Program</h2>
+        <div class="topic">
+            <h2>Register for the Loyalty Program</h2>
+        </div>
         <form action="" method="POST">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>

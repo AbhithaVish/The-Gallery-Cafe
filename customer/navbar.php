@@ -1,6 +1,5 @@
 <?php
-session_start(); // Ensure sessions are started
-
+session_start(); 
 include_once('../connection.php');
 
 $activePage = basename($_SERVER['PHP_SELF'], "index.php");
@@ -12,13 +11,24 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Gallery Cafe</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link rel="stylesheet" href="style/style.css">
+    <!-- Import Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+    <!-- Import Icons (e.g., Remix Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.css">
 </head>
 <body>
-
 <header class="header">
+    <center>
     <nav class="nav container">
+        <div class="nav__data">
+            <a href="index.php" class="nav__logo">
+                <i class="ri-planet-line"></i> The Gallery Cafe
+            </a>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </div>
         <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
                 <li><a href="index.php" class="nav__link">Home</a></li>
@@ -28,29 +38,22 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
                 <li><a href="Orders.php" class="nav__link">Orders</a></li>
                 <li><a href="reservation.php" class="nav__link">Reservation</a></li>
                 <li><a href="about.php" class="nav__link">About Us</a></li>
+
                 <li>
-                    <a href="cart.php" class="nav__link">
-                        <i class="fa-solid fa-cart-shopping"></i> 
-                    </a>
-                </li>
-                <li>
-                    <a href="search.php" class="nav__link">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </a>
-                </li>
-                
-                <li>
-                <a href="view_profile.php" class="nav__link">
-                <i class="fa-solid fa-user"></i>
-                </a>
-                </li>   
-                <li>
-                    <a href="../index.php" class="login" id="loginbutton">Log Out</a>
+                    <a href="welcome.php" class="login" id="loginbutton">Log In</a>
                 </li>
             </ul>
         </div>
     </nav>
+    </center>
 </header>
+
+<!-- Add JavaScript to toggle the menu -->
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('nav-menu').classList.toggle('show-menu');
+    });
+</script>
 
 </body>
 </html>
