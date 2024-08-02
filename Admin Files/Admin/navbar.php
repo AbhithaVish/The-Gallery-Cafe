@@ -1,7 +1,7 @@
 <?php
-session_start(); // Ensure sessions are started
-
+session_start(); 
 include_once('../connection.php');
+
 $activePage = basename($_SERVER['PHP_SELF'], "index.php");
 ?>
 
@@ -11,15 +11,27 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Gallery Cafe</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style/style.css">
+    <!-- Import Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+    <!-- Import Icons (e.g., Remix Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.css">
 </head>
 <body>
-
 <header class="header">
+    <center>
     <nav class="nav container">
+        <div class="nav__data">
+            <a href="index.php" class="nav__logo">
+                <i class="ri-planet-line"></i> 
+            </a>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+        </div>
         <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
-                <li><a href="index.php" class="nav__link">Dashboard</a></li>
+            <li><a href="index.php" class="nav__link">Dashboard</a></li>
                 <li><a href="menu.php" class="nav__link">Menu</a></li>
                 <li><a href="live.php" class="nav__link">Live</a></li>
                 <li><a href="order.php" class="nav__link">Orders</a></li>
@@ -33,7 +45,15 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
             </ul>
         </div>
     </nav>
+    </center>
 </header>
+
+<!-- Add JavaScript to toggle the menu -->
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+        document.getElementById('nav-menu').classList.toggle('show-menu');
+    });
+</script>
 
 </body>
 </html>
