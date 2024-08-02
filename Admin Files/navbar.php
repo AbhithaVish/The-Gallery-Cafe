@@ -20,7 +20,7 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
     <nav class="nav container">
         <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
-                <li><a href="index.php" class="nav__link">Home</a></li>
+                <li><a href="index.php" class="nav__link">Dashboard</a></li>
                 <li><a href="welcome.php" class="nav__link">Menu</a></li>
                 <li><a href="welcome.php" class="nav__link">Live</a></li>
                 <li><a href="welcome.php" class="nav__link">Orders</a></li>
