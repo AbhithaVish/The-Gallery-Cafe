@@ -11,28 +11,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = $_POST['name'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = $_POST['password']; 
-        $profile = $_POST['profile'] ?? ''; 
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $profile = 'customer'; 
         $sqlCheck = "SELECT 1 FROM `login_tbl` WHERE `username` = '$username' LIMIT 1";
         $result = $conn->query($sqlCheck);
         if ($result->num_rows == 0) {
-            $sqlAddUser = "INSERT INTO `login_tbl` ( `name`, `username`, `email`, `password`, `profile`) VALUES ( '$name', '$username', '$email', '$password', '$profile')";
+            $sqlAddUser = "INSERT INTO `login_tbl` (`name`, `username`, `email`, `password`, `profile`) VALUES ('$name', '$username', '$email', '$password', '$profile')";
             $conn->query($sqlAddUser);
         } else {
             echo "Error: Username already exists.";
         }
     } elseif (isset($_POST['edit_user'])) {
-        $id = $_POST['id'] ?? $id; // Ensure $id is set
+        $id = $_POST['id'] ?? $id; 
         $name = $_POST['name'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = $_POST['password']; // No encryption
-        $profile = $_POST['profile'] ?? ''; // Use null coalescing operator
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT); 
+        $profile = 'customer'; 
         $sqlEditUser = "UPDATE `login_tbl` SET `name` = '$name', `username` = '$username', `email` = '$email', `password` = '$password', `profile` = '$profile' WHERE `id` = '$id'";
         $conn->query($sqlEditUser);
     } elseif (isset($_POST['delete_user'])) {
-        $id = $_POST['id'];
-        $sqlDeleteUser = "DELETE FROM `login_tbl` WHERE `id` = '$id'";
+        $username = $_POST['username'];
+        $sqlDeleteUser = "DELETE FROM `login_tbl` WHERE `username` = '$username'";
         $conn->query($sqlDeleteUser);
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -93,7 +93,6 @@ $conn->close();
                     <input type="text" name="username" placeholder="Username" value="<?php echo $editingUser['username'] ?? ''; ?>" required>
                     <input type="email" name="email" placeholder="Email" value="<?php echo $editingUser['email'] ?? ''; ?>" required>
                     <input type="password" name="password" placeholder="Password" required>
-                    <input type="text" name="profile" placeholder="Profile" value="<?php echo $editingUser['profile'] ?? ''; ?>">
                     <?php if ($editingUser): ?>
                         <button type="submit" name="edit_user" class="btn-class">Edit User</button>
                     <?php else: ?>
@@ -102,7 +101,7 @@ $conn->close();
                 </form>
                 <form method="post">
                     <h3>Delete User</h3>
-                    <input type="text" name="id" placeholder="ID" required>
+                    <input type="text" name="username" placeholder="Username" required>
                     <button type="submit" name="delete_user" class="btn-delete">Delete User</button>
                 </form>
             </div>
