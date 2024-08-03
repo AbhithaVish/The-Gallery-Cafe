@@ -58,6 +58,7 @@ $conn->close();
             <label for="password" class="form-label">Password</label><br>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
+        <p style="color: black;">You are accepts <a href="conditions.php">Terms and Conditions</a> By creating this Account.</p>
         <button type="submit" class="btn-add">Create</button><br> <br>
         <a href="welcome.php" class="btn-add2">Log In</a>
     </form>
