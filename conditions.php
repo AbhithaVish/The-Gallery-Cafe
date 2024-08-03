@@ -16,13 +16,12 @@ include_once('navbar.php');
         }
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin-top: 100px;
             padding: 0;
             color: black;
         }
         .container-policy {
             max-width: 800px;
+            height: 1100px;
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
@@ -50,6 +49,7 @@ include_once('navbar.php');
     </style>
 </head>
 <body>
+    <br><br><br><br><br><br>
     <div class="container-policy">
         <div class="head">
             <h1>Terms and Conditions</h1>
@@ -102,7 +102,7 @@ include_once('navbar.php');
                 <li><strong>Changes to Privacy Policy</strong></li>
                 <p>We reserve the right to update this privacy policy at any time. Any changes will be posted on our website.</p>
                 <li><strong>Contact Us</strong></li>
-                <p>If you have any questions or concerns about our privacy policy, please contact us at [contact information].</p>
+                <p>If you have any questions or concerns about our privacy policy, please contact us at <a href="tel:+94 114 777 888">114 777 888</a>.</p>
             </ol>
         </div>
     </div>
