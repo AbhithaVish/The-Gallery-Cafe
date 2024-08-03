@@ -3,7 +3,7 @@ include_once('../connection.php');
 include_once('navbar.php');
 
 $editingUser = null;
-$id = null; // Initialize $id to prevent undefined variable notice
+$id = null; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_user'])) {
@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = $_POST['name'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = $_POST['password']; // No encryption
-        $profile = $_POST['profile'] ?? ''; // Use null coalescing operator
+        $password = $_POST['password']; 
+        $profile = $_POST['profile'] ?? ''; 
         $sqlCheck = "SELECT 1 FROM `login_tbl` WHERE `username` = '$username' LIMIT 1";
         $result = $conn->query($sqlCheck);
         if ($result->num_rows == 0) {
