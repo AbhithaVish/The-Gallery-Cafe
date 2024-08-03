@@ -2,7 +2,6 @@
 include_once('connection.php');
 include_once('navbar.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +12,6 @@ include_once('navbar.php');
         body {
             overflow-y: scroll;
             display: flex;
-        }
-        body {
             font-family: Arial, sans-serif;
             padding: 0;
             color: black;
@@ -27,6 +24,7 @@ include_once('navbar.php');
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 150px; 
         }
         .head {
             text-align: center;
