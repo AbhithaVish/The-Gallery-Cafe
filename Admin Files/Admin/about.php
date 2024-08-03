@@ -11,8 +11,12 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
     <link rel="stylesheet" href="../../customer/style/style-about.css">
-    <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <style>
+        body{
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 <body>
     <div class="main-container">
@@ -78,7 +82,7 @@ $conn->close();
                 <div class="contact-d">
                     <h1>Contact us</h1>
                     <i class="fa-solid fa-phone"></i> <a href="tel:+94 114 777 888">114 777 888</a><br>
-                    <i class="fa-solid fa-location-dot"></i> Location : De Krester Road, Colombo 4.<br>
+                    <i class="fa-solid fa-location-dot"></i> Location : De Krester Road, Colombo.<br>
                     <i class="fa-solid fa-envelope"></i> <a href="mailto:thegallerycafe@gmail.com">E-mail : thegallerycafe@gmail.com </a><br>
                 </div>
             </div>

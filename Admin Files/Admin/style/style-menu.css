@@ -1,3 +1,4 @@
+/* General body styling */
 body {
     background-image: url('Images/menu backround.png');
     background-size: cover;
@@ -6,28 +7,55 @@ body {
     background-attachment: fixed;
     color: white;
     font-family: Arial, sans-serif;
-    margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin-top: 70px;
+    border: none;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
+
 
 .main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    max-width: 800px;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center; 
+    gap: 20px; 
+}
+
+.main-box {
+    flex: 1;
+    margin: 10px;
     padding: 20px;
-    box-sizing: border-box;
+    background-color: hsl(0, 0%, 60%);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.button-click {
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    background-color: var(--white-color);
 }
 
 h1 {
     text-align: center;
     color: #333;
-    margin-bottom: 20px;
 }
 
 .form-container {
@@ -38,8 +66,9 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
 }
+
 
 .form-container label {
     display: block;
@@ -79,10 +108,10 @@ h1 {
     background-color: #45a049;
 }
 
+
 .view-table {
     width: 90%;
     max-width: 600px;
-    margin-top: 20px;
 }
 
 table {
@@ -90,6 +119,7 @@ table {
     border-collapse: collapse;
     background: white;
     border-radius: 8px;
+    overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-left: 10px;
 }
@@ -117,6 +147,7 @@ td {
 @media screen and (max-width: 768px) {
     table {
         font-size: 14px;
+        flex-direction: column-reverse;
     }
 
     .main-container {
@@ -126,6 +157,7 @@ td {
     .form-container,
     .view-table {
         width: 95%;
+        padding: 15px;
         margin-bottom: 20px;
     }
 }

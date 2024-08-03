@@ -5,9 +5,9 @@ session_start();
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
 if (!empty($username)) {
-    $reference_number = uniqid('ref_', true);//creating unique reference number
+    $reference_number = uniqid('ref_', true);
 
-    // retrieve items from the cart for the user
+
     $sqlCart = "SELECT * FROM `cart` WHERE username=?";
     $stmtCart = $conn->prepare($sqlCart);
     $stmtCart->bind_param('s', $username);
@@ -26,7 +26,7 @@ if (!empty($username)) {
 
         $stmtInsertOrder->close();
 
-        //delete items from the cart for the user
+
         $sqlDeleteCart = "DELETE FROM `cart` WHERE username=?";
         $stmtDeleteCart = $conn->prepare($sqlDeleteCart);
         $stmtDeleteCart->bind_param('s', $username);

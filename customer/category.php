@@ -117,10 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
     </div>
 
 </section>
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
 </body>
 </html>
 

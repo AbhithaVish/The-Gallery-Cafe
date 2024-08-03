@@ -39,7 +39,6 @@ $conn->close();
     <title>Reservations</title>
     <link rel="stylesheet" href="style/style-Vreservation.css">
     <style>
-        /* style for display scroll bar in the page */
         html{
             overflow-x: scroll;
         }

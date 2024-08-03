@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {//getting  the username from the session to 
     exit;
 }
 
-// Fetch user profile data from the database
+// get user profile data from the database
 $username = $_SESSION['username'];
 $query = "SELECT id, name, username, email, password FROM login_tbl WHERE username = ?";
 $stmt = $conn->prepare($query);

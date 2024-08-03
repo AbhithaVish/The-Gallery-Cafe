@@ -4,7 +4,7 @@ include_once('../connection.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $item_id = $_POST['item_id'];
 
-    // Fetch existing menu item data
+    // get existing menu item data
     $query = "SELECT * FROM menu WHERE item_id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $item_id);
