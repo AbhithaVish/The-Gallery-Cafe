@@ -52,7 +52,6 @@ $conn->close();
                         <th>Item ID</th>
                         <th>Name</th>
                         <th>Price</th>
-                        <th>Added Date</th>
                         <th>Reference Number</th>
                         <th>Payment Date</th>
                         <th>Status</th>
@@ -67,7 +66,6 @@ $conn->close();
                                 <td>" . htmlspecialchars($row["item_id"]) . "</td>
                                 <td>" . htmlspecialchars($row["name"]) . "</td>
                                 <td>" . htmlspecialchars($row["price"]) . "</td>
-                                <td>" . htmlspecialchars($row["added_date"]) . "</td>
                                 <td>" . htmlspecialchars($row["reference_number"]) . "</td>
                                 <td>" . htmlspecialchars($row["payment_date"]) . "</td>
                                 <td class='" . htmlspecialchars($statusClass) . "'>" . htmlspecialchars($row["status"]) . "</td>

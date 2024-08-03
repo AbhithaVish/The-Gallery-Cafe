@@ -13,6 +13,7 @@ include_once('navbar.php');
 </head>
 <body>
     <div class="main-container">
+        <center>
         <div class="topic">
             <h1>Payment Successful!</h1>
         </div>
@@ -28,6 +29,7 @@ include_once('navbar.php');
             </button>
 
         </div>
+        </center>
     </div>
 </body>
 </html>
