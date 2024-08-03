@@ -80,7 +80,6 @@ table tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Button Styles */
 button {
     background-color: #4CAF50;
     color: white;
@@ -101,7 +100,6 @@ form {
     margin: 0;
 }
 
-/* Image Upload Form Styles */
 .form-container {
     width: 50%;
     margin: 20px auto;
@@ -263,7 +261,6 @@ a {
     color: #999;
 }
 
-/* header section */
 header {
     background: rgba(0, 0, 0, 0.8);
     padding: 10px 20px;
@@ -283,19 +280,9 @@ header a:hover {
     color: #fff;
 }
 
-/* footer section */
-footer {
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
-
-footer a {
-    color: #f39c12;
-    margin: 0 10px;
-}
-
-footer a:hover {
-    color: #fff;
+.box-container{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }

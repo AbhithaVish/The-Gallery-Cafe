@@ -34,9 +34,10 @@ th, td {
     text-align: left;
 }
 
-td{
+td {
     color: #333;
 }
+
 th {
     background-color: #929292;
     font-weight: bold;
@@ -81,4 +82,49 @@ button {
 
 button:hover {
     background-color: #45a049;
+}
+
+.topic-register h2 {
+    color: #ddd;
+}
+
+@media (max-width: 768px) {
+    table, th, td, tr {
+        display: block;
+        width: 100%;
+        border: none;
+    }
+
+    tr {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+    }
+
+    th {
+        display: none;
+    }
+
+    td {
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+        padding: 10px;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: bold;
+        padding-right: 10px;
+    }
+
+    form {
+        width: 90%;
+    }
 }

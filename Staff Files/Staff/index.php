@@ -1,5 +1,4 @@
 <?php
-// session_start();
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -8,26 +7,23 @@ error_reporting(E_ALL);
 include_once('../connection.php');
 include_once('navbar.php');
 
-// Function to get the count of rows in a table
+// getting counts
 function getCount($tableName) {
     global $conn;
 
-    // Prepare and execute the query
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM $tableName");
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Fetch the result and return the count
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $totalCount = $row['count'];
         return $totalCount;
     } else {
-        return 0; // Return 0 if query fails or no rows found
+        return 0;
     }
 }
 
-// Get the counts from respective tables
 $loginCount = getCount('login_tbl');
 $orderCount = getCount('orders');
 $reservationCount = getCount('reservation');
@@ -48,14 +44,14 @@ $conn->close();
     <style>
         .round-banner img {
             margin-top: 400px;
-            width: 100vw; /* 20% of the viewport width */
-            height: auto; /* Maintain aspect ratio */
-            max-width: 350px; /* Optional: set a maximum width */
+            width: 100vw; 
+            height: auto; 
+            max-width: 350px; 
         }
         @media screen and (max-width: 600px) {
             .round-banner img {
-                width: 40vw; /* 40% of the viewport width for smaller screens */
-                max-width: 150px; /* Optional: set a different maximum width */
+                width: 40vw; 
+                max-width: 150px;
             }
         }
     </style>

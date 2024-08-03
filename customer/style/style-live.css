@@ -20,7 +20,12 @@ body {
 .available {
     color: green;
 }
-
+.main-container{
+    
+    display: flex;
+    justify-content: center; 
+    gap: 20px; 
+}
 .topic {
     text-align: center;
     font-size: 50px;

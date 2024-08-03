@@ -7,15 +7,19 @@ body {
     background-attachment: fixed;
     color: white;
     font-family: Arial, sans-serif;
-    margin-top: 70px;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    border: none;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
-/* Main container styling */
+
 .main-container {
     display: flex;
     flex-direction: column;
@@ -24,13 +28,36 @@ body {
     max-width: 800px;
 }
 
-/* Heading styling */
+
+.container {
+    display: flex;
+    justify-content: center; 
+    gap: 20px; 
+}
+
+.main-box {
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    background-color: hsl(0, 0%, 60%);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.button-click {
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    background-color: var(--white-color);
+}
+
 h1 {
     text-align: center;
     color: #333;
 }
 
-/* Form container styling */
 .form-container {
     width: 90%;
     max-width: 600px;
@@ -39,10 +66,10 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     box-sizing: border-box;
-    margin-bottom: 20px; /* Add spacing below the form */
+    margin-bottom: 20px; 
 }
 
-/* Form styling */
+
 .form-container label {
     display: block;
     margin-bottom: 8px;
@@ -81,13 +108,12 @@ h1 {
     background-color: #45a049;
 }
 
-/* Table container styling */
+
 .view-table {
     width: 90%;
     max-width: 600px;
 }
 
-/* Table styling */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -118,7 +144,6 @@ td {
     color: rgb(0, 0, 0);
 }
 
-/* Responsive table styling */
 @media screen and (max-width: 768px) {
     table {
         font-size: 14px;

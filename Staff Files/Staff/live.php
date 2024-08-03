@@ -76,7 +76,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Data</title>
-    <link rel="stylesheet" href="style/style.css">
+    <!-- <link rel="stylesheet" href="style/style.css"> -->
     <link rel="stylesheet" href="style/style-live.css">
 </head>
 <body>
@@ -84,7 +84,7 @@ $conn->close();
         <div class="topic">
             <h1>Live Data</h1>
         </div>
-        <div class="container">
+        <div class="container-live">
             <div class="table-container">
                 <h2>Tables Availability</h2>
                 

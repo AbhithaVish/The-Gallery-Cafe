@@ -60,7 +60,6 @@ $result = $query->get_result();
 $user_data = $result->fetch_assoc();
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,6 +69,9 @@ $user_data = $result->fetch_assoc();
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/style-card.css">
     <style>
+        html{
+            overflow-y: scroll;
+        }
         body {
             margin-top: 150px;
         }
@@ -84,25 +86,26 @@ $user_data = $result->fetch_assoc();
 </head>
 <body>
     <?php if (isset($user_data)): ?>
-        <h2>Welcome back, <?php echo htmlspecialchars($user_data['name']); ?>!</h2>
         <table border="1">
-            <tr>
-                <th>Card Number</th>
-                <th>Expiry Date</th>
-                <th>NIC</th>
-                <th>Phone Number</th>
-                <th>Address</th>
+        <tr>
+                <th>Card Number</th><br>
+                <th>Expiry Date</th><br>
+                <th>NIC</th><br>
+                <th>Phone Number</th><br>
+                <th>Address</th><br>
             </tr>
             <tr>
-                <td><?php echo htmlspecialchars($user_data['card_no']); ?></td>
-                <td><?php echo htmlspecialchars($user_data['expiry_date']); ?></td>
-                <td><?php echo htmlspecialchars($user_data['nic']); ?></td>
-                <td><?php echo htmlspecialchars($user_data['phone_no']); ?></td>
-                <td><?php echo htmlspecialchars($user_data['address']); ?></td>
+                <td data-label="Card Number"><?php echo htmlspecialchars($user_data['card_no']); ?></td>
+                <td data-label="Expiry Date"><?php echo htmlspecialchars($user_data['expiry_date']); ?></td>
+                <td data-label="NIC"><?php echo htmlspecialchars($user_data['nic']); ?></td>
+                <td data-label="Phone Number"><?php echo htmlspecialchars($user_data['phone_no']); ?></td>
+                <td data-label="Address"><?php echo htmlspecialchars($user_data['address']); ?></td>
             </tr>
         </table>
     <?php else: ?>
-        <h2>Register for the Loyalty Program</h2>
+        <div class="topic-register">
+            <h2>Register for the Loyalty Program</h2>
+        </div>
         <form action="" method="POST">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>

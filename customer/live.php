@@ -24,10 +24,11 @@ $conn->close();
     <link rel="stylesheet" href="style/style-live.css">
 </head>
 <body>
-    <div class="main-container">
-        <div class="topic">
+<div class="topic">
             <h1>Live Data</h1>
         </div>
+    <div class="main-container">
+       
         <div class="container">
             <div class="table-container">
                 <h2>Tables Availability</h2>

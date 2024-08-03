@@ -2,7 +2,7 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-// Check if user is logged in
+
 if (!isset($_SESSION['username'])) {
     header('Location: ../welcome.php');
     exit;
@@ -13,10 +13,10 @@ $address = isset($_SESSION['address']) ? $_SESSION['address'] : '';
 $contact = isset($_SESSION['contact']) ? $_SESSION['contact'] : '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
-    $item_id = intval($_POST['item_id']); // Ensure item_id is an integer
-    error_log("Received item_id: " . $item_id); // Debugging
+    $item_id = intval($_POST['item_id']); 
+    error_log("Received item_id: " . $item_id);
 
-    // Fetch item details
+
     $item_sql = "SELECT * FROM menu WHERE item_id = ?";
     if ($stmt = $conn->prepare($item_sql)) {
         $stmt->bind_param("i", $item_id);
@@ -41,19 +41,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
                 $message = "Item added to cart.";
             } else {
                 $message = "Error adding item to cart: " . $stmt->error;
-                error_log("Error adding item to cart: " . $stmt->error); // Debugging
+                error_log("Error adding item to cart: " . $stmt->error); 
             }
             $stmt->close();
         } else {
             $message = "Error preparing statement: " . $conn->error;
-            error_log("Error preparing statement: " . $conn->error); // Debugging
+            error_log("Error preparing statement: " . $conn->error); 
         }
     } else {
         $message = "Item not found.";
     }
 }
 
-// Fetch distinct categories
+
 $category_sql = "SELECT DISTINCT category FROM menu";
 $category_result = $conn->query($category_sql);
 ?>
@@ -101,14 +101,9 @@ $category_result = $conn->query($category_sql);
         ?>
         </center>
 
-
     </div>
 
 </section>
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
 </body>
 </html>
 

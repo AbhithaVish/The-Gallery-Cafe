@@ -106,15 +106,13 @@ h3 {
 }
 
 .direction-btn a {
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
 }
 
 .direction-btn:hover {
     color: #000;
 }
-
-/* Flex container for Mission and Vision */
 .mission-vision-container {
     display: flex;
     justify-content: space-around;

@@ -94,8 +94,6 @@ $conn->close();
 </head>
 <body>
     <div class="main-container">
-        <div class="topic">
-            <h1>Pay Here</h1>
         </div>
         <div class="container123">
             <div class="table-container">
@@ -134,7 +132,7 @@ $conn->close();
             <?php endif; ?>
             <form method="POST" action="">
                 <br>
-                <label for="card_no">Enter Card Number for Discount:</label>
+                <label for="card_no" style="color :black ;">Enter Card Number for Discount:</label>
                 <input type="text" id="card_no" name="card_no"><br>
                 <button type="submit" class="btn-pay">Apply Discount</button>
             </form>

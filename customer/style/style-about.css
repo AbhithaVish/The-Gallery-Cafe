@@ -150,12 +150,19 @@ button {
 }
 
 .direction-btn a {
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
+    background-color: aquamarine;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: background-color 0.3s ease;
 }
 
 .direction-btn:hover a {
-    color: #000;
+    color: #ffffff;
 }
 
 .contact {
