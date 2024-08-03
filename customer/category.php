@@ -30,9 +30,8 @@ if (isset($_GET['category'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
     $item_id = intval($_POST['item_id']);
-    $quantity = intval($_POST['qty']); // Ensure quantity is an integer
+    $quantity = intval($_POST['qty']); 
 
-    // Fetch item details
     $item_sql = "SELECT * FROM menu WHERE item_id = ?";
     if ($stmt = $conn->prepare($item_sql)) {
         $stmt->bind_param("i", $item_id);
@@ -49,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
         $price = $item['price'];
         $added_date = date('Y-m-d H:i:s');
 
-        // Add to cart table
         $cart_sql = "INSERT INTO cart (item_id, name, price, quantity, username, added_date) VALUES (?, ?, ?, ?, ?, ?)";
         if ($stmt = $conn->prepare($cart_sql)) {
             $stmt->bind_param("ississ", $item_id, $name, $price, $quantity, $username, $added_date);
@@ -80,12 +78,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="style/style-menu.css">
     <link rel="stylesheet" href="style/style.css">
+    <style>
+        body{
+            overflow-y: scroll;
+            margin-top: 100px;
+        }
+    </style>
 </head>
 <body>
 <section class="products">
-
-    <h1 class="title">Category: <?= $category; ?></h1>
-
     <div class="box-container">
 
         <?php
