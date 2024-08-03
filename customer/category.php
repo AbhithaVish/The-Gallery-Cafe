@@ -100,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'])) {
             <button type="submit" class="fas fa-shopping-cart" name="add_to_cart"></button>
             <img src="../Admin Files/Admin/uploads/<?= htmlspecialchars($row['image']); ?>" alt="<?= htmlspecialchars($row['name']); ?>">
             <div class="name"><?= htmlspecialchars($row['name']); ?></div>
+            <div class="name"><?= htmlspecialchars($row['description']); ?></div>
             <div class="flex">
                 <div class="price"><span>Rs.</span><?= htmlspecialchars($row['price']); ?></div>
                 <input type="number" name="qty" class="qty" value="1" min="1">
