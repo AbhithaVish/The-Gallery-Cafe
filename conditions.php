@@ -49,7 +49,6 @@ include_once('navbar.php');
     </style>
 </head>
 <body>
-    <br><br><br><br><br><br>
     <div class="container-policy">
         <div class="head">
             <h1>Terms and Conditions</h1>
