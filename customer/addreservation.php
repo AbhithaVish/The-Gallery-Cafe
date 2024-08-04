@@ -30,21 +30,7 @@ if ($tableExistsResult->num_rows == 1) {
             echo "Error: " . $stmt->error;
         }
         $stmt->close();
-    }
-    $query = "SELECT * FROM reservation WHERE username = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param('s', $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $reservations[] = $row;
-        }
-    } else {
-        echo "No reservations found.";
-    }
-    $stmt->close();
+    } 
 } else {
     echo "Table 'reservations' does not exist.";
 }

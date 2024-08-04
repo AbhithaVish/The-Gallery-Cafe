@@ -73,7 +73,7 @@ $user_data = $result->fetch_assoc();
             overflow-y: scroll;
         }
         body {
-            margin-top: 150px;
+            margin-top: 50px;
         }
     </style>
     <script>

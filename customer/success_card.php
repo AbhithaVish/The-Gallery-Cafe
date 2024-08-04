@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // expiry date set to one year from the payment date
     $expiry_date = date('Y-m-d', strtotime('+1 year'));
 
-    $query = $conn->prepare("INSERT INTO loyalty_card (username, name, nic, phone_no, address, card_no, points, expiry_date) VALUES (?, ?, ?, ?, ?, ?, 0, ?)");
+    $query = $conn->prepare("INSERT INTO loyalty_card (username, name, nic, phone_no, address, card_no, expiry_date) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $query->bind_param("sssssss", $username, $name, $nic, $phone_no, $address, $card_no, $expiry_date);
 
     if ($query->execute()) {

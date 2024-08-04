@@ -13,10 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Update user profile data in the database
+    // hashing the password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // edit user profile data in the database
     $query = "UPDATE login_tbl SET name = ?, email = ?, password = ? WHERE username = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssss", $name, $email, $password, $username);
+    $stmt->bind_param("ssss", $name, $email, $hashedPassword, $username);
     if ($stmt->execute()) {
         header('Location: profile.php');
     } else {

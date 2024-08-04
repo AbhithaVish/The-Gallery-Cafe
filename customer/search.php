@@ -14,7 +14,7 @@ include_once('../connection.php');
 <body>
     <form method="post">
         <label>Search</label>
-        <input type="text" name="search" required>
+        <input type="text" name="search" placeholder="Search By Food Name">
         <input type="submit" name="submit" value="Search">
     </form>
 </body>
@@ -24,11 +24,10 @@ include_once('../connection.php');
     if (isset($_POST["submit"])) {
         $str = $_POST["search"];
         $str = $conn->real_escape_string($str);  
-        $sql = "SELECT * FROM menu WHERE name = '$str'";
+        $sql = "SELECT * FROM menu WHERE name LIKE '%$str%'";
         $result = $conn->query($sql);
     
         if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
             ?>
             <br><br><br>
             <table>
@@ -38,16 +37,22 @@ include_once('../connection.php');
                     <th>Price</th>
                     <th>Image</th>
                 </tr>
+            <?php
+            while ($row = $result->fetch_assoc()) {
+                ?>
                 <tr>
                     <td><?php echo htmlspecialchars($row['name']); ?></td>
                     <td><?php echo htmlspecialchars($row['description']); ?></td>
                     <td><?php echo htmlspecialchars($row['price']); ?></td>
                     <td><img src="path_to_images/<?php echo htmlspecialchars($row['image']); ?>" alt="<?php echo htmlspecialchars($row['name']); ?>"></td>
                 </tr>
+                <?php
+            }
+            ?>
             </table>
             <?php
         } else {
-            echo "That item does not exist.";
+            echo "No items match your search.";
         }
     }
 ?>

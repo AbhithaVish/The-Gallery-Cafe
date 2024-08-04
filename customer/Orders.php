@@ -48,12 +48,10 @@ $conn->close();
                 <table>
                     <tr>
                         <th>Order ID</th>
-                        <th>Username</th>
                         <th>Item ID</th>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Reference Number</th>
-                        <th>Payment Date</th>
                         <th>Status</th>
                     </tr>
                     <?php
@@ -62,12 +60,10 @@ $conn->close();
                             $statusClass = $row["status"] === 'cancel' ? 'cancel' : ($row["status"] === 'picked' ? 'picked' : 'ready-to-pick-up');
                             echo "<tr>
                                 <td>" . htmlspecialchars($row["order_id"]) . "</td>
-                                <td>" . htmlspecialchars($row["username"]) . "</td>
                                 <td>" . htmlspecialchars($row["item_id"]) . "</td>
                                 <td>" . htmlspecialchars($row["name"]) . "</td>
                                 <td>" . htmlspecialchars($row["price"]) . "</td>
                                 <td>" . htmlspecialchars($row["reference_number"]) . "</td>
-                                <td>" . htmlspecialchars($row["payment_date"]) . "</td>
                                 <td class='" . htmlspecialchars($statusClass) . "'>" . htmlspecialchars($row["status"]) . "</td>
                             </tr>";
                         }
