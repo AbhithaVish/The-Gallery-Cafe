@@ -9,18 +9,29 @@ if ($tableExistsResult->num_rows == 1) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
         $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
-        $profile = 'customer';
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-
-        $insertQuery = "INSERT INTO login_tbl (name, username, password, profile, email) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param('sssss', $name, $username, $password, $profile, $email);
         
-        if ($stmt->execute()) {
-            echo "New Account added successfully.";
+        $checkUsernameQuery = "SELECT * FROM login_tbl WHERE username = ?";
+        $stmt = $conn->prepare($checkUsernameQuery);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        // see whether username is available or not
+        if ($result->num_rows > 0) {
+            echo "Username already taken. Please choose a different username.";
         } else {
-            echo "Error: " . $stmt->error;
+            $password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+            $profile = 'customer';
+
+            $insertQuery = "INSERT INTO login_tbl (name, username, password, profile, email) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($insertQuery);
+            $stmt->bind_param('sssss', $name, $username, $password, $profile, $email);
+            
+            if ($stmt->execute()) {
+                echo "New Account added successfully.";
+            } else {
+                echo "Error: " . $stmt->error;
+            }
         }
         $stmt->close();
     }

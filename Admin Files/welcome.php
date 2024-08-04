@@ -44,10 +44,6 @@ include_once('connection.php');
         <input type="submit" value="Sign in" name="login" class="btn" />
       </div>
     </form>
-
-    <div class="sign-up">
-      <h6>Don't have an account? <a href="account.php">Sign up here</a>.</h6>
-    </div>
   </div>
 </section>
 
