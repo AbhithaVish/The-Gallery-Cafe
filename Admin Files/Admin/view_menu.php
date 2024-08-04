@@ -13,14 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cousintype = $_POST['cousintype'];
         $category = $_POST['category'];
 
-        // Handle file upload
+        // manage file upload
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $imageTmpPath = $_FILES['image']['tmp_name'];
             $imageName = basename($_FILES['image']['name']);
-            $imageUploadPath = 'uploads/' . $imageName; // Corrected the path
+            $imageUploadPath = 'uploads/' . $imageName; // complete the path
 
             if (move_uploaded_file($imageTmpPath, $imageUploadPath)) {
-                $imagePathForDB = '../../Admin Files/Admin/uploads/' . $imageName; // Path to be stored in the database
+                $imagePathForDB = '../../Admin Files/Admin/uploads/' . $imageName; // path to be stored in the database
                 $sqlAddItem = "INSERT INTO `menu` (`item_id`, `name`, `description`, `price`, `cousintype`, `image`, `category`) VALUES ('$item_id', '$name', '$description', '$price', '$cousintype', '$imagePathForDB', '$category')";
                 $conn->query($sqlAddItem);
             } else {

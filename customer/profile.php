@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username'];
 
-// Fetch user profile data from the database
+// get user profile data from the database
 $query = "SELECT id, name, username, email, password FROM login_tbl WHERE username = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("s", $username);

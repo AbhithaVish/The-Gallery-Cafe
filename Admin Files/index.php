@@ -49,24 +49,5 @@ $conn->close();
     </div>
         </center>
     </div>
-<!-- 
-    <div class="mini-boxes">
-        <div class="box">
-            <h2>Reservation</h2>
-            <button>Book Now</button>
-        </div>
-        <div class="box">
-            <h2>Order Now</h2>
-            <button>Order</button>
-        </div>
-        <div class="box">
-            <h2>Tables</h2>
-            <button>View Tables</button>
-        </div>
-        <div class="box">
-            <h2>Menu</h2>
-            <button>See Menu</button>
-        </div>
-    </div> -->
 </body>
 </html>
