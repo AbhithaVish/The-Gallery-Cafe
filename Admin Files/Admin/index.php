@@ -8,11 +8,9 @@ error_reporting(E_ALL);
 include_once('../connection.php');
 include_once('navbar.php');
 
-// Function to get the count of rows in a table
 function getCount($tableName) {
     global $conn;
 
-    // Prepare and execute the query
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM $tableName");
     $stmt->execute();
     $result = $stmt->get_result();
@@ -27,7 +25,6 @@ function getCount($tableName) {
     }
 }
 
-// Get the counts from respective tables
 $loginCount = getCount('login_tbl');
 $orderCount = getCount('orders');
 $reservationCount = getCount('reservation');
@@ -48,14 +45,14 @@ $conn->close();
     <style>
         .round-banner img {
             margin-top: 400px;
-            width: 100vw; /* 20% of the viewport width */
-            height: auto; /* Maintain aspect ratio */
-            max-width: 350px; /* Optional: set a maximum width */
+            width: 100vw;
+            height: auto;
+            max-width: 350px; 
         }
         @media screen and (max-width: 600px) {
             .round-banner img {
-                width: 40vw; /* 40% of the viewport width for smaller screens */
-                max-width: 150px; /* Optional: set a different maximum width */
+                width: 40vw; 
+                max-width: 150px;
             }
         }
     </style>

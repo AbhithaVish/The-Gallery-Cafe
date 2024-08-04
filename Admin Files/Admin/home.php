@@ -2,16 +2,13 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-// Function to get the count of rows in a table
 function getCount($tableName) {
     global $conn;
 
-    // Prepare and execute the query
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM $tableName");
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Fetch the result and return the count
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $totalCount = $row['count'];
@@ -21,7 +18,6 @@ function getCount($tableName) {
     }
 }
 
-// Get the counts from respective tables
 $loginCount = getCount('login_tbl');
 $orderCount = getCount('orders');
 $reservationCount = getCount('reservation');

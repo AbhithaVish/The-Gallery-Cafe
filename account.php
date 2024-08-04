@@ -7,10 +7,9 @@ $tableExistsResult = $conn->query($tableExistsQuery);
 
 if ($tableExistsResult->num_rows == 1) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Sanitizing and filtering inputs
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
         $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hashing the password
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
         $profile = 'customer';
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
