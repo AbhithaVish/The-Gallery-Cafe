@@ -38,7 +38,6 @@ if ($tableExistsResult->num_rows == 1) {
 }
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,11 +46,12 @@ $conn->close();
     <title>Account Creation</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-new.css">
+    <script src="script.js"></script>
 </head>
 <body>
 <div class="container">
     <h2 class="text-topic">Create New Account</h2>
-    <form method="post" action="">
+    <form method="post" action="" onsubmit="return validateForm()">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label><br>
             <input type="text" class="form-control" id="name" name="name" required>
@@ -68,8 +68,12 @@ $conn->close();
             <label for="password" class="form-label">Password</label><br>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
-        <p style="color: black;">You are accepts <a href="conditions.php">Terms and Conditions</a> By creating this Account.</p>
-        <button type="submit" class="btn-add">Create</button><br> <br>
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label">Confirm Password</label><br>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+        </div>
+        <p style="color: black;">You are accepting <a href="conditions.php">Terms and Conditions</a> by creating this Account.</p>
+        <button type="submit" class="btn-add">Create</button><br><br>
         <a href="welcome.php" class="btn-add2">Log In</a>
     </form>
 </div>
