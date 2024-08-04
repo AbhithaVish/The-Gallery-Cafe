@@ -60,6 +60,7 @@ $conn->close();
     <link rel="stylesheet" href="style/style-live.css">
 </head>
 <body>
+    <center>
     <div class="main-container">
         <div class="topic">
             <h1>Manage Customer Profiles</h1>
@@ -107,5 +108,6 @@ $conn->close();
             </div>
         </div>
     </div>
+    </center>
 </body>
 </html>

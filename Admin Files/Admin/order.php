@@ -33,11 +33,10 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
-    <!-- <link rel="stylesheet" href="style/style.css"> -->
     <link rel="stylesheet" href="style/style-orders.css">
     <style>
         body{
-            overflow-y: scroll;
+            overflow-y: auto;
         }
     </style>
     <script>

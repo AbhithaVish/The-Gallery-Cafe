@@ -78,8 +78,14 @@ $conn->close();
     <title>Live Data</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/style-live.css">
+    <style>
+        body{
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
+    <center>
     <div class="main-container">
         <div class="topic">
             <h1>Live Data</h1>
@@ -166,5 +172,6 @@ $conn->close();
             </div>
         </div>
     </div>
+    </center>
 </body>
 </html>

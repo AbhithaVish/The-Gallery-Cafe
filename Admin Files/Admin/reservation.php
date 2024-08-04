@@ -21,6 +21,7 @@ $conn->close();
     <link rel="stylesheet" href="style/style-reservation.css">
 </head>
 <body>
+    <center>
     <div class="container">
         <div class="view-reservations">
             <div class="main-box">
@@ -36,5 +37,6 @@ $conn->close();
             </div>
         </div>
     </div>
+    </center>
 </body>
 </html>

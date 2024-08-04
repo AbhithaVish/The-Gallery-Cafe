@@ -68,6 +68,9 @@ $conn->close();
         html {
             overflow-y: auto;
         }
+        body{
+            margin-top: 100px;
+        }
     </style>
 </head>
 <body>
