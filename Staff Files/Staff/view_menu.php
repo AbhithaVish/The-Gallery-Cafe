@@ -13,23 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cousintype = $_POST['cousintype'];
         $category = $_POST['category'];
 
-        // Handle file upload
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $imageTmpPath = $_FILES['image']['tmp_name'];
-            $imageName = basename($_FILES['image']['name']);
-            $imageUploadPath = 'uploads/' . $imageName; // Corrected the path
-
-            if (move_uploaded_file($imageTmpPath, $imageUploadPath)) {
-                $imagePathForDB = '../../Admin Files/Admin/uploads/' . $imageName; // Path to be stored in the database
-                $sqlAddItem = "INSERT INTO `menu` (`item_id`, `name`, `description`, `price`, `cousintype`, `image`, `category`) VALUES ('$item_id', '$name', '$description', '$price', '$cousintype', '$imagePathForDB', '$category')";
-                $conn->query($sqlAddItem);
-            } else {
-                echo "Failed to upload image.";
-            }
-        } else {
-            $sqlAddItem = "INSERT INTO `menu` (`item_id`, `name`, `description`, `price`, `cousintype`, `category`) VALUES ('$item_id', '$name', '$description', '$price', '$cousintype', '$category')";
-            $conn->query($sqlAddItem);
-        }
+        // Insert item without image
+        $sqlAddItem = "INSERT INTO `menu` (`item_id`, `name`, `description`, `price`, `cousintype`, `category`) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmtAddItem = $conn->prepare($sqlAddItem);
+        $stmtAddItem->bind_param("ssssss", $item_id, $name, $description, $price, $cousintype, $category);
+        $stmtAddItem->execute();
     } elseif (isset($_POST['edit_item'])) {
         $id = $_POST['id'];
         $item_id = $_POST['item_id'];
@@ -39,33 +27,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cousintype = $_POST['cousintype'];
         $category = $_POST['category'];
 
-        // Handle file upload
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $imageTmpPath = $_FILES['image']['tmp_name'];
-            $imageName = basename($_FILES['image']['name']);
-            $imageUploadPath = 'uploads/' . $imageName; // Corrected the path
-
-            if (move_uploaded_file($imageTmpPath, $imageUploadPath)) {
-                $imagePathForDB = 'Admin Files/Admin/uploads/' . $imageName; // Path to be stored in the database
-                $sqlEditItem = "UPDATE `menu` SET `item_id` = '$item_id', `name` = '$name', `description` = '$description', `price` = '$price', `cousintype` = '$cousintype', `image` = '$imagePathForDB', `category` = '$category' WHERE `item_id` = '$id'";
-                $conn->query($sqlEditItem);
-            } else {
-                echo "Failed to upload image.";
-            }
-        } else {
-            $sqlEditItem = "UPDATE `menu` SET `item_id` = '$item_id', `name` = '$name', `description` = '$description', `price` = '$price', `cousintype` = '$cousintype', `category` = '$category' WHERE `item_id` = '$id'";
-            $conn->query($sqlEditItem);
-        }
+        // Update item without image
+        $sqlEditItem = "UPDATE `menu` SET `item_id` = ?, `name` = ?, `description` = ?, `price` = ?, `cousintype` = ?, `category` = ? WHERE `item_id` = ?";
+        $stmtEditItem = $conn->prepare($sqlEditItem);
+        $stmtEditItem->bind_param("sssssss", $item_id, $name, $description, $price, $cousintype, $category, $id);
+        $stmtEditItem->execute();
     } elseif (isset($_POST['delete_item'])) {
         $id = $_POST['id'];
-        $sqlDeleteItem = "DELETE FROM `menu` WHERE `item_id` = '$id'";
-        $conn->query($sqlDeleteItem);
+        $sqlDeleteItem = "DELETE FROM `menu` WHERE `item_id` = ?";
+        $stmtDeleteItem = $conn->prepare($sqlDeleteItem);
+        $stmtDeleteItem->bind_param("s", $id);
+        $stmtDeleteItem->execute();
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['edit_item_id'])) {
         $id = $_GET['edit_item_id'];
-        $sql = "SELECT * FROM `menu` WHERE `item_id` = '$id' LIMIT 1";
-        $result = $conn->query($sql);
+        $sql = "SELECT * FROM `menu` WHERE `item_id` = ? LIMIT 1";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
         $editingItem = $result->fetch_assoc();
     }
 }
@@ -91,6 +72,7 @@ $conn->close();
     </style>
 </head>
 <body>
+    <center>
     <div class="main-container">
         <div class="topic">
             <h1>Manage Menu Items</h1>
@@ -107,32 +89,30 @@ $conn->close();
                         <th>Price</th>
                         <th>Cuisine Type</th>
                         <th>Category</th>
-                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                     <?php
                     if ($resultItems->num_rows > 0) {
                         while ($row = $resultItems->fetch_assoc()) {
-                            echo "<tr><td>" . $row["item_id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["description"] . "</td><td>" . $row["price"] . "</td><td>" . $row["cousintype"] . "</td><td>" . $row["category"] . "</td><td><img src='" . htmlspecialchars($row['image']) . "' alt='Item Image' width='100'></td>";
-                            echo "<td><a href='?edit_item_id=" . $row["item_id"] . "'>Edit</a></td></tr>";
+                            echo "<tr><td>" . htmlspecialchars($row["item_id"]) . "</td><td>" . htmlspecialchars($row["name"]) . "</td><td>" . htmlspecialchars($row["description"]) . "</td><td>" . htmlspecialchars($row["price"]) . "</td><td>" . htmlspecialchars($row["cousintype"]) . "</td><td>" . htmlspecialchars($row["category"]) . "</td>";
+                            echo "<td><a href='?edit_item_id=" . htmlspecialchars($row["item_id"]) . "'>Edit</a></td></tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='8'>No data available</td></tr>";
+                        echo "<tr><td colspan='7'>No data available</td></tr>";
                     }
                     ?>
                 </table>
-                <form method="post" enctype="multipart/form-data">
+                <form method="post">
                     <h3><?php echo $editingItem ? 'Edit Item' : 'Add Item'; ?></h3>
                     <?php if ($editingItem): ?>
-                        <input type="hidden" name="id" value="<?php echo $editingItem['item_id']; ?>">
+                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($editingItem['item_id']); ?>">
                     <?php endif; ?>
-                    <input type="text" name="item_id" placeholder="Item ID" value="<?php echo $editingItem['item_id'] ?? ''; ?>" required>
-                    <input type="text" name="name" placeholder="Name" value="<?php echo $editingItem['name'] ?? ''; ?>" required>
-                    <input type="text" name="description" placeholder="Description" value="<?php echo $editingItem['description'] ?? ''; ?>" required>
-                    <input type="number" step="0.01" name="price" placeholder="Price" value="<?php echo $editingItem['price'] ?? ''; ?>" required>
-                    <input type="text" name="cousintype" placeholder="Cuisine Type" value="<?php echo $editingItem['cousintype'] ?? ''; ?>" required>
-                    <input type="file" name="image" placeholder="Image">
-                    <input type="text" name="category" placeholder="Category" value="<?php echo $editingItem['category'] ?? ''; ?>" required>
+                    <input type="text" name="item_id" placeholder="Item ID" value="<?php echo htmlspecialchars($editingItem['item_id'] ?? ''); ?>" required>
+                    <input type="text" name="name" placeholder="Name" value="<?php echo htmlspecialchars($editingItem['name'] ?? ''); ?>" required>
+                    <input type="text" name="description" placeholder="Description" value="<?php echo htmlspecialchars($editingItem['description'] ?? ''); ?>" required>
+                    <input type="number" step="0.01" name="price" placeholder="Price" value="<?php echo htmlspecialchars($editingItem['price'] ?? ''); ?>" required>
+                    <input type="text" name="cousintype" placeholder="Cuisine Type" value="<?php echo htmlspecialchars($editingItem['cousintype'] ?? ''); ?>" required>
+                    <input type="text" name="category" placeholder="Category" value="<?php echo htmlspecialchars($editingItem['category'] ?? ''); ?>" required>
                     <?php if ($editingItem): ?>
                         <button type="submit" name="edit_item" class="btn-class">Edit Item</button>
                     <?php else: ?>
@@ -147,5 +127,6 @@ $conn->close();
             </div>
         </div>
     </div>
+    </center>
 </body>
 </html>
