@@ -3,7 +3,11 @@ include_once('../connection.php');
 include_once('navbar.php');
 
 $editingItem = null;
+$filterCategory = isset($_GET['filter_category']) ? $_GET['filter_category'] : '';
+$filterCousintype = isset($_GET['filter_cousintype']) ? $_GET['filter_cousintype'] : '';
+$filterName = isset($_GET['filter_name']) ? $_GET['filter_name'] : '';
 
+// Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_item'])) {
         $item_id = $_POST['item_id'];
@@ -40,12 +44,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$sqlItems = "SELECT * FROM `menu`";
+$sqlItems = "SELECT * FROM `menu` WHERE 1=1";
+if ($filterCategory) {
+    $sqlItems .= " AND `category` LIKE '%$filterCategory%'";
+}
+if ($filterCousintype) {
+    $sqlItems .= " AND `cousintype` LIKE '%$filterCousintype%'";
+}
+if ($filterName) {
+    $sqlItems .= " AND `name` LIKE '%$filterName%'";
+}
+
 $resultItems = $conn->query($sqlItems);
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,61 +73,70 @@ $conn->close();
         }
     </style>
 </head>
-<body><center>
-    <div class="main-container">
-        <div class="topic">
-            <h1>Manage Menu Items</h1>
-        </div>
-        <div class="container">
-            <div class="table-container">
-                <h2>Menu Items</h2>
-                
-                <table>
-                    <tr>
-                        <th>Item ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Cuisine Type</th>
-                        <th>Category</th>
-                        <th>Action</th>
-                    </tr>
-                    <?php
-                    if ($resultItems->num_rows > 0) {
-                        while ($row = $resultItems->fetch_assoc()) {
-                            echo "<tr><td>" . $row["item_id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["description"] . "</td><td>" . $row["price"] . "</td><td>" . $row["cousintype"] . "</td><td>" . $row["category"] . "</td>";
-                            echo "<td><a href='?edit_item_id=" . $row["item_id"] . "'>Edit</a></td></tr>";
+<body>
+    <center>
+        <div class="main-container">
+            <div class="topic">
+                <h1>Manage Menu Items</h1>
+            </div>
+            <div class="container">
+                <div class="table-container">
+                    <h2>Menu Items</h2>
+
+                    <!-- Filtering Form -->
+                    <form class="filter-form" method="get">
+                        <input type="text" name="filter_name" placeholder="Filter by Name" value="<?php echo htmlspecialchars($filterName); ?>">
+                        <input type="text" name="filter_cousintype" placeholder="Filter by Cuisine Type" value="<?php echo htmlspecialchars($filterCousintype); ?>">
+                        <input type="text" name="filter_category" placeholder="Filter by Category" value="<?php echo htmlspecialchars($filterCategory); ?>">
+                        <button type="submit">Filter</button>
+                    </form>
+
+                    <table>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Cuisine Type</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                        <?php
+                        if ($resultItems->num_rows > 0) {
+                            while ($row = $resultItems->fetch_assoc()) {
+                                echo "<tr><td>" . $row["item_id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["description"] . "</td><td>" . $row["price"] . "</td><td>" . $row["cousintype"] . "</td><td>" . $row["category"] . "</td>";
+                                echo "<td><a href='?edit_item_id=" . $row["item_id"] . "'>Edit</a></td></tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='7'>No data available</td></tr>";
                         }
-                    } else {
-                        echo "<tr><td colspan='7'>No data available</td></tr>";
-                    }
-                    ?>
-                </table>
-                <form method="post" enctype="multipart/form-data">
-                    <h3><?php echo $editingItem ? 'Edit Item' : 'Add Item'; ?></h3>
-                    <?php if ($editingItem): ?>
-                        <input type="hidden" name="id" value="<?php echo $editingItem['item_id']; ?>">
-                    <?php endif; ?>
-                    <input type="text" name="item_id" placeholder="Item ID" value="<?php echo $editingItem['item_id'] ?? ''; ?>" required>
-                    <input type="text" name="name" placeholder="Name" value="<?php echo $editingItem['name'] ?? ''; ?>" required>
-                    <input type="text" name="description" placeholder="Description" value="<?php echo $editingItem['description'] ?? ''; ?>" required>
-                    <input type="number" step="0.01" name="price" placeholder="Price" value="<?php echo $editingItem['price'] ?? ''; ?>" required>
-                    <input type="text" name="cousintype" placeholder="Cuisine Type" value="<?php echo $editingItem['cousintype'] ?? ''; ?>" required>
-                    <input type="text" name="category" placeholder="Category" value="<?php echo $editingItem['category'] ?? ''; ?>" required>
-                    <?php if ($editingItem): ?>
-                        <button type="submit" name="edit_item" class="btn-class">Edit Item</button>
-                    <?php else: ?>
-                        <button type="submit" name="add_item" class="btn-class">Add Item</button>
-                    <?php endif; ?>
-                </form>
-                <form method="post">
-                    <h3>Delete Item</h3>
-                    <input type="text" name="id" placeholder="Item ID" required>
-                    <button type="submit" name="delete_item" class="btn-delete">Delete Item</button>
-                </form>
+                        ?>
+                    </table>
+                    <form method="post" enctype="multipart/form-data">
+                        <h3><?php echo $editingItem ? 'Edit Item' : 'Add Item'; ?></h3>
+                        <?php if ($editingItem): ?>
+                            <input type="hidden" name="id" value="<?php echo $editingItem['item_id']; ?>">
+                        <?php endif; ?>
+                        <input type="text" name="item_id" placeholder="Item ID" value="<?php echo $editingItem['item_id'] ?? ''; ?>" required>
+                        <input type="text" name="name" placeholder="Name" value="<?php echo $editingItem['name'] ?? ''; ?>" required>
+                        <input type="text" name="description" placeholder="Description" value="<?php echo $editingItem['description'] ?? ''; ?>" required>
+                        <input type="number" step="0.01" name="price" placeholder="Price" value="<?php echo $editingItem['price'] ?? ''; ?>" required>
+                        <input type="text" name="cousintype" placeholder="Cuisine Type" value="<?php echo $editingItem['cousintype'] ?? ''; ?>" required>
+                        <input type="text" name="category" placeholder="Category" value="<?php echo $editingItem['category'] ?? ''; ?>" required>
+                        <?php if ($editingItem): ?>
+                            <button type="submit" name="edit_item" class="btn-class">Edit Item</button>
+                        <?php else: ?>
+                            <button type="submit" name="add_item" class="btn-class">Add Item</button>
+                        <?php endif; ?>
+                    </form>
+                    <form method="post">
+                        <h3>Delete Item</h3>
+                        <input type="text" name="id" placeholder="Item ID" required>
+                        <button type="submit" name="delete_item" class="btn-delete">Delete Item</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </center>
 </body>
 </html>
