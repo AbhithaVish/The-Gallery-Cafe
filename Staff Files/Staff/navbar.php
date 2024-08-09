@@ -12,9 +12,7 @@ $activePage = basename($_SERVER['PHP_SELF'], "index.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Gallery Cafe</title>
     <link rel="stylesheet" href="style/style.css">
-    <!-- Import Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
-    <!-- Import Icons (e.g., Remix Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.css">
 </head>
 <body>

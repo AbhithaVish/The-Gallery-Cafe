@@ -78,7 +78,6 @@ body, html {
     text-align: center;
     color: white;
     padding-top: 150px; 
-    /* margin-top: 180px; */
 }
 .main-banner__content {
     position: relative;
@@ -90,8 +89,8 @@ body, html {
     justify-content: center;
     gap: 10px;
     margin: 20px 0;
-    padding: 0 20px; /* Added padding to mini-boxes container */
-    box-sizing: border-box; /* Ensures padding is included in total width */
+    padding: 0 20px; 
+    box-sizing: border-box; 
 }
 .box {
     padding: 20px;
@@ -99,8 +98,8 @@ body, html {
     color: white;
     border-radius: 10px;
     text-align: center;
-    flex: 1; /* Allows boxes to expand and take equal space */
-    min-width: 150px; /* Minimum width to maintain box integrity */
+    flex: 1; 
+    min-width: 150px; 
 }
 
 button {
@@ -222,7 +221,6 @@ a {
     margin-inline: 1.5rem;
 }
 
-/*Header CSS part*/
 .header {
     margin: 10px 100px 10px 10px;
     position: fixed;
@@ -235,7 +233,6 @@ a {
     border-radius: 20px;
 }
 
-/*Nav Bar CSS part*/
 .nav {
     height: var(--header-height);
 }
@@ -383,7 +380,6 @@ a {
     }
 }
 
-/*Main CSS part*/
 .main-banner {
     display: flex;
     align-items: center;
@@ -413,7 +409,6 @@ a {
     transform: scale(1.1);
 }
 
-/*order button CSS part*/
 .order {
     background-color: hsl(44, 100%, 50%);
     border-radius: 10px;

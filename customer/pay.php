@@ -21,12 +21,12 @@ $total_price = 0;
 
 while ($row = $resultCart->fetch_assoc()) {
     $cart_items[] = $row;
-    $total_price += $row['price'] * $row['quantity']; // Calculate total price
+    $total_price += $row['price'] * $row['quantity']; //  total price
     $line_items[] = [
         "quantity" => $row['quantity'],
         "price_data" => [
             "currency" => "lkr",
-            "unit_amount" => $row['price'] * 100, // Stripe expects the amount in cents
+            "unit_amount" => $row['price'] * 100, // stripe amount 
             "product_data" => [
                 "name" => $row['name']
             ]
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = $query->get_result();
         if ($result->num_rows > 0) {
             $card_valid = true;
-            $discounted_total_price = $total_price * 0.85; // Apply 15% discount
+            $discounted_total_price = $total_price * 0.85; // set discount
         }
     }
 }
@@ -54,13 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if (count($line_items) > 0) {
     $checkout_session = \Stripe\Checkout\Session::create([
         "mode" => "payment",
-        "success_url" => "http://localhost:3000/customer/success.php", // Update this URL
+        "success_url" => "http://localhost:3000/customer/success.php", 
         "cancel_url" => "http://localhost:3000/customer/cancel.php",
         "line_items" => [[
             "quantity" => 1,
             "price_data" => [
                 "currency" => "lkr",
-                "unit_amount" => $discounted_total_price * 100, // Apply the discounted total price
+                "unit_amount" => $discounted_total_price * 100, 
                 "product_data" => [
                     "name" => "Total Cart Items"
                 ]
@@ -70,7 +70,7 @@ if (count($line_items) > 0) {
 
     $checkout_url = $checkout_session->url;
 } else {
-    $checkout_url = "#"; // No items in the cart
+    $checkout_url = "#"; 
 }
 
 $stmtCart->close();

@@ -82,8 +82,6 @@ $conn->close();
             <div class="container">
                 <div class="table-container">
                     <h2>Menu Items</h2>
-
-                    <!-- Filtering Form -->
                     <form class="filter-form" method="get">
                         <input type="text" name="filter_name" placeholder="Filter by Name" value="<?php echo htmlspecialchars($filterName); ?>">
                         <input type="text" name="filter_cousintype" placeholder="Filter by Cuisine Type" value="<?php echo htmlspecialchars($filterCousintype); ?>">

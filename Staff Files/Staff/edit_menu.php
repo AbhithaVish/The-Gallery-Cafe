@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $cousintype = $_POST['cousintype'];
     $price = $_POST['price'];
 
-    // Update the menu item in the database
+    // edit the menu item in the database
     $query = "UPDATE menu SET name = ?, description = ?, category = ?, cousintype = ?, price = ? WHERE item_id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ssssdi", $name, $description, $category, $cousintype, $price, $item_id);

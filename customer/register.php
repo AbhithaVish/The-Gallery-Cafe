@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Retrieve user data if already registered
+// get user data if already registered
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 $query = $conn->prepare("SELECT * FROM loyalty_card WHERE username = ?");
 $query->bind_param("s", $username);

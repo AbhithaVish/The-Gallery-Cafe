@@ -60,7 +60,6 @@ h2 {
 }
 .row{
     width: auto;
-    /* float: left; */
     display: flex;
 
 }
@@ -87,7 +86,7 @@ h2 {
 
 .btn-add{
         text-align: center;
-        background-color: #009de6; /* Green */
+        background-color: #009de6; 
         border: none;
         color: white;
         padding: 5px 10px;

@@ -2,20 +2,18 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-// Initialize username variable
-$usernameFilter = isset($_POST['username']) ? $_POST['username'] : '';
 
-// Prepare the SQL query
-$sqlOrders = "SELECT * FROM `orders`";
-if ($usernameFilter) {
-    $sqlOrders .= " WHERE username = ?";
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
 }
 
-// Prepare and execute the query
+$username = $_SESSION['username'];
+
+$sqlOrders = "SELECT * FROM `orders` WHERE username = ?";
+
 $stmt = $conn->prepare($sqlOrders);
-if ($usernameFilter) {
-    $stmt->bind_param('s', $usernameFilter);
-}
+$stmt->bind_param('s', $username);
 $stmt->execute();
 $resultOrders = $stmt->get_result();
 $stmt->close();
@@ -29,7 +27,6 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Data</title>
-    <!-- <link rel="stylesheet" href="style/style.css"> -->
     <link rel="stylesheet" href="style/style-live.css">
     <style>
         .filter-form {
@@ -68,7 +65,7 @@ $conn->close();
                             </tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='9'>No data available</td></tr>";
+                        echo "<tr><td colspan='6'>No data available</td></tr>";
                     }
                     ?>
                 </table>

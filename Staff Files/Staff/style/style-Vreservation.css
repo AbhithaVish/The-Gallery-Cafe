@@ -4,7 +4,6 @@
     --white-color: hsl(44, 100%, 50%);
     --white-color-light: hsl(0, 0%, 100%);
     --white-color-lighten: hsl(220, 20%, 18%);
-    /* --black-color: #000000; */
     --body-color: hsl(0, 0%, 28%);
     --body-font: "Montserrat", sans-serif;
     --normal-font-size: .938rem;
@@ -42,7 +41,6 @@ h2 {
     color: #333;
 }
 
-/* Card Styles */
 .card {
     background-color: var(--white-color-light);
     margin: 20px 0;
@@ -95,7 +93,6 @@ h2 {
     text-align: center;
 }
 
-/* Media queries for responsive design */
 @media (max-width: 600px) {
     .container {
         padding: 15px;

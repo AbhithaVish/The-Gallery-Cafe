@@ -25,7 +25,7 @@ body {
 }
 
 .table-container {
-    max-height: 600px; /* Adjust as needed */
+    max-height: 600px; 
     overflow-y: auto;
     margin-bottom: 20px;
 }

@@ -15,7 +15,7 @@ function getCount($tableName) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Fetch the result and return the count
+    // getting the result and return the count
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $totalCount = $row['count'];

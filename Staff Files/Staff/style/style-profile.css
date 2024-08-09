@@ -15,7 +15,6 @@ body{
 }
 
 
-/* Container for profile content */
 .profile-container {
     background-color: #fff;
     padding: 20px;
@@ -23,29 +22,25 @@ body{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 500px;
     width: 100%;
-    /* text-align: center; */
+    
 }
 
-/* Heading styles */
 .profile-container h1 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
 }
 
-/* Paragraph styles */
 .profile-container p {
     margin: 10px 0;
     font-size: 18px;
     color: #555;
 }
 
-/* Bold text styles */
 .profile-container strong {
     color: #333;
 }
 
-/* Input field styles */
 .profile-container input {
     padding: 8px;
     margin-bottom: 10px;
@@ -55,7 +50,6 @@ body{
     box-sizing: border-box;
 }
 
-/* Button styles */
 .update-btn {
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -69,7 +63,6 @@ body{
     background-color: #45a049;
 }
 
-/* Button styles */
 .cancel-btn {
     padding: 10px 20px;
     background-color: #f30202;

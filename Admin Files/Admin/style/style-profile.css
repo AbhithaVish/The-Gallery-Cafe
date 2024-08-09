@@ -8,7 +8,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    margin-top: 50px; /* Adjusted from 200px to align with the container */
+    margin-top: 50px;
 }
 
 
@@ -18,7 +18,7 @@ body, html {
 }
 .container {
     margin: 0 auto;
-    max-width: 1200px; /* Adjust this value as needed */
+    max-width: 1200px; 
     padding: 20px;
     display: flex;
     justify-content: center;

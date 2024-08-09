@@ -7,7 +7,7 @@ $filterCategory = isset($_GET['filter_category']) ? $_GET['filter_category'] : '
 $filterCousintype = isset($_GET['filter_cousintype']) ? $_GET['filter_cousintype'] : '';
 $filterName = isset($_GET['filter_name']) ? $_GET['filter_name'] : '';
 
-// Handle form submissions
+//submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_item'])) {
         $item_id = $_POST['item_id'];

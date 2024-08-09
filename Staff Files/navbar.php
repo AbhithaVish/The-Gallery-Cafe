@@ -1,6 +1,5 @@
 <?php
-session_start(); // Ensure sessions are started
-
+session_start();
 include_once('connection.php');
 
 

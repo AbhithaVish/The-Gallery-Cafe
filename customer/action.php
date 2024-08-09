@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once('../connection.php');
 include_once('config.php');
 
 if (isset($_POST['pid'])) {
@@ -9,7 +10,7 @@ if (isset($_POST['pid'])) {
     $username = $_SESSION['username'];
     $password = isset($_SESSION['password']) ? $_SESSION['password'] : ''; 
 
-    // Fetch product details
+    // get product details
     $stmt = $conn->prepare('SELECT * FROM product WHERE id = ?');
     $stmt->bind_param('i', $pid);
     $stmt->execute();
@@ -22,7 +23,7 @@ if (isset($_POST['pid'])) {
         $pimage = $item['product_image'];
         $pcode = $item['product_code'];
 
-        // Add to cart
+        //cart
         $cart_sql = "INSERT INTO cart (username, password, item_id, quantity, product_name, product_price, product_image, product_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($cart_sql);
         $stmt->bind_param('ssisssss', $username, $password, $pid, $pqty, $pname, $pprice, $pimage, $pcode);

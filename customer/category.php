@@ -12,7 +12,7 @@ $username = $_SESSION['username'];
 if (isset($_GET['category'])) {
     $category = htmlspecialchars($_GET['category']);
 
-    // Fetch items by category
+    // get items by category
     $sql = "SELECT * FROM menu WHERE category = ?";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("s", $category);

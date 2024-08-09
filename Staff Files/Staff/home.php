@@ -2,11 +2,11 @@
 include_once('../connection.php');
 include_once('navbar.php');
 
-// Function to get the count of rows in a table
+// getting the count of rows in a table
 function getCount($tableName) {
     global $conn;
 
-    // Prepare and execute the query
+    // prepare and execute the query
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM $tableName");
     $stmt->execute();
     $result = $stmt->get_result();
@@ -17,11 +17,11 @@ function getCount($tableName) {
         $totalCount = $row['count'];
         return $totalCount;
     } else {
-        return 0; // Return 0 if query fails or no rows found
+        return 0; // return 0 if query fails or no rows found
     }
 }
 
-// Get the counts from respective tables
+// getting the counts from respective tables
 $loginCount = getCount('login_tbl');
 $orderCount = getCount('orders');
 $reservationCount = getCount('reservation');

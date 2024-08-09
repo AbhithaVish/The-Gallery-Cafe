@@ -114,7 +114,6 @@ h3 {
     color: #000;
 }
 
-/* Flex container for Mission and Vision */
 .mission-vision-container {
     display: flex;
     justify-content: space-around;

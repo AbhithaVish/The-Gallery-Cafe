@@ -4,7 +4,6 @@ include_once('navbar.php');
 
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
-// Handle status update
 if (isset($_POST['update_status'])) {
     $id = $_POST['reservation_id'];
     $status = $_POST['new_status'];
@@ -20,11 +19,11 @@ if (isset($_POST['update_status'])) {
         echo "Error updating reservation: " . $stmt->error;
     }
     $stmt->close();
-    header("Location: " . $_SERVER['PHP_SELF']); // Refresh the page
+    header("Location: " . $_SERVER['PHP_SELF']); //refreshing the page
     exit();
 }
 
-// Fetch reservations
+// get reservations
 $reservations = array();
 
 $tableExistsQuery = "SHOW TABLES LIKE 'reservation'";
@@ -64,7 +63,7 @@ $conn->close();
             overflow-y: auto;
         }
         .container {
-            max-height: 80vh; /* Adjust based on your layout */
+            max-height: 80vh; 
             
             padding: 20px;
         }

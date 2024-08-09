@@ -4,11 +4,11 @@ include_once('navbar.php');
 
 $username = $_SESSION['username'];
 
-// Fetch all orders from the orders table
+// get all orders from the orders table
 $order_sql = "SELECT * FROM orders ORDER BY reference_number";
 $order_result = $conn->query($order_sql);
 
-// Group orders by reference number
+// filter orders by reference number
 $orders = [];
 if ($order_result->num_rows > 0) {
     while ($row = $order_result->fetch_assoc()) {

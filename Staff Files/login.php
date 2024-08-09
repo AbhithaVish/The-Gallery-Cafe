@@ -20,7 +20,7 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        if (password_verify($password, $row['password'])) { // Verify the password
+        if (password_verify($password, $row['password'])) { // check the password
             $_SESSION['name'] = $row['name'];
             $_SESSION['username'] = $row['username'];
             header('Location: Staff/index.php');

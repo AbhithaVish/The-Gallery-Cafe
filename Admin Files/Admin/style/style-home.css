@@ -51,5 +51,5 @@ body{
 .counter-box p,
 .counter-box i,
 .counter-box .counter {
-    color: inherit; /* Ensure text color matches background */
+    color: inherit; 
 }

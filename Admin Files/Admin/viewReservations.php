@@ -4,7 +4,7 @@ include_once('navbar.php');
 
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
-// Handle deletion
+//deletion
 if (isset($_POST['delete'])) {
     $id = $_POST['reservation_id'];
     echo "Attempting to delete reservation ID: $id";
@@ -19,11 +19,11 @@ if (isset($_POST['delete'])) {
         echo "Error deleting reservation: " . $stmt->error;
     }
     $stmt->close();
-    header("Location: " . $_SERVER['PHP_SELF']); // Refresh the page
+    header("Location: " . $_SERVER['PHP_SELF']); // refreshing the page
     exit();
 }
 
-// Handle status update
+
 if (isset($_POST['update_status'])) {
     $id = $_POST['reservation_id'];
     $status = $_POST['new_status'];
@@ -43,7 +43,7 @@ if (isset($_POST['update_status'])) {
     exit();
 }
 
-// Fetch reservations
+// get reservations
 $reservations = array();
 
 $tableExistsQuery = "SHOW TABLES LIKE 'reservation'";
